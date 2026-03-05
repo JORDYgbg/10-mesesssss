@@ -4,25 +4,24 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 <title>Para Ti — 16 de Mayo</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --gold:#c9a84c;--gold2:#e8d5a3;--gold3:#8a6a1f;--gold4:#f5e6c0;
   --dark:#0a0604;
-  --parch:#f0e2c6;--parch2:#e8d5b0;--parch3:#eddcbe;
+  --parch:#f0e2c6;--parch3:#eddcbe;
   --ink:#1c110a;--ink2:#3d2b1a;
   --rose:#c4627a;
   --ae:rgba(101,64,20,0.15);
 }
-html,body{width:100%;height:100%;overflow:hidden;font-family:'EB Garamond',Georgia,serif;}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'EB Garamond',Georgia,serif;font-size:18px;}
 body{background:var(--dark);}
 
-/* Parchment texture */
 .parch{
   background-color:var(--parch);
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E"),
     repeating-linear-gradient(100deg,transparent,transparent 3px,rgba(140,90,30,0.012) 3px,rgba(140,90,30,0.012) 6px),
     linear-gradient(170deg,#f5e8cc 0%,#eddcb8 40%,#f2e4c4 70%,#e8d8b0 100%);
 }
@@ -33,16 +32,13 @@ body{background:var(--dark);}
     linear-gradient(180deg,#eddcc0 0%,#dfc9a0 50%,#d5be98 100%);
 }
 
-/* Particles */
 #particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 .ptcl{position:absolute;width:2px;height:2px;background:var(--gold);border-radius:50%;animation:pfloat linear infinite;opacity:0;}
 @keyframes pfloat{0%{transform:translateY(100vh) translateX(0);opacity:0;}10%{opacity:0.5;}90%{opacity:0.2;}100%{transform:translateY(-10vh) translateX(var(--d));opacity:0;}}
-
-/* Animations */
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
 @keyframes pglow{0%,100%{text-shadow:0 0 20px rgba(201,168,76,0.4);}50%{text-shadow:0 0 70px rgba(201,168,76,0.9),0 0 130px rgba(201,168,76,0.35);}}
-@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-7px);}40%,80%{transform:translateX(7px);}}
-@keyframes cfade{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
+@keyframes cfade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 @keyframes hbeat{0%,100%{transform:scale(1);}50%{transform:scale(1.3);}}
 @keyframes breathe{0%,100%{opacity:0.45;}50%{opacity:0.9;}}
 @keyframes twinkle{0%,100%{opacity:0.1;transform:scale(1);}50%{opacity:0.85;transform:scale(1.5);}}
@@ -53,34 +49,42 @@ body{background:var(--dark);}
   background:radial-gradient(ellipse at 50% 40%,#1e0e06 0%,#0a0604 65%,#000 100%);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   transition:opacity 1.2s ease,transform 1.2s ease;
-  padding:1.5rem 1rem;overflow-y:auto;
+  padding:2rem 1.5rem;overflow-y:auto;
 }
 #introScreen.out{opacity:0;transform:scale(1.06);pointer-events:none;}
 .i-stars{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
 .istar{position:absolute;background:var(--gold);border-radius:50%;animation:twinkle ease-in-out infinite;}
-.i-top{font-family:'Cinzel',serif;color:var(--gold);font-size:0.6rem;letter-spacing:0.6em;opacity:0;animation:fadeUp 1s 0.4s forwards;margin-bottom:2rem;text-align:center;}
-.i-cross{font-size:2.8rem;color:var(--gold);animation:pglow 3s ease-in-out infinite,fadeUp 1s 0.7s both;margin-bottom:1.5rem;}
-.i-title{font-family:'Cormorant Garamond',serif;color:var(--gold2);font-size:clamp(0.95rem,2.4vw,1.22rem);font-style:italic;line-height:1.88;text-align:center;max-width:490px;opacity:0;animation:fadeUp 1s 1s forwards;margin-bottom:2rem;}
+
+.i-top{font-family:'Cinzel',serif;color:var(--gold);font-size:0.85rem;letter-spacing:0.5em;opacity:0;animation:fadeUp 1s 0.4s forwards;margin-bottom:2rem;text-align:center;}
+.i-cross{font-size:3.5rem;color:var(--gold);animation:pglow 3s ease-in-out infinite,fadeUp 1s 0.7s both;margin-bottom:1.5rem;}
+.i-title{
+  font-family:'Cormorant Garamond',serif;color:var(--gold2);
+  font-size:clamp(1.15rem,2.5vw,1.5rem);
+  font-style:italic;line-height:1.9;text-align:center;max-width:520px;
+  opacity:0;animation:fadeUp 1s 1s forwards;margin-bottom:2rem;
+}
 .i-title strong{font-style:normal;font-weight:600;color:var(--gold4);}
-.i-div{width:155px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0;animation:fadeUp 1s 1.5s forwards;margin-bottom:2rem;}
-.i-lbl{font-family:'Cinzel',serif;color:rgba(201,168,76,0.55);font-size:0.58rem;letter-spacing:0.42em;text-transform:uppercase;opacity:0;animation:fadeUp 1s 1.8s forwards;margin-bottom:0.9rem;}
-.pdots{display:flex;gap:13px;margin-bottom:1.4rem;opacity:0;animation:fadeUp 0.8s 2s forwards;}
-.pdot{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(201,168,76,0.32);background:transparent;transition:all 0.25s;}
-.pdot.on{background:var(--gold);border-color:var(--gold);transform:scale(1.15);box-shadow:0 0 12px rgba(201,168,76,0.55);}
-.ppad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;width:205px;opacity:0;animation:fadeUp 0.8s 2.2s forwards;margin-bottom:0.9rem;}
-.pkey{aspect-ratio:1;background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.18);color:var(--gold2);font-family:'Cinzel',serif;font-size:1.05rem;cursor:pointer;transition:all 0.15s;border-radius:3px;display:flex;align-items:center;justify-content:center;user-select:none;-webkit-tap-highlight-color:transparent;}
+.i-div{width:160px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0;animation:fadeUp 1s 1.5s forwards;margin-bottom:2rem;}
+.i-lbl{font-family:'Cinzel',serif;color:rgba(201,168,76,0.55);font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;opacity:0;animation:fadeUp 1s 1.8s forwards;margin-bottom:1rem;}
+
+.pdots{display:flex;gap:16px;margin-bottom:1.6rem;opacity:0;animation:fadeUp 0.8s 2s forwards;}
+.pdot{width:16px;height:16px;border-radius:50%;border:2px solid rgba(201,168,76,0.32);background:transparent;transition:all 0.25s;}
+.pdot.on{background:var(--gold);border-color:var(--gold);transform:scale(1.15);box-shadow:0 0 14px rgba(201,168,76,0.6);}
+
+.ppad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:240px;opacity:0;animation:fadeUp 0.8s 2.2s forwards;margin-bottom:1rem;}
+.pkey{aspect-ratio:1;background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.2);color:var(--gold2);font-family:'Cinzel',serif;font-size:1.25rem;cursor:pointer;transition:all 0.15s;border-radius:3px;display:flex;align-items:center;justify-content:center;user-select:none;-webkit-tap-highlight-color:transparent;}
 .pkey:hover,.pkey:active{background:rgba(201,168,76,0.18);border-color:var(--gold);transform:scale(1.06);}
-.pkey.del{font-size:0.85rem;color:rgba(201,168,76,0.5);}
-.perr{font-family:'Cormorant Garamond',serif;color:#e07575;font-size:0.88rem;font-style:italic;opacity:0;transition:opacity 0.3s;height:1.2rem;text-align:center;}
+.pkey.del{font-size:1rem;color:rgba(201,168,76,0.5);}
+.perr{font-family:'Cormorant Garamond',serif;color:#e07575;font-size:1.05rem;font-style:italic;opacity:0;transition:opacity 0.3s;height:1.4rem;text-align:center;}
 .perr.show{opacity:1;}
 
 /* ===== BIBLE COVER ===== */
 #bibleScreen{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse at 50% 35%,#1e0e06 0%,#0a0604 70%);display:none;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}
 #bibleScreen.vis{display:flex;}
-.b-greet{font-family:'Cormorant Garamond',serif;color:rgba(232,213,163,0.65);font-size:clamp(0.9rem,2vw,1.1rem);font-style:italic;letter-spacing:0.06em;text-align:center;animation:fadeUp 1s 0.3s both;margin-bottom:1.8rem;padding:0 1.5rem;}
+.b-greet{font-family:'Cormorant Garamond',serif;color:rgba(232,213,163,0.7);font-size:clamp(1.1rem,2.5vw,1.4rem);font-style:italic;letter-spacing:0.06em;text-align:center;animation:fadeUp 1s 0.3s both;margin-bottom:2rem;padding:0 1.5rem;}
 .book-wrap{perspective:1400px;cursor:pointer;animation:fadeUp 1s 0.6s both;}
 .book{
-  width:clamp(150px,20vw,205px);height:clamp(210px,28vw,287px);
+  width:clamp(160px,22vw,220px);height:clamp(220px,31vw,308px);
   position:relative;transform-style:preserve-3d;
   transform:rotateY(-28deg) rotateX(6deg);
   transition:transform 0.55s cubic-bezier(0.34,1.3,0.64,1);
@@ -88,53 +92,61 @@ body{background:var(--dark);}
 }
 .book:hover{transform:rotateY(-16deg) rotateX(4deg) scale(1.04);}
 .book.opening{transform:rotateY(-190deg) scale(0) !important;opacity:0 !important;transition:transform 0.9s cubic-bezier(0.4,0,0.2,1),opacity 0.8s !important;}
-.b-front{position:absolute;inset:0;background:linear-gradient(150deg,#3d1a08 0%,#5c2a10 25%,#3a1507 55%,#271005 100%);border-radius:3px 9px 9px 3px;border:1px solid rgba(201,168,76,0.28);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:1.5rem 1.2rem;overflow:hidden;}
+.b-front{position:absolute;inset:0;background:linear-gradient(150deg,#3d1a08 0%,#5c2a10 25%,#3a1507 55%,#271005 100%);border-radius:3px 9px 9px 3px;border:1px solid rgba(201,168,76,0.28);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;padding:1.5rem 1.2rem;overflow:hidden;}
 .b-front::before{content:'';position:absolute;inset:7px;border:1px solid rgba(201,168,76,0.22);border-radius:2px 7px 7px 2px;pointer-events:none;}
 .b-front::after{content:'';position:absolute;left:0;top:0;bottom:0;width:16px;background:linear-gradient(to right,#100503,#3e1a08,#100503);border-radius:3px 0 0 3px;}
-.b-cross{color:var(--gold);font-size:clamp(1.6rem,3.5vw,2.2rem);text-shadow:0 0 20px rgba(201,168,76,0.5);}
-.b-ttxt{font-family:'Cinzel',serif;color:var(--gold2);font-size:clamp(0.58rem,1.3vw,0.73rem);letter-spacing:0.22em;text-align:center;line-height:1.7;}
-.b-stxt{font-family:'Cormorant Garamond',serif;color:rgba(232,213,163,0.44);font-size:0.6rem;letter-spacing:0.18em;font-style:italic;text-align:center;}
-.b-line{width:52px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+.b-cross{color:var(--gold);font-size:2.4rem;text-shadow:0 0 20px rgba(201,168,76,0.5);}
+.b-ttxt{font-family:'Cinzel',serif;color:var(--gold2);font-size:0.82rem;letter-spacing:0.22em;text-align:center;line-height:1.7;}
+.b-stxt{font-family:'Cormorant Garamond',serif;color:rgba(232,213,163,0.44);font-size:0.68rem;letter-spacing:0.18em;font-style:italic;text-align:center;}
+.b-line{width:55px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
 .b-spine{position:absolute;top:0;left:-14px;bottom:0;width:16px;background:linear-gradient(to right,#080302,#341205,#080302);border-radius:3px 0 0 3px;display:flex;align-items:center;justify-content:center;}
-.b-spine span{font-family:'Cinzel',serif;color:rgba(201,168,76,0.5);font-size:0.35rem;letter-spacing:0.28em;writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;}
+.b-spine span{font-family:'Cinzel',serif;color:rgba(201,168,76,0.5);font-size:0.38rem;letter-spacing:0.28em;writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;}
 .b-pages{position:absolute;top:3px;right:-5px;bottom:3px;width:9px;background:repeating-linear-gradient(to bottom,#ede0c0,#d8caaa 1px,#ede0c0 2px);border-radius:0 3px 3px 0;box-shadow:2px 0 5px rgba(0,0,0,0.35);}
-.b-hint{font-family:'Cormorant Garamond',serif;color:rgba(201,168,76,0.5);font-size:0.85rem;font-style:italic;text-align:center;animation:fadeUp 1s 1.3s both,breathe 3s 2s ease-in-out infinite;margin-top:1.6rem;}
+.b-hint{font-family:'Cormorant Garamond',serif;color:rgba(201,168,76,0.5);font-size:1rem;font-style:italic;text-align:center;animation:fadeUp 1s 1.3s both,breathe 3s 2s ease-in-out infinite;margin-top:1.8rem;}
 
 /* ===== READER ===== */
 #readerScreen{position:fixed;inset:0;z-index:200;display:none;flex-direction:column;overflow:hidden;}
 #readerScreen.vis{display:flex;}
 
-.rh{background:linear-gradient(180deg,#1a0f06 0%,#221406 100%);border-bottom:1px solid rgba(201,168,76,0.2);padding:0.7rem 1.2rem;display:flex;flex-direction:column;gap:0.6rem;flex-shrink:0;z-index:10;}
+.rh{background:linear-gradient(180deg,#1a0f06 0%,#221406 100%);border-bottom:1px solid rgba(201,168,76,0.2);padding:0.85rem 1.4rem;display:flex;flex-direction:column;gap:0.7rem;flex-shrink:0;z-index:10;}
 .rh-top{display:flex;align-items:center;justify-content:space-between;gap:0.8rem;flex-wrap:wrap;}
-.rh-logo{font-family:'Cinzel',serif;color:var(--gold2);font-size:clamp(0.78rem,2vw,0.98rem);letter-spacing:0.14em;line-height:1.3;}
-.rh-logo small{display:block;font-size:0.5rem;letter-spacing:0.24em;color:rgba(232,213,163,0.36);margin-top:0.12rem;}
-.rh-btns{display:flex;gap:0.45rem;align-items:center;flex-shrink:0;}
-.rh-back{background:none;border:1px solid rgba(201,168,76,0.28);color:var(--gold);font-family:'Cinzel',serif;font-size:0.54rem;letter-spacing:0.16em;padding:0.36rem 0.8rem;cursor:pointer;transition:all 0.2s;text-transform:uppercase;}
+.rh-logo{font-family:'Cinzel',serif;color:var(--gold2);font-size:1.1rem;letter-spacing:0.14em;line-height:1.3;}
+.rh-logo small{display:block;font-size:0.62rem;letter-spacing:0.24em;color:rgba(232,213,163,0.38);margin-top:0.12rem;}
+.rh-btns{display:flex;gap:0.5rem;align-items:center;flex-shrink:0;}
+.rh-back{background:none;border:1px solid rgba(201,168,76,0.3);color:var(--gold);font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.16em;padding:0.45rem 1rem;cursor:pointer;transition:all 0.2s;text-transform:uppercase;}
 .rh-back:hover{background:rgba(201,168,76,0.1);border-color:var(--gold);}
-.mob-bk-btn{display:none;background:rgba(160,110,40,0.15);border:1px solid rgba(160,110,40,0.3);color:var(--gold3);font-family:'Cinzel',serif;font-size:0.54rem;letter-spacing:0.14em;padding:0.36rem 0.7rem;cursor:pointer;border-radius:2px;text-transform:uppercase;}
+.mob-bk-btn{display:none;background:rgba(160,110,40,0.15);border:1px solid rgba(160,110,40,0.3);color:var(--gold3);font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.14em;padding:0.45rem 0.85rem;cursor:pointer;border-radius:2px;text-transform:uppercase;}
 
-.rsearch{display:flex;gap:0.38rem;flex-wrap:wrap;align-items:stretch;}
-.rsearch select,.rsearch input{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);color:var(--gold2);font-family:'Cormorant Garamond',serif;font-size:0.95rem;padding:0.4rem 0.65rem;outline:none;transition:border-color 0.2s;border-radius:2px;}
+.rsearch{display:flex;gap:0.45rem;flex-wrap:wrap;align-items:stretch;}
+.rsearch select,.rsearch input{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.22);
+  color:var(--gold2);font-family:'Cormorant Garamond',serif;font-size:1.1rem;
+  padding:0.5rem 0.8rem;outline:none;transition:border-color 0.2s;border-radius:2px;
+}
 .rsearch select{cursor:pointer;}
 .rsearch select option{background:#1a0f06;color:var(--gold2);}
-.rsearch input::placeholder{color:rgba(201,168,76,0.26);}
+.rsearch input::placeholder{color:rgba(201,168,76,0.28);}
 .rsearch input:focus,.rsearch select:focus{border-color:var(--gold);}
-.rsearch input[type=number]{width:65px;}
-#sTxt{flex:1;min-width:110px;}
-.rbtn{background:var(--gold);border:none;color:var(--ink);font-family:'Cinzel',serif;font-size:0.56rem;letter-spacing:0.16em;padding:0.4rem 0.95rem;cursor:pointer;text-transform:uppercase;transition:all 0.18s;border-radius:2px;white-space:nowrap;}
+.rsearch input[type=number]{width:72px;}
+#sTxt{flex:1;min-width:130px;}
+.rbtn{background:var(--gold);border:none;color:var(--ink);font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.16em;padding:0.5rem 1.1rem;cursor:pointer;text-transform:uppercase;transition:all 0.18s;border-radius:2px;white-space:nowrap;}
 .rbtn:hover{background:var(--gold2);}
+
+.r-hint{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(232,213,163,0.5);font-size:0.95rem;letter-spacing:0.03em;}
+.r-hint-link{color:rgba(201,168,76,0.8);cursor:pointer;text-decoration:underline;text-decoration-style:dotted;transition:color 0.2s;}
+.r-hint-link:hover{color:var(--gold2);}
 
 .rbody{display:flex;flex:1;overflow:hidden;}
 
 /* Sidebar */
-.rside{width:220px;min-width:200px;border-right:1px solid var(--ae);overflow-y:auto;flex-shrink:0;}
+.rside{width:230px;min-width:210px;border-right:1px solid var(--ae);overflow-y:auto;flex-shrink:0;}
 .rside::-webkit-scrollbar{width:3px;}
 .rside::-webkit-scrollbar-thumb{background:var(--gold3);border-radius:2px;}
 .rside::-webkit-scrollbar-track{background:transparent;}
-.rs-sec{padding:0.85rem;border-bottom:1px solid rgba(101,64,20,0.13);}
-.rs-lbl{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.3em;color:var(--gold3);text-transform:uppercase;margin-bottom:0.6rem;}
-.tbtns{display:flex;flex-direction:column;gap:0.26rem;}
-.tbtn{background:none;border:1px solid transparent;color:var(--ink2);font-family:'Cormorant Garamond',serif;font-size:1.05rem;padding:0.35rem 0.55rem;cursor:pointer;text-align:left;transition:all 0.15s;border-radius:2px;}
+.rs-sec{padding:1rem;border-bottom:1px solid rgba(101,64,20,0.13);}
+.rs-lbl{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.3em;color:var(--gold3);text-transform:uppercase;margin-bottom:0.7rem;}
+.tbtns{display:flex;flex-direction:column;gap:0.3rem;}
+.tbtn{background:none;border:1px solid transparent;color:var(--ink2);font-family:'Cormorant Garamond',serif;font-size:1.1rem;padding:0.38rem 0.6rem;cursor:pointer;text-align:left;transition:all 0.15s;border-radius:2px;}
 .tbtn:hover{background:rgba(140,90,30,0.12);border-color:rgba(140,90,30,0.28);}
 .tbtn.act{background:rgba(140,90,30,0.18);border-color:var(--gold3);color:var(--gold3);font-weight:600;}
 .bklist{list-style:none;}
@@ -144,44 +156,43 @@ body{background:var(--dark);}
 
 /* Reading area */
 .rarea{flex:1;overflow-y:auto;position:relative;}
-.rarea::-webkit-scrollbar{width:5px;}
+.rarea::-webkit-scrollbar{width:6px;}
 .rarea::-webkit-scrollbar-thumb{background:var(--gold3);border-radius:3px;}
 .rarea::-webkit-scrollbar-track{background:rgba(180,130,60,0.08);}
+.rarea-top-fade{position:sticky;top:0;left:0;right:0;height:18px;background:linear-gradient(to bottom,rgba(110,65,15,0.1),transparent);pointer-events:none;z-index:5;display:block;}
 
-.rinner{padding:2.2rem 3.5rem 3.5rem;max-width:860px;margin:0 auto;}
+.rinner{padding:2.5rem 4rem 4rem;max-width:880px;margin:0 auto;}
 
-/* Aged top fade */
-.rarea-top-fade{position:sticky;top:0;left:0;right:0;height:16px;background:linear-gradient(to bottom,rgba(110,65,15,0.1),transparent);pointer-events:none;z-index:5;display:block;}
-
-.chdr{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;border-bottom:1px solid rgba(130,80,25,0.22);padding-bottom:0.85rem;margin-bottom:1.4rem;}
-.ctitle{font-family:'Cinzel',serif;color:var(--ink);font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:400;letter-spacing:0.03em;}
+.chdr{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;border-bottom:1px solid rgba(130,80,25,0.22);padding-bottom:1rem;margin-bottom:1.6rem;}
+.ctitle{font-family:'Cinzel',serif;color:var(--ink);font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:400;letter-spacing:0.03em;}
 .cinfo{font-family:'Cormorant Garamond',serif;color:rgba(80,45,15,0.55);font-size:1rem;font-style:italic;}
 
-.chapnav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:1.6rem;}
-.cbtn{background:rgba(160,110,40,0.1);border:1px solid rgba(130,80,25,0.2);color:var(--ink2);font-family:'Cormorant Garamond',serif;font-size:1rem;width:38px;height:38px;cursor:pointer;transition:all 0.13s;border-radius:2px;display:flex;align-items:center;justify-content:center;}
+.chapnav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:1.8rem;}
+.cbtn{background:rgba(160,110,40,0.1);border:1px solid rgba(130,80,25,0.2);color:var(--ink2);font-family:'Cormorant Garamond',serif;font-size:1rem;width:40px;height:40px;cursor:pointer;transition:all 0.13s;border-radius:2px;display:flex;align-items:center;justify-content:center;}
 .cbtn:hover{background:rgba(160,110,40,0.2);border-color:var(--gold3);}
 .cbtn.act{background:var(--gold3);border-color:var(--gold3);color:#fff;font-weight:700;}
 
-.vwrap{font-family:'EB Garamond',Georgia,serif;font-size:clamp(1.25rem,2.2vw,1.45rem);line-height:2.1;color:var(--ink);}
-.vrow{display:flex;gap:0.6rem;padding:0.28rem 0.4rem;border-radius:3px;transition:background 0.13s;}
+/* VERSES — big and readable */
+.vwrap{font-family:'EB Garamond',Georgia,serif;font-size:clamp(1.25rem,2vw,1.45rem);line-height:2.1;color:var(--ink);}
+.vrow{display:flex;gap:0.75rem;padding:0.35rem 0.5rem;border-radius:3px;transition:background 0.13s;}
 .vrow:hover{background:rgba(140,90,30,0.07);}
-.vrow.lv{background:rgba(196,98,122,0.055);border-left:2px solid rgba(196,98,122,0.28);padding-left:0.72rem;}
-.vrow.lv:hover{background:rgba(196,98,122,0.1);}
-.vrow.egg{background:rgba(196,98,122,0.1);border-left:3px solid var(--rose);padding-left:0.72rem;}
-.vnum{font-family:'Cinzel',serif;font-size:0.68rem;color:var(--gold3);min-width:22px;padding-top:0.55rem;text-align:right;flex-shrink:0;}
-.vcont{flex:1;display:flex;align-items:flex-start;gap:0.32rem;}
+.vrow.lv{background:rgba(196,98,122,0.06);border-left:2px solid rgba(196,98,122,0.3);padding-left:0.85rem;}
+.vrow.lv:hover{background:rgba(196,98,122,0.11);}
+.vrow.egg{background:rgba(196,98,122,0.1);border-left:3px solid var(--rose);padding-left:0.85rem;}
+.vnum{font-family:'Cinzel',serif;font-size:0.7rem;color:var(--gold3);min-width:24px;padding-top:0.6rem;text-align:right;flex-shrink:0;}
+.vcont{flex:1;display:flex;align-items:flex-start;gap:0.4rem;}
 .vtxt{flex:1;}
-.lheart{color:var(--rose);font-size:0.68rem;margin-top:0.6rem;flex-shrink:0;animation:hbeat 2.8s ease-in-out infinite;}
+.lheart{color:var(--rose);font-size:0.78rem;margin-top:0.65rem;flex-shrink:0;animation:hbeat 2.8s ease-in-out infinite;}
 
-.ornline{text-align:center;color:var(--gold3);font-size:0.88rem;margin:1.3rem 0;letter-spacing:0.5rem;opacity:0.38;}
+.ornline{text-align:center;color:var(--gold3);font-size:1rem;margin:1.5rem 0;letter-spacing:0.5rem;opacity:0.38;}
 
-.smsg{text-align:center;padding:3.5rem 1.5rem;color:rgba(80,45,15,0.48);font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-style:italic;}
-.smsg span{display:block;font-size:1.7rem;color:var(--gold3);margin-bottom:0.85rem;animation:pglow 2.5s ease-in-out infinite;}
+.smsg{text-align:center;padding:4rem 1.5rem;color:rgba(80,45,15,0.48);font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;}
+.smsg span{display:block;font-size:2rem;color:var(--gold3);margin-bottom:1rem;animation:pglow 2.5s ease-in-out infinite;}
 
-.rcard{border:1px solid rgba(130,80,25,0.18);background:rgba(245,235,215,0.75);padding:0.88rem 1.15rem;margin-bottom:0.65rem;cursor:pointer;transition:all 0.16s;border-radius:2px;}
+.rcard{border:1px solid rgba(130,80,25,0.18);background:rgba(245,235,215,0.75);padding:1rem 1.3rem;margin-bottom:0.75rem;cursor:pointer;transition:all 0.16s;border-radius:2px;}
 .rcard:hover{border-color:var(--gold3);background:rgba(201,168,76,0.1);}
-.rref{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.18em;color:var(--gold3);margin-bottom:0.36rem;}
-.rtxt{font-family:'EB Garamond',serif;font-size:1.04rem;color:var(--ink);line-height:1.65;}
+.rref{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.18em;color:var(--gold3);margin-bottom:0.4rem;}
+.rtxt{font-family:'EB Garamond',serif;font-size:1.15rem;color:var(--ink);line-height:1.7;}
 .rtxt em{background:rgba(201,168,76,0.28);font-style:normal;border-radius:2px;padding:0 2px;}
 
 /* Heart blast */
@@ -192,24 +203,24 @@ body{background:var(--dark);}
 /* Mobile drawer */
 .mob-overlay{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.5);}
 .mob-overlay.show{display:block;}
-.mob-drawer{position:fixed;left:0;top:0;bottom:0;width:235px;z-index:301;overflow-y:auto;transform:translateX(-100%);transition:transform 0.28s ease;}
+.mob-drawer{position:fixed;left:0;top:0;bottom:0;width:260px;z-index:301;overflow-y:auto;transform:translateX(-100%);transition:transform 0.28s ease;}
 .mob-drawer.show{transform:translateX(0);}
-.mob-drawer .rs-sec{padding:0.95rem;}
-.mob-dc{background:none;border:none;color:var(--ink2);font-size:1.1rem;float:right;cursor:pointer;padding:0.2rem 0.3rem;}
+.mob-drawer .rs-sec{padding:1.1rem;}
+.mob-dc{background:none;border:none;color:var(--ink2);font-size:1.3rem;float:right;cursor:pointer;padding:0.2rem 0.3rem;}
 
 /* Responsive */
 @media(max-width:640px){
   .rside{display:none;}
   .mob-bk-btn{display:block;}
-  .rinner{padding:1.3rem 1.1rem 2rem;}
-  .chapnav{gap:3px;}
-  .cbtn{width:34px;height:34px;font-size:0.92rem;}
-  .vwrap{font-size:1.18rem;line-height:1.95;}
-  .ctitle{font-size:1.35rem;}
+  .rinner{padding:1.4rem 1.2rem 2.5rem;}
+  .chapnav{gap:4px;}
+  .cbtn{width:36px;height:36px;font-size:0.95rem;}
+  .vwrap{font-size:1.2rem;line-height:2;}
+  .ctitle{font-size:1.4rem;}
 }
-@media(min-width:641px) and (max-width:900px){
-  .rside{width:168px;min-width:145px;}
-  .rinner{padding:1.4rem 1.8rem 2rem;}
+@media(min-width:641px) and (max-width:960px){
+  .rside{width:200px;min-width:180px;}
+  .rinner{padding:1.8rem 2.2rem 3rem;}
 }
 </style>
 </head>
@@ -217,7 +228,7 @@ body{background:var(--dark);}
 
 <div id="particles"></div>
 
-<!-- INTRO -->
+<!-- ===== INTRO ===== -->
 <div id="introScreen">
   <div class="i-stars" id="iStars"></div>
   <p class="i-top">✦ &nbsp; Un Acertijo Para Ti &nbsp; ✦</p>
@@ -227,7 +238,7 @@ body{background:var(--dark);}
     significa que estás <strong>muy cerca</strong> de resolver el acertijo.<br/><br/>
     Hay una fecha grabada en mi corazón —<br/>
     <strong>el día en que todo comenzó.</strong><br/>
-    Escríbela, y abre lo que guardé para ti.
+    Escríbela y abre lo que guardé para ti.
   </p>
   <div class="i-div"></div>
   <p class="i-lbl">Tu código secreto</p>
@@ -252,7 +263,7 @@ body{background:var(--dark);}
   <p class="perr" id="pErr">Esa no es la fecha, mi amor 🕊️</p>
 </div>
 
-<!-- BIBLE COVER -->
+<!-- ===== BIBLE COVER ===== -->
 <div id="bibleScreen">
   <p class="b-greet">Lo lograste — esto es para ti, con todo mi amor ✨</p>
   <div class="book-wrap" onclick="openBible()">
@@ -271,27 +282,30 @@ body{background:var(--dark);}
   <p class="b-hint">Toca la Biblia para abrirla ✦</p>
 </div>
 
-<!-- READER -->
+<!-- ===== READER ===== -->
 <div id="readerScreen">
   <header class="rh">
     <div class="rh-top">
-      <div class="rh-logo">La Santa Biblia<small>Reina-Valera · Para ti, con amor</small></div>
+      <div class="rh-logo">La Santa Biblia<small>Reina-Valera 1960 · Para ti, con amor</small></div>
       <div class="rh-btns">
         <button class="mob-bk-btn" onclick="openDrawer()">☰ Libros</button>
         <button class="rh-back" onclick="goBack()">← Inicio</button>
       </div>
     </div>
     <div class="rsearch">
-      <input type="text" id="sTxt" placeholder="Buscar texto en la Biblia…"/>
+      <input type="text" id="sTxt" placeholder="Buscar en la Biblia…"/>
       <select id="sBk"><option value="">— Libro —</option></select>
       <input type="number" id="sCh" placeholder="Cap." min="1"/>
       <input type="number" id="sVr" placeholder="Ver." min="1"/>
-      <button class="rbtn" onclick="doSearch()">Ir</button>
+      <button class="rbtn" onclick="doSearch()">Buscar</button>
     </div>
-    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(232,213,163,0.45);font-size:0.88rem;letter-spacing:0.04em;">
-      💡 Pista: busca <span style="color:rgba(201,168,76,0.7);cursor:pointer;" onclick="document.getElementById('sTxt').value='felices 10 meses';doSearch();">"felices 10 meses"</span> para encontrar algo especial ✨
-    </div>
+    <p class="r-hint">
+      💡 Pista especial: busca
+      <span class="r-hint-link" onclick="eggSearch()">"felices 10 meses"</span>
+      para encontrar un mensaje escondido ✨
+    </p>
   </header>
+
   <div class="rbody">
     <nav class="rside parch-side" id="dSide">
       <div class="rs-sec">
@@ -333,7 +347,7 @@ body{background:var(--dark);}
 <div id="heartBlast"></div>
 
 <script>
-// --- PARTICLES ---
+// ===== PARTICLES =====
 (function(){
   const c=document.getElementById('particles'),f=document.createDocumentFragment();
   for(let i=0;i<22;i++){const p=document.createElement('div');p.className='ptcl';const s=Math.random()*2+1;p.style.cssText=`left:${Math.random()*100}%;width:${s}px;height:${s}px;animation-duration:${Math.random()*16+13}s;animation-delay:${Math.random()*16}s;--d:${(Math.random()-0.5)*160}px;`;f.appendChild(p);}
@@ -343,7 +357,7 @@ body{background:var(--dark);}
   st.appendChild(sf);
 })();
 
-// --- PIN ---
+// ===== PIN =====
 const SECRET='1605';
 let pin='';
 function pp(k){
@@ -368,7 +382,7 @@ function checkPin(){
   }
 }
 
-// --- OPEN BIBLE ---
+// ===== OPEN BIBLE =====
 function openBible(){
   document.getElementById('theBook').classList.add('opening');
   setTimeout(()=>{
@@ -385,44 +399,43 @@ function goBack(){
   const bk=document.getElementById('theBook');
   bk.classList.remove('opening');bk.style.opacity='1';
 }
-
-// --- DRAWER ---
 function openDrawer(){document.getElementById('mobOv').classList.add('show');document.getElementById('mobDr').classList.add('show');}
 function closeDrawer(){document.getElementById('mobOv').classList.remove('show');document.getElementById('mobDr').classList.remove('show');}
 
-// --- BIBLE DATA ---
+// ===== BIBLE DATA =====
 const OLD=[
-  {id:'genesis',name:'Génesis',ch:50},{id:'exodus',name:'Éxodo',ch:40},{id:'leviticus',name:'Levítico',ch:27},
-  {id:'numbers',name:'Números',ch:36},{id:'deuteronomy',name:'Deuteronomio',ch:34},{id:'joshua',name:'Josué',ch:24},
-  {id:'judges',name:'Jueces',ch:21},{id:'ruth',name:'Rut',ch:4},{id:'1samuel',name:'1 Samuel',ch:31},
-  {id:'2samuel',name:'2 Samuel',ch:24},{id:'1kings',name:'1 Reyes',ch:22},{id:'2kings',name:'2 Reyes',ch:25},
-  {id:'1chronicles',name:'1 Crónicas',ch:29},{id:'2chronicles',name:'2 Crónicas',ch:36},{id:'ezra',name:'Esdras',ch:10},
-  {id:'nehemiah',name:'Nehemías',ch:13},{id:'esther',name:'Ester',ch:10},{id:'job',name:'Job',ch:42},
-  {id:'psalms',name:'Salmos',ch:150},{id:'proverbs',name:'Proverbios',ch:31},{id:'ecclesiastes',name:'Eclesiastés',ch:12},
-  {id:'songofsolomon',name:'Cantares',ch:8},{id:'isaiah',name:'Isaías',ch:66},{id:'jeremiah',name:'Jeremías',ch:52},
-  {id:'lamentations',name:'Lamentaciones',ch:5},{id:'ezekiel',name:'Ezequiel',ch:48},{id:'daniel',name:'Daniel',ch:12},
-  {id:'hosea',name:'Oseas',ch:14},{id:'joel',name:'Joel',ch:3},{id:'amos',name:'Amós',ch:9},
-  {id:'obadiah',name:'Abdías',ch:1},{id:'jonah',name:'Jonás',ch:4},{id:'micah',name:'Miqueas',ch:7},
-  {id:'nahum',name:'Nahúm',ch:3},{id:'habakkuk',name:'Habacuc',ch:3},{id:'zephaniah',name:'Sofonías',ch:3},
-  {id:'haggai',name:'Hageo',ch:2},{id:'zechariah',name:'Zacarías',ch:14},{id:'malachi',name:'Malaquías',ch:4}
+  {id:'GEN',name:'Génesis',ch:50},{id:'EXO',name:'Éxodo',ch:40},{id:'LEV',name:'Levítico',ch:27},
+  {id:'NUM',name:'Números',ch:36},{id:'DEU',name:'Deuteronomio',ch:34},{id:'JOS',name:'Josué',ch:24},
+  {id:'JDG',name:'Jueces',ch:21},{id:'RUT',name:'Rut',ch:4},{id:'1SA',name:'1 Samuel',ch:31},
+  {id:'2SA',name:'2 Samuel',ch:24},{id:'1KI',name:'1 Reyes',ch:22},{id:'2KI',name:'2 Reyes',ch:25},
+  {id:'1CH',name:'1 Crónicas',ch:29},{id:'2CH',name:'2 Crónicas',ch:36},{id:'EZR',name:'Esdras',ch:10},
+  {id:'NEH',name:'Nehemías',ch:13},{id:'EST',name:'Ester',ch:10},{id:'JOB',name:'Job',ch:42},
+  {id:'PSA',name:'Salmos',ch:150},{id:'PRO',name:'Proverbios',ch:31},{id:'ECC',name:'Eclesiastés',ch:12},
+  {id:'SNG',name:'Cantares',ch:8},{id:'ISA',name:'Isaías',ch:66},{id:'JER',name:'Jeremías',ch:52},
+  {id:'LAM',name:'Lamentaciones',ch:5},{id:'EZK',name:'Ezequiel',ch:48},{id:'DAN',name:'Daniel',ch:12},
+  {id:'HOS',name:'Oseas',ch:14},{id:'JOL',name:'Joel',ch:3},{id:'AMO',name:'Amós',ch:9},
+  {id:'OBA',name:'Abdías',ch:1},{id:'JON',name:'Jonás',ch:4},{id:'MIC',name:'Miqueas',ch:7},
+  {id:'NAM',name:'Nahúm',ch:3},{id:'HAB',name:'Habacuc',ch:3},{id:'ZEP',name:'Sofonías',ch:3},
+  {id:'HAG',name:'Hageo',ch:2},{id:'ZEC',name:'Zacarías',ch:14},{id:'MAL',name:'Malaquías',ch:4}
 ];
 const NEW=[
-  {id:'matthew',name:'Mateo',ch:28},{id:'mark',name:'Marcos',ch:16},{id:'luke',name:'Lucas',ch:24},
-  {id:'john',name:'Juan',ch:21},{id:'acts',name:'Hechos',ch:28},{id:'romans',name:'Romanos',ch:16},
-  {id:'1corinthians',name:'1 Corintios',ch:16},{id:'2corinthians',name:'2 Corintios',ch:13},{id:'galatians',name:'Gálatas',ch:6},
-  {id:'ephesians',name:'Efesios',ch:6},{id:'philippians',name:'Filipenses',ch:4},{id:'colossians',name:'Colosenses',ch:4},
-  {id:'1thessalonians',name:'1 Tesalonicenses',ch:5},{id:'2thessalonians',name:'2 Tesalonicenses',ch:3},{id:'1timothy',name:'1 Timoteo',ch:6},
-  {id:'2timothy',name:'2 Timoteo',ch:4},{id:'titus',name:'Tito',ch:3},{id:'philemon',name:'Filemón',ch:1},
-  {id:'hebrews',name:'Hebreos',ch:13},{id:'james',name:'Santiago',ch:5},{id:'1peter',name:'1 Pedro',ch:5},
-  {id:'2peter',name:'2 Pedro',ch:3},{id:'1john',name:'1 Juan',ch:5},{id:'2john',name:'2 Juan',ch:1},
-  {id:'3john',name:'3 Juan',ch:1},{id:'jude',name:'Judas',ch:1},{id:'revelation',name:'Apocalipsis',ch:22}
+  {id:'MAT',name:'Mateo',ch:28},{id:'MRK',name:'Marcos',ch:16},{id:'LUK',name:'Lucas',ch:24},
+  {id:'JHN',name:'Juan',ch:21},{id:'ACT',name:'Hechos',ch:28},{id:'ROM',name:'Romanos',ch:16},
+  {id:'1CO',name:'1 Corintios',ch:16},{id:'2CO',name:'2 Corintios',ch:13},{id:'GAL',name:'Gálatas',ch:6},
+  {id:'EPH',name:'Efesios',ch:6},{id:'PHP',name:'Filipenses',ch:4},{id:'COL',name:'Colosenses',ch:4},
+  {id:'1TH',name:'1 Tesalonicenses',ch:5},{id:'2TH',name:'2 Tesalonicenses',ch:3},{id:'1TI',name:'1 Timoteo',ch:6},
+  {id:'2TI',name:'2 Timoteo',ch:4},{id:'TIT',name:'Tito',ch:3},{id:'PHM',name:'Filemón',ch:1},
+  {id:'HEB',name:'Hebreos',ch:13},{id:'JAS',name:'Santiago',ch:5},{id:'1PE',name:'1 Pedro',ch:5},
+  {id:'2PE',name:'2 Pedro',ch:3},{id:'1JN',name:'1 Juan',ch:5},{id:'2JN',name:'2 Juan',ch:1},
+  {id:'3JN',name:'3 Juan',ch:1},{id:'JUD',name:'Judas',ch:1},{id:'REV',name:'Apocalipsis',ch:22}
 ];
 const ALL=[...OLD,...NEW];
 
-// Easter egg: Cantares 2:16
-const EGG={book:'songofsolomon',ch:2,vr:16,msg:'Felices 10 meses mi amor 💕'};
-// Love keywords
-const LW=['amor','amad','amará','amarás','amamos','amaron',' ama ','amar','amado','amada','corazón','corazon','misericordia','gracia','fiel','fidelidad','ternura',' paz ','gozo','alegría','alegria','esposa','esposo','bien amado','amada mía','amado mío','querido','querida','dilecto','eterno','eterna','compasión','favor '];
+// Easter egg — Cantares 2 (Song of Solomon)
+const EGG={bookId:'SNG',ch:2,vr:16,msg:'💕 Felices 10 meses mi amor 💕'};
+
+// Love words in Spanish
+const LW=['amor','amad','amará','amarás','amamos','amaron',' ama ','amar ','amado','amada','corazón','corazon','misericordia','gracia','fiel','fidelidad','ternura',' paz ','gozo','alegría','alegria','esposa','esposo','dilecto','dilecta','bien amado','amada mía','amado mío','querido','querida','eterno','eterna','compasión','amo a','te amo'];
 function isLove(t){const tl=t.toLowerCase();return LW.some(w=>tl.includes(w));}
 
 const cache={};
@@ -467,46 +480,106 @@ function selCh(n){
   document.querySelectorAll('.cbtn').forEach((b,i)=>b.classList.toggle('act',i+1===n));
   loadCh(curBook.id,n);
 }
+
+// ===== FETCH — uses bible.helloao.com (RVR1960 full Spanish) =====
 async function loadCh(bookId,ch){
   const va=document.getElementById('vArea');if(!va)return;
   const key=bookId+'-'+ch;
-  if(cache[key]){renderVerses(cache[key].verses,bookId,ch,cache[key].eng);return;}
+  if(cache[key]){renderVerses(cache[key].v,bookId,ch,cache[key].eng);return;}
   va.innerHTML=`<div class="smsg"><span>✝</span>Cargando versículos…</div>`;
-  // Try Spanish RVR1960 first, then WEB (World English) as fallback
-  const urls=[
-    `https://bible-api.com/${bookId}+${ch}?translation=rvr1960`,
-    `https://bible-api.com/${bookId}+${ch}?translation=web`
-  ];
-  for(let i=0;i<urls.length;i++){
+
+  // Primary: bible.helloao.com — full RVR1960 Spanish
+  // Format: /api/RVR1960/books/{BOOK}/chapters/{CH}
+  try{
+    const r=await fetch(`https://bible.helloao.com/api/RVR1960/books/${bookId}/chapters/${ch}`);
+    if(!r.ok) throw new Error('not ok');
+    const d=await r.json();
+    // Response shape: { chapter: { verses: [ {number, content} ] } }
+    const raw=d?.chapter?.verses||d?.verses||[];
+    if(raw.length){
+      const verses=raw.map(v=>({verse:v.number??v.verse,text:stripTags(v.content??v.text??'')}));
+      cache[key]={v:verses,eng:false};
+      renderVerses(verses,bookId,ch,false);
+      return;
+    }
+    throw new Error('empty');
+  }catch(e1){
+    // Fallback: bible-api.com RVR1960
     try{
-      const r=await fetch(urls[i]);
-      const d=await r.json();
-      if(d.verses&&d.verses.length){
-        cache[key]={verses:d.verses,eng:i>0};
-        renderVerses(d.verses,bookId,ch,i>0);
+      // bible-api uses lowercase book names different from our IDs — map them
+      const apiId=toApiId(bookId);
+      const r2=await fetch(`https://bible-api.com/${apiId}+${ch}?translation=rvr1960`);
+      const d2=await r2.json();
+      if(d2.verses&&d2.verses.length){
+        cache[key]={v:d2.verses,eng:false};
+        renderVerses(d2.verses,bookId,ch,false);
         return;
       }
-    }catch{}
+      throw new Error('empty2');
+    }catch(e2){
+      // Last resort: bible-api.com English
+      try{
+        const apiId=toApiId(bookId);
+        const r3=await fetch(`https://bible-api.com/${apiId}+${ch}`);
+        const d3=await r3.json();
+        if(d3.verses&&d3.verses.length){
+          cache[key]={v:d3.verses,eng:true};
+          renderVerses(d3.verses,bookId,ch,true);
+          return;
+        }
+      }catch{}
+      va.innerHTML=`<div class="smsg">No se pudo cargar.<br><small style="font-size:0.9rem;display:block;margin-top:0.5rem;">Asegúrate de estar en línea (sube a GitHub Pages o Netlify)</small></div>`;
+    }
   }
-  va.innerHTML=`<div class="smsg">No se pudo cargar. Verifica tu conexión.<br><small style="font-size:0.85rem;margin-top:0.5rem;display:block;">Asegúrate de estar online (GitHub Pages o Netlify)</small></div>`;
 }
+
+function stripTags(s){return s.replace(/<[^>]*>/g,'').trim();}
+
+// Map our uppercase IDs to bible-api lowercase IDs
+const ID_MAP={
+  GEN:'genesis',EXO:'exodus',LEV:'leviticus',NUM:'numbers',DEU:'deuteronomy',
+  JOS:'joshua',JDG:'judges',RUT:'ruth','1SA':'1samuel','2SA':'2samuel',
+  '1KI':'1kings','2KI':'2kings','1CH':'1chronicles','2CH':'2chronicles',
+  EZR:'ezra',NEH:'nehemiah',EST:'esther',JOB:'job',PSA:'psalms',
+  PRO:'proverbs',ECC:'ecclesiastes',SNG:'songofsolomon',ISA:'isaiah',
+  JER:'jeremiah',LAM:'lamentations',EZK:'ezekiel',DAN:'daniel',
+  HOS:'hosea',JOL:'joel',AMO:'amos',OBA:'obadiah',JON:'jonah',
+  MIC:'micah',NAM:'nahum',HAB:'habakkuk',ZEP:'zephaniah',HAG:'haggai',
+  ZEC:'zechariah',MAL:'malachi',MAT:'matthew',MRK:'mark',LUK:'luke',
+  JHN:'john',ACT:'acts',ROM:'romans','1CO':'1corinthians','2CO':'2corinthians',
+  GAL:'galatians',EPH:'ephesians',PHP:'philippians',COL:'colossians',
+  '1TH':'1thessalonians','2TH':'2thessalonians','1TI':'1timothy','2TI':'2timothy',
+  TIT:'titus',PHM:'philemon',HEB:'hebrews',JAS:'james','1PE':'1peter',
+  '2PE':'2peter','1JN':'1john','2JN':'2john','3JN':'3john',JUD:'jude',REV:'revelation'
+};
+function toApiId(id){return ID_MAP[id]||id.toLowerCase();}
+
 function renderVerses(verses,bookId,ch,eng=false){
   const va=document.getElementById('vArea');if(!va)return;
-  const isEggCh=bookId===EGG.book&&parseInt(ch)===EGG.ch;
+  const isEggCh=bookId===EGG.bookId&&parseInt(ch)===EGG.ch;
   let h=`<div class="ornline cfade">— ✦ —</div><div class="vwrap cfade">`;
-  if(eng)h+=`<p style="font-style:italic;color:rgba(80,45,15,0.48);font-size:0.82rem;margin-bottom:0.9rem;">* En inglés — versión española no disponible para este libro</p>`;
+  if(eng)h+=`<p style="font-style:italic;color:rgba(80,45,15,0.5);font-size:0.9rem;margin-bottom:1rem;">* En inglés — versión española no disponible para este libro en este momento</p>`;
   verses.forEach(v=>{
-    let txt=v.text.trim();
-    const isEggV=isEggCh&&v.verse===EGG.vr;
-    if(isEggV) txt+=` <span style="color:var(--rose);font-style:italic;font-weight:600;">— ${EGG.msg}</span>`;
+    let txt=(v.text||'').trim();
+    const vn=parseInt(v.verse??v.number??0);
+    const isEggV=isEggCh&&vn===EGG.vr;
+    if(isEggV) txt+=` <span style="color:var(--rose);font-weight:600;font-style:italic;">&nbsp;— ${EGG.msg}</span>`;
     const love=isLove(txt)||isEggV;
-    h+=`<div class="vrow${isEggV?' egg':love?' lv':''}"><span class="vnum">${v.verse}</span><div class="vcont"><span class="vtxt">${txt}</span>${love?'<span class="lheart">♥</span>':''}</div></div>`;
+    h+=`<div class="vrow${isEggV?' egg':love?' lv':''}">
+      <span class="vnum">${vn}</span>
+      <div class="vcont"><span class="vtxt">${txt}</span>${love?'<span class="lheart">♥</span>':''}</div>
+    </div>`;
   });
-  h+=`</div><div class="ornline" style="margin-top:1.3rem;">— ✦ —</div>`;
+  h+=`</div><div class="ornline" style="margin-top:1.5rem;">— ✦ —</div>`;
   va.innerHTML=h;
 }
 
-// --- SEARCH ---
+// ===== SEARCH =====
+function eggSearch(){
+  document.getElementById('sTxt').value='felices 10 meses';
+  doSearch();
+}
+
 async function doSearch(){
   const txt=document.getElementById('sTxt').value.trim();
   const bkId=document.getElementById('sBk').value;
@@ -514,29 +587,42 @@ async function doSearch(){
   const vr=parseInt(document.getElementById('sVr').value)||0;
   const ra=document.getElementById('rArea');
 
+  // Navigate to specific reference
   if(bkId&&ch){
     const b=ALL.find(x=>x.id===bkId);if(!b)return;
     curBook=b;curCh=ch;
     curT=OLD.find(x=>x.id===bkId)?'old':'new';
     swT(curT);renderChNav();
     await loadCh(bkId,ch);
-    if(vr){setTimeout(()=>hlVerse(vr,bkId===EGG.book&&ch===EGG.ch&&vr===EGG.vr),600);}
+    if(vr) setTimeout(()=>hlVerse(vr,bkId===EGG.bookId&&ch===EGG.ch&&vr===EGG.vr),700);
     return;
   }
 
   if(txt.length<2)return;
-  const isEggQ=/felices|10 meses|meses mi amor/i.test(txt);
+  const isEggQ=/felices|10 meses|meses.*amor|amor.*meses/i.test(txt);
 
-  ra.innerHTML=`<div class="rarea-top-fade"></div><div class="rinner"><div class="chdr cfade"><h2 class="ctitle">Búsqueda</h2><span class="cinfo">"${txt}"</span></div><div class="smsg"><span>✝</span>Buscando en las Escrituras…</div></div>`;
+  ra.innerHTML=`<div class="rarea-top-fade"></div><div class="rinner">
+    <div class="chdr cfade"><h2 class="ctitle">Búsqueda</h2><span class="cinfo">"${txt}"</span></div>
+    <div class="smsg"><span>✝</span>Buscando en las Escrituras…</div>
+  </div>`;
 
   if(isEggQ){
     setTimeout(()=>{
-      ra.innerHTML=`<div class="rarea-top-fade"></div><div class="rinner"><div class="chdr cfade"><h2 class="ctitle">Búsqueda</h2><span class="cinfo">1 resultado especial ✦</span></div><div class="rcard cfade" onclick="jumpTo('songofsolomon','Cantares',2,16)" style="border-color:var(--rose);background:rgba(196,98,122,0.08);"><div class="rref" style="color:var(--rose);">Cantares 2:16 ♥</div><div class="rtxt">Mi amado es mío, y yo soy suya — <em style="background:rgba(196,98,122,0.22);">${EGG.msg}</em></div></div></div>`;
-      setTimeout(triggerHearts,380);
-    },650);
+      ra.innerHTML=`<div class="rarea-top-fade"></div><div class="rinner">
+        <div class="chdr cfade"><h2 class="ctitle">Búsqueda</h2><span class="cinfo">1 resultado especial ✦</span></div>
+        <div class="rcard cfade" onclick="jumpTo('SNG','Cantares',2,16)" style="border-color:var(--rose);background:rgba(196,98,122,0.09);">
+          <div class="rref" style="color:var(--rose);">Cantares 2:16 ♥</div>
+          <div class="rtxt">Mi amado es mío, y yo soy suya; él apacienta entre lirios. —
+            <em style="background:rgba(196,98,122,0.22);">${EGG.msg}</em>
+          </div>
+        </div>
+      </div>`;
+      setTimeout(triggerHearts,350);
+    },700);
     return;
   }
 
+  // Text search via bible-api
   try{
     const r=await fetch(`https://bible-api.com/?q=${encodeURIComponent(txt)}&translation=rvr1960`);
     const d=await r.json();
@@ -544,31 +630,43 @@ async function doSearch(){
       const esc=txt.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
       let h=`<div class="chdr cfade"><h2 class="ctitle">Resultados</h2><span class="cinfo">${d.verses.length} versículo(s) · "${txt}"</span></div>`;
       d.verses.slice(0,25).forEach(v=>{
-        const hi=v.text.replace(new RegExp(esc,'gi'),m=>`<em>${m}</em>`);
-        const love=isLove(v.text);
-        h+=`<div class="rcard cfade" onclick="jumpTo('${v.book_id}','${v.book_name}',${v.chapter},${v.verse})"><div class="rref">${v.book_name} ${v.chapter}:${v.verse}${love?' ♥':''}</div><div class="rtxt">${hi}</div></div>`;
+        const hi=(v.text||'').replace(new RegExp(esc,'gi'),m=>`<em>${m}</em>`);
+        const love=isLove(v.text||'');
+        h+=`<div class="rcard cfade" onclick="jumpTo('${toReverseId(v.book_id)||v.book_id}','${v.book_name}',${v.chapter},${v.verse})">
+          <div class="rref">${v.book_name} ${v.chapter}:${v.verse}${love?' ♥':''}</div>
+          <div class="rtxt">${hi}</div>
+        </div>`;
       });
       ra.innerHTML=`<div class="rarea-top-fade"></div><div class="rinner">${h}</div>`;
     } else {
-      ra.innerHTML=`<div class="rarea-top-fade"></div><div class="rinner"><div class="chdr cfade"><h2 class="ctitle">Sin resultados</h2></div><div class="smsg">No se encontraron versículos con ese término.</div></div>`;
+      ra.innerHTML=`<div class="rarea-top-fade"></div><div class="rinner">
+        <div class="chdr cfade"><h2 class="ctitle">Sin resultados</h2></div>
+        <div class="smsg">No se encontraron versículos.<br><small style="font-size:0.9rem;margin-top:0.5rem;display:block;">Prueba buscar por libro + capítulo en el buscador.</small></div>
+      </div>`;
     }
   }catch{
-    ra.innerHTML=`<div class="rarea-top-fade"></div><div class="rinner"><div class="smsg">Error al buscar. Prueba con libro + capítulo.</div></div>`;
+    ra.innerHTML=`<div class="rarea-top-fade"></div><div class="rinner"><div class="smsg">Error al buscar. Intenta seleccionando un libro y capítulo directamente.</div></div>`;
   }
 }
+
+// Reverse map for search results book_id
+const REV_MAP={};
+Object.entries(ID_MAP).forEach(([k,v])=>{REV_MAP[v]=k;});
+function toReverseId(apiId){return REV_MAP[apiId]||apiId.toUpperCase();}
+
 async function jumpTo(bkId,bkName,ch,vr){
   const b=ALL.find(x=>x.id===bkId)||{id:bkId,name:bkName,ch:50};
   curBook=b;curCh=ch;
   curT=OLD.find(x=>x.id===bkId)?'old':'new';
   swT(curT);renderChNav();
   await loadCh(bkId,ch);
-  const isEgg=bkId===EGG.book&&ch===EGG.ch&&vr===EGG.vr;
-  setTimeout(()=>hlVerse(vr,isEgg),650);
+  const isEgg=bkId===EGG.bookId&&ch===EGG.ch&&vr===EGG.vr;
+  setTimeout(()=>hlVerse(vr,isEgg),700);
 }
 function hlVerse(vr,egg=false){
   document.querySelectorAll('.vrow').forEach(row=>{
     if(parseInt(row.querySelector('.vnum').textContent)===vr){
-      row.style.background='rgba(201,168,76,0.18)';
+      row.style.background='rgba(201,168,76,0.2)';
       row.style.borderLeft='3px solid var(--gold)';
       row.scrollIntoView({behavior:'smooth',block:'center'});
       if(egg)setTimeout(triggerHearts,500);
@@ -576,23 +674,23 @@ function hlVerse(vr,egg=false){
   });
 }
 
-// --- HEART EXPLOSION ---
+// ===== HEART EXPLOSION =====
 function triggerHearts(){
   const bl=document.getElementById('heartBlast');
   bl.style.display='block';bl.innerHTML='';
   const cx=window.innerWidth/2,cy=window.innerHeight/2;
-  const em=['♥','❤','💕','💖','💗','💓','💞','🌹'];
+  const em=['♥','❤','💕','💖','💗','💓','💞','🌹','✨'];
   const f=document.createDocumentFragment();
-  for(let i=0;i<40;i++){
+  for(let i=0;i<45;i++){
     const h=document.createElement('div');h.className='hp';
-    const ang=Math.random()*360,dist=100+Math.random()*230;
-    const tx=Math.cos(ang*Math.PI/180)*dist,ty=Math.sin(ang*Math.PI/180)*dist-70;
-    h.style.cssText=`left:${cx}px;top:${cy}px;animation-delay:${Math.random()*0.5}s;--r:${(Math.random()-0.5)*55}deg;--tx:${tx}px;--ty:${ty}px;font-size:${1+Math.random()*1.3}rem;`;
+    const ang=Math.random()*360,dist=100+Math.random()*240;
+    const tx=Math.cos(ang*Math.PI/180)*dist,ty=Math.sin(ang*Math.PI/180)*dist-80;
+    h.style.cssText=`left:${cx}px;top:${cy}px;animation-delay:${Math.random()*0.6}s;--r:${(Math.random()-0.5)*60}deg;--tx:${tx}px;--ty:${ty}px;font-size:${1.1+Math.random()*1.5}rem;`;
     h.textContent=em[Math.floor(Math.random()*em.length)];
     f.appendChild(h);
   }
   bl.appendChild(f);
-  setTimeout(()=>{bl.style.display='none';bl.innerHTML='';},3200);
+  setTimeout(()=>{bl.style.display='none';bl.innerHTML='';},3500);
 }
 
 document.getElementById('sTxt').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
