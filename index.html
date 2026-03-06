@@ -2,868 +2,938 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-<title>Para Ti — 16 de Mayo</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<title>Diccionario</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
 <style>
+/* ══════════════════════════════════════════
+   ROOT & RESET
+══════════════════════════════════════════ */
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --g:#b8922a;--g2:#dcc97a;--g3:#7a5c10;--g4:#f0dea0;--g5:#ede0b8;
-  --dk:#08050299;--dk2:#140c04;--dk3:#1e1208;
-  --p:#ede0c0;--p2:#e0cca0;--p3:#d4bc8c;--p4:#c8ac78;
-  --ink:#1a0e06;--ink2:#2e1c0a;--ink3:#5a3a18;
-  --rose:#b05060;--rose2:#d07888;
-  --sp:0.08em;
+  --cream:#f5f0e8;
+  --cream2:#ede6d6;
+  --cream3:#e4dac6;
+  --paper:#faf7f2;
+  --ink:#1a1610;
+  --ink2:#2e2820;
+  --ink3:#4a4035;
+  --ink4:#7a6e60;
+  --red:#9b2020;
+  --red2:#c0392b;
+  --gold:#8a6f3a;
+  --gold2:#b8953e;
+  --spine:#1c1410;
+  --cover:#1e1a14;
+  --cover2:#2a2418;
+  --border:#c8bfaa;
 }
-html,body{width:100%;height:100%;overflow:hidden;background:#08050299;}
-body{font-family:'IM Fell English',Georgia,serif;}
-
-/* ══════ UTILITY ══════ */
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes glow{0%,100%{text-shadow:0 0 18px rgba(184,146,42,.4)}50%{text-shadow:0 0 60px rgba(184,146,42,.9),0 0 110px rgba(184,146,42,.3)}}
-@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-9px)}75%{transform:translateX(9px)}}
-@keyframes twinkle{0%,100%{opacity:.08;transform:scale(1)}50%{opacity:.9;transform:scale(1.6)}}
-@keyframes breathe{0%,100%{opacity:.4}50%{opacity:.85}}
-@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
-@keyframes hbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
-@keyframes pop{0%{transform:translate(-50%,-50%) scale(0) rotate(var(--r));opacity:0}20%{opacity:1}100%{transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(.3) rotate(var(--r));opacity:0}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes slideIn{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:none}}
-
-/* ══════ PARTICLES ══════ */
-#ptcls{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-@keyframes rise{0%{transform:translateY(100vh) translateX(0);opacity:0}10%{opacity:.6}90%{opacity:.15}100%{transform:translateY(-10vh) translateX(var(--dx));opacity:0}}
-.p{position:absolute;background:var(--g);border-radius:50%;animation:rise linear infinite;opacity:0}
-
-/* ══════ SCREENS ══════ */
-.screen{position:fixed;inset:0;z-index:10;display:none}
-.screen.vis{display:flex}
-
-/* ══════ INTRO SCREEN ══════ */
-#sIntro{
-  background:radial-gradient(ellipse at 50% 38%,#1c0e04 0%,#0a0502 60%,#000 100%);
-  flex-direction:column;align-items:center;justify-content:center;
-  padding:2rem 1.5rem;overflow-y:auto;gap:.6rem;
-  transition:opacity 1.3s,transform 1.3s;
-}
-#sIntro.out{opacity:0;transform:scale(1.05);pointer-events:none}
-.stars{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.star{position:absolute;background:var(--g);border-radius:50%;animation:twinkle ease-in-out infinite}
-
-.i-super{font-family:'Cinzel',serif;color:var(--g);font-size:.82rem;letter-spacing:.55em;opacity:0;animation:fadeUp .8s .3s both;text-align:center}
-.i-cross{font-size:4.2rem;color:var(--g);animation:glow 3s ease-in-out infinite,fadeUp .8s .6s both;line-height:1}
-.i-title{
-  font-family:'Cormorant Garamond',serif;color:var(--g2);
-  font-size:clamp(1.25rem,3vw,1.65rem);font-style:italic;line-height:1.95;
-  text-align:center;max-width:500px;
-  opacity:0;animation:fadeUp .9s 1s both;
-}
-.i-title b{font-style:normal;font-weight:600;color:var(--g4)}
-.i-rule{width:140px;height:1px;background:linear-gradient(90deg,transparent,var(--g),transparent);opacity:0;animation:fadeUp .8s 1.5s both}
-.i-label{font-family:'Cinzel',serif;color:rgba(184,146,42,.5);font-size:.72rem;letter-spacing:.42em;opacity:0;animation:fadeUp .8s 1.8s both}
-.dots{display:flex;gap:14px;opacity:0;animation:fadeUp .7s 2s both}
-.dot{width:15px;height:15px;border-radius:50%;border:2px solid rgba(184,146,42,.3);transition:all .25s}
-.dot.on{background:var(--g);border-color:var(--g);box-shadow:0 0 12px rgba(184,146,42,.6);transform:scale(1.2)}
-.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;width:242px;opacity:0;animation:fadeUp .7s 2.2s both}
-.key{
-  aspect-ratio:1;background:rgba(184,146,42,.04);
-  border:1px solid rgba(184,146,42,.18);
-  color:var(--g2);font-family:'Cinzel',serif;font-size:1.35rem;
-  cursor:pointer;border-radius:4px;display:flex;align-items:center;justify-content:center;
-  transition:all .14s;user-select:none;-webkit-tap-highlight-color:transparent;
-}
-.key:hover,.key:active{background:rgba(184,146,42,.16);border-color:var(--g);transform:scale(1.07)}
-.key.sm{font-size:1rem;color:rgba(184,146,42,.5)}
-.err{font-family:'Cormorant Garamond',serif;color:#d06868;font-size:1.05rem;font-style:italic;opacity:0;transition:opacity .3s;height:1.4rem;text-align:center}
-.err.on{opacity:1}
-
-/* ══════ COVER SCREEN ══════ */
-#sCover{
-  background:radial-gradient(ellipse at 50% 32%,#1e0e04 0%,#0a0502 65%);
-  flex-direction:column;align-items:center;justify-content:center;gap:0;
-}
-.c-greet{font-family:'Cormorant Garamond',serif;color:rgba(220,201,122,.68);font-size:clamp(1.1rem,2.5vw,1.4rem);font-style:italic;text-align:center;animation:fadeUp .9s .2s both;padding:0 2rem;margin-bottom:2rem}
-
-/* 3D Book */
-.book-scene{perspective:1600px;cursor:pointer;animation:fadeUp 1s .5s both}
-.book{
-  width:clamp(175px,23vw,238px);height:clamp(245px,32vw,333px);
-  position:relative;transform-style:preserve-3d;
-  transform:rotateY(-30deg) rotateX(7deg);
-  transition:transform .6s cubic-bezier(.34,1.4,.64,1);
-  filter:drop-shadow(-20px 32px 50px rgba(0,0,0,.8));
-}
-.book:hover{transform:rotateY(-18deg) rotateX(4deg) scale(1.05)}
-.book.open{transform:rotateY(-195deg) scale(0) !important;opacity:0 !important;transition:transform .95s cubic-bezier(.4,0,.2,1),opacity .7s !important}
-.bk-cover{
-  position:absolute;inset:0;border-radius:4px 10px 10px 4px;
-  background:linear-gradient(145deg,#3e1908 0%,#5e2c0e 28%,#3c1608 58%,#280f04 100%);
-  border:1px solid rgba(184,146,42,.3);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
-  padding:1.6rem 1.3rem;overflow:hidden;
-}
-.bk-cover::before{content:'';position:absolute;inset:8px;border:1px solid rgba(184,146,42,.2);border-radius:3px 8px 8px 3px;pointer-events:none}
-.bk-cover::after{content:'';position:absolute;left:0;top:0;bottom:0;width:18px;background:linear-gradient(90deg,#100402,#3e1808,#100402);border-radius:4px 0 0 4px}
-.bk-cross{color:var(--g);font-size:2.6rem;text-shadow:0 0 22px rgba(184,146,42,.5)}
-.bk-rule{width:52px;height:1px;background:linear-gradient(90deg,transparent,var(--g),transparent)}
-.bk-t{font-family:'Cinzel',serif;color:var(--g2);font-size:.85rem;letter-spacing:.25em;text-align:center;line-height:1.8}
-.bk-s{font-family:'Cormorant Garamond',serif;color:rgba(220,201,122,.42);font-size:.7rem;letter-spacing:.2em;font-style:italic}
-.bk-spine{position:absolute;top:0;left:-15px;bottom:0;width:17px;background:linear-gradient(90deg,#060201,#341005,#060201);border-radius:4px 0 0 4px;display:flex;align-items:center;justify-content:center}
-.bk-spine span{font-family:'Cinzel',serif;color:rgba(184,146,42,.45);font-size:.36rem;letter-spacing:.3em;writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap}
-.bk-pages{position:absolute;top:4px;right:-6px;bottom:4px;width:10px;background:repeating-linear-gradient(180deg,#eeddc0,#d8c8a8 1px,#eeddc0 2px);border-radius:0 4px 4px 0;box-shadow:3px 0 6px rgba(0,0,0,.4)}
-.c-hint{font-family:'Cormorant Garamond',serif;color:rgba(184,146,42,.45);font-size:1.05rem;font-style:italic;animation:fadeUp .9s 1.2s both,breathe 3.5s 2s infinite;margin-top:1.8rem}
-
-/* ══════ READER SCREEN ══════ */
-#sReader{flex-direction:column;overflow:hidden;background:#08050299}
-.rdr-head{
-  background:linear-gradient(180deg,#180c04 0%,#201008 100%);
-  border-bottom:1px solid rgba(184,146,42,.22);
-  padding:.8rem 1.4rem;flex-shrink:0;z-index:20;
-  display:flex;flex-direction:column;gap:.6rem;
-}
-.rh-row1{display:flex;align-items:center;justify-content:space-between;gap:.8rem;flex-wrap:wrap}
-.rh-brand{font-family:'Cinzel',serif;color:var(--g2);font-size:1.05rem;letter-spacing:.15em;line-height:1.3}
-.rh-brand small{display:block;font-size:.6rem;letter-spacing:.25em;color:rgba(220,201,122,.35);margin-top:.1rem}
-.rh-actions{display:flex;gap:.4rem;align-items:center}
-.btn-back{background:none;border:1px solid rgba(184,146,42,.28);color:var(--g);font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.16em;padding:.45rem .9rem;cursor:pointer;transition:all .2s;text-transform:uppercase}
-.btn-back:hover{background:rgba(184,146,42,.1);border-color:var(--g)}
-.btn-menu{display:none;background:rgba(120,80,20,.15);border:1px solid rgba(120,80,20,.3);color:var(--g3);font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.14em;padding:.45rem .8rem;cursor:pointer;text-transform:uppercase;border-radius:2px}
-.rh-search{display:flex;gap:.4rem;flex-wrap:wrap}
-.rh-search select,.rh-search input{
-  background:rgba(255,255,255,.03);border:1px solid rgba(184,146,42,.2);
-  color:var(--g2);font-family:'Cormorant Garamond',serif;font-size:1.1rem;
-  padding:.48rem .78rem;outline:none;border-radius:2px;transition:border-color .2s;
-}
-.rh-search select option{background:#180c04;color:var(--g2)}
-.rh-search input::placeholder{color:rgba(184,146,42,.25)}
-.rh-search input:focus,.rh-search select:focus{border-color:var(--g)}
-.rh-search input[type=number]{width:74px}
-#sTxt{flex:1;min-width:120px}
-.btn-srch{background:var(--g);border:none;color:var(--ink);font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.16em;padding:.48rem 1.1rem;cursor:pointer;text-transform:uppercase;transition:all .18s;border-radius:2px;white-space:nowrap}
-.btn-srch:hover{background:var(--g2)}
-.rh-hint{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(220,201,122,.48);font-size:.95rem}
-.rh-hint a{color:rgba(184,146,42,.8);cursor:pointer;text-decoration:underline dotted}
-.rh-hint a:hover{color:var(--g2)}
-
-/* ══════ BOOK LAYOUT ══════ */
-.book-layout{display:flex;flex:1;overflow:hidden}
-
-/* Left sidebar */
-.sidebar{
-  width:240px;min-width:220px;flex-shrink:0;
-  border-right:1px solid rgba(100,60,15,.25);
-  overflow-y:auto;display:flex;flex-direction:column;
-  background:linear-gradient(170deg,#d8c498 0%,#cbb884 30%,#c4ae7a 60%,#bba268 100%);
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E"),
-    linear-gradient(170deg,#d8c498 0%,#cbb884 30%,#c4ae7a 60%,#bba268 100%);
-}
-.sidebar::-webkit-scrollbar{width:3px}
-.sidebar::-webkit-scrollbar-thumb{background:var(--g3);border-radius:2px}
-
-.sb-section{padding:.9rem 1rem;border-bottom:1px solid rgba(90,50,10,.15)}
-.sb-label{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.35em;color:var(--g3);text-transform:uppercase;margin-bottom:.65rem}
-.test-btns{display:flex;flex-direction:column;gap:.25rem}
-.test-btn{background:none;border:1px solid transparent;color:var(--ink2);font-family:'Cormorant Garamond',serif;font-size:1.08rem;padding:.32rem .55rem;cursor:pointer;text-align:left;transition:all .14s;border-radius:2px}
-.test-btn:hover{background:rgba(120,80,20,.12);border-color:rgba(120,80,20,.28)}
-.test-btn.act{background:rgba(100,65,15,.2);border-color:var(--g3);color:var(--g3);font-weight:600}
-.bk-list{list-style:none}
-.bk-item{
-  font-family:'Cormorant Garamond',serif;font-size:1.08rem;color:var(--ink2);
-  padding:.3rem .52rem;cursor:pointer;border-radius:2px;
-  transition:all .13s;border-left:2px solid transparent;display:flex;justify-content:space-between;align-items:baseline;
-}
-.bk-item:hover{background:rgba(120,80,20,.1);border-left-color:rgba(120,80,20,.35)}
-.bk-item.act{background:rgba(100,65,15,.18);border-left-color:var(--g3);color:var(--g3);font-weight:600}
-.bk-item .ch-count{font-size:.72rem;color:var(--ink3);opacity:.55}
-
-/* Right reading area */
-.reading-area{flex:1;overflow:hidden;position:relative;display:flex;flex-direction:column}
-
-/* Page turn container */
-.page-container{
-  flex:1;position:relative;overflow:hidden;
-  background-color:#e8d498;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.52' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='600' height='600' filter='url(%23n)' opacity='0.13'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.015' numOctaves='2'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='4'/%3E%3C/filter%3E%3Crect width='400' height='400' fill='%23a07830' opacity='0.04' filter='url(%23g)'/%3E%3C/svg%3E"),
-    repeating-linear-gradient(96deg,transparent,transparent 5px,rgba(110,70,18,.016) 5px,rgba(110,70,18,.016) 10px),
-    repeating-linear-gradient(186deg,transparent,transparent 8px,rgba(90,55,12,.01) 8px,rgba(90,55,12,.01) 16px),
-    radial-gradient(ellipse at 8% 90%, rgba(140,90,25,.14) 0%,transparent 45%),
-    radial-gradient(ellipse at 92% 5%, rgba(160,105,30,.12) 0%,transparent 42%),
-    radial-gradient(ellipse at 55% 55%, rgba(120,80,20,.06) 0%,transparent 65%),
-    linear-gradient(160deg,#f0ddb0 0%,#e6cc98 18%,#edd8a8 42%,#e2c88e 65%,#e9d4a0 85%,#dfc080 100%);
+html,body{
+  width:100%;height:100%;overflow:hidden;
+  background:#0e0c09;
+  font-family:'EB Garamond',Georgia,serif;
 }
 
-/* Worn edges */
-.page-container::before{
-  content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
-  box-shadow:inset 0 0 30px rgba(80,45,10,.18),inset 4px 0 16px rgba(60,35,8,.12),inset -4px 0 16px rgba(60,35,8,.08),inset 0 6px 20px rgba(80,45,10,.1),inset 0 -6px 20px rgba(80,45,10,.1);
+/* ══════════════════════════════════════════
+   NOISE OVERLAY (grain texture everywhere)
+══════════════════════════════════════════ */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  opacity:.6;mix-blend-mode:multiply;
 }
 
-.page-inner{position:absolute;inset:0;overflow-y:auto;z-index:1}
-.page-inner::-webkit-scrollbar{width:5px}
-.page-inner::-webkit-scrollbar-thumb{background:var(--g3);border-radius:3px;opacity:.5}
-.page-inner::-webkit-scrollbar-track{background:rgba(120,80,20,.06)}
+/* ══════════════════════════════════════════
+   SCREENS
+══════════════════════════════════════════ */
+.screen{position:fixed;inset:0;z-index:10;display:none;align-items:center;justify-content:center;}
+.screen.active{display:flex;}
 
-.page-content{padding:2.8rem 4.5rem 5rem;max-width:920px;margin:0 auto}
-
-/* Page turn animation */
-.page-inner.turn-out{animation:turnOut .5s cubic-bezier(.4,0,1,1) forwards}
-.page-inner.turn-in{animation:turnIn .5s cubic-bezier(0,0,.6,1) forwards}
-@keyframes turnOut{
-  0%{opacity:1;transform:none}
-  40%{opacity:.3;transform:perspective(1200px) rotateY(-8deg) translateX(-3%)}
-  100%{opacity:0;transform:perspective(1200px) rotateY(-18deg) translateX(-8%)}
-}
-@keyframes turnIn{
-  0%{opacity:0;transform:perspective(1200px) rotateY(18deg) translateX(8%)}
-  60%{opacity:.6;transform:perspective(1200px) rotateY(3deg) translateX(1%)}
-  100%{opacity:1;transform:none}
+/* ══════════════════════════════════════════
+   PIN SCREEN
+══════════════════════════════════════════ */
+#pinScreen{
+  background:radial-gradient(ellipse 80% 70% at 50% 40%, #1a150e 0%, #0e0c09 70%);
+  flex-direction:column;gap:0;padding:2rem 1.5rem;overflow-y:auto;
 }
 
-/* Chapter header */
-.ch-header{
-  text-align:center;margin-bottom:2.4rem;padding-bottom:1.6rem;
-  border-bottom:1px solid rgba(120,75,18,.22);
+/* Floating letters background */
+.bg-letters{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:.06;}
+.bg-letter{
+  position:absolute;font-family:'Playfair Display',serif;
+  color:var(--cream);font-style:italic;
+  animation:floatLetter linear infinite;
+  user-select:none;
+}
+@keyframes floatLetter{
+  0%{transform:translateY(110vh) rotate(var(--r));opacity:0;}
+  10%{opacity:1;}90%{opacity:.5;}
+  100%{transform:translateY(-15vh) rotate(var(--r));opacity:0;}
+}
+
+/* Pin content */
+.pin-super{
+  font-family:'EB Garamond',serif;font-style:italic;
+  color:rgba(197,178,140,.5);font-size:.88rem;letter-spacing:.28em;
+  animation:fadeUp .8s .3s both;text-align:center;margin-bottom:2.4rem;
+}
+.pin-book-icon{
+  font-family:'Playfair Display',serif;font-size:3.8rem;font-weight:900;
+  color:var(--cream2);line-height:1;
+  animation:fadeUp .8s .5s both;
+  text-shadow:0 4px 30px rgba(197,178,140,.15);
+  margin-bottom:.3rem;
+}
+.pin-book-label{
+  font-family:'Lora',serif;font-style:italic;
+  color:rgba(197,178,140,.35);font-size:.78rem;letter-spacing:.35em;
+  animation:fadeUp .8s .7s both;margin-bottom:2.8rem;
+}
+.pin-msg{
+  font-family:'Playfair Display',serif;font-style:italic;
+  color:rgba(232,218,192,.72);font-size:clamp(1.1rem,2.5vw,1.45rem);
+  line-height:1.85;text-align:center;max-width:440px;
+  animation:fadeUp .9s .9s both;margin-bottom:2.4rem;
+}
+.pin-msg b{font-style:normal;font-weight:700;color:rgba(232,218,192,.95);}
+.pin-rule{
+  width:120px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(197,178,140,.4),transparent);
+  animation:fadeUp .8s 1.3s both;margin-bottom:2.2rem;
+}
+.pin-label{
+  font-family:'EB Garamond',serif;font-style:italic;
+  color:rgba(197,178,140,.42);font-size:.88rem;letter-spacing:.22em;
+  animation:fadeUp .8s 1.5s both;margin-bottom:1.2rem;
+}
+
+/* Dots */
+.pin-dots{display:flex;gap:12px;animation:fadeUp .7s 1.7s both;margin-bottom:1.5rem;}
+.pdot{
+  width:13px;height:13px;border-radius:50%;
+  border:1.5px solid rgba(197,178,140,.25);
+  transition:all .22s;
+}
+.pdot.lit{
+  background:var(--cream2);border-color:var(--cream2);
+  box-shadow:0 0 10px rgba(197,178,140,.5);transform:scale(1.18);
+}
+
+/* Keypad */
+.pin-pad{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+  width:228px;animation:fadeUp .7s 1.9s both;margin-bottom:.9rem;
+}
+.pkey{
+  aspect-ratio:1;
+  background:rgba(197,178,140,.04);
+  border:1px solid rgba(197,178,140,.14);
+  color:rgba(232,218,192,.82);
+  font-family:'Playfair Display',serif;font-size:1.3rem;
+  cursor:pointer;border-radius:3px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .13s;user-select:none;-webkit-tap-highlight-color:transparent;
+}
+.pkey:hover,.pkey:active{
+  background:rgba(197,178,140,.14);
+  border-color:rgba(197,178,140,.4);
+  transform:scale(1.06);
+}
+.pkey.del-k{font-size:.95rem;color:rgba(197,178,140,.4);}
+.pkey.ok-k{color:rgba(197,178,140,.85);}
+.pin-err{
+  font-family:'Lora',serif;font-style:italic;
+  color:rgba(180,80,80,.85);font-size:.95rem;
+  opacity:0;transition:opacity .3s;height:1.3rem;text-align:center;
+  animation:fadeUp .6s 2.1s both;
+}
+.pin-err.show{opacity:1;}
+
+/* ══════════════════════════════════════════
+   BOOK COVER SCREEN
+══════════════════════════════════════════ */
+#coverScreen{
+  background:radial-gradient(ellipse 90% 80% at 50% 45%, #16120c 0%, #0a0806 100%);
+  flex-direction:column;gap:0;
+  perspective:2000px;
+}
+.cover-greeting{
+  font-family:'Lora',serif;font-style:italic;
+  color:rgba(220,205,170,.6);font-size:clamp(1rem,2vw,1.3rem);
+  letter-spacing:.05em;text-align:center;
+  animation:fadeUp .9s .2s both;
+  margin-bottom:2.8rem;padding:0 2rem;
+}
+
+/* THE DICTIONARY BOOK 3D */
+.dict-scene{
+  cursor:pointer;
+  transform-style:preserve-3d;
+  animation:fadeUp 1s .5s both, bookFloat 4s 1.5s ease-in-out infinite;
+}
+@keyframes bookFloat{
+  0%,100%{transform:translateY(0) rotateX(2deg);}
+  50%{transform:translateY(-10px) rotateX(2deg);}
+}
+.dict-book{
+  width:clamp(210px,28vw,280px);
+  height:clamp(280px,38vw,375px);
   position:relative;
+  transform-style:preserve-3d;
+  transform:rotateY(-32deg) rotateX(5deg);
+  transition:transform .6s cubic-bezier(.34,1.3,.64,1);
+  filter:drop-shadow(-22px 38px 55px rgba(0,0,0,.85));
 }
-.ch-header::after{
-  content:'✦';position:absolute;bottom:-0.65rem;left:50%;transform:translateX(-50%);
-  background:var(--p);color:var(--g3);font-size:.7rem;padding:0 .5rem;
+.dict-scene:hover .dict-book{
+  transform:rotateY(-20deg) rotateX(3deg) scale(1.04);
 }
-.ch-book{font-family:'Cinzel',serif;color:var(--ink3);font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;margin-bottom:.5rem}
-.ch-num{font-family:'Cinzel Decorative',serif;color:var(--ink);font-size:clamp(2rem,5vw,3rem);font-weight:400;line-height:1;margin-bottom:.5rem}
-.ch-nav-row{display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-top:1.2rem}
-.pg-btn{
-  background:none;border:1px solid rgba(120,75,18,.22);color:var(--ink3);
-  font-family:'Cormorant Garamond',serif;font-size:1rem;
-  width:38px;height:38px;cursor:pointer;transition:all .14s;border-radius:2px;
+.dict-book.opening{
+  transform:rotateY(-200deg) scale(0) !important;
+  opacity:0 !important;
+  transition:transform 1s cubic-bezier(.4,0,.2,1), opacity .75s !important;
+}
+
+/* Cover face */
+.book-face{
+  position:absolute;inset:0;
+  background:linear-gradient(160deg, #2a2318 0%, #1e1a12 30%, #242016 60%, #1a1710 100%);
+  border-radius:3px 8px 8px 3px;
+  border:1px solid rgba(197,178,140,.2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;padding:2rem 1.8rem;overflow:hidden;
+}
+/* Worn edges on cover */
+.book-face::before{
+  content:'';position:absolute;inset:10px;
+  border:1px solid rgba(197,178,140,.12);
+  border-radius:2px 6px 6px 2px;pointer-events:none;
+}
+/* Inner worn border */
+.book-face::after{
+  content:'';position:absolute;inset:14px;
+  border:1px solid rgba(197,178,140,.06);
+  border-radius:1px 5px 5px 1px;pointer-events:none;
+}
+/* Hinge shadow */
+.book-hinge{
+  position:absolute;left:0;top:0;bottom:0;width:20px;
+  background:linear-gradient(90deg,#080604,#1a1510,#080604);
+  border-radius:3px 0 0 3px;
+}
+/* Pages side */
+.book-pages{
+  position:absolute;top:4px;right:-8px;bottom:4px;width:12px;
+  background:repeating-linear-gradient(180deg,
+    var(--cream) 0px, var(--cream2) 1px, var(--paper) 2px);
+  border-radius:0 3px 3px 0;
+  box-shadow:3px 0 8px rgba(0,0,0,.5), inset -2px 0 4px rgba(0,0,0,.15);
+}
+/* Spine */
+.book-spine{
+  position:absolute;top:0;left:-18px;bottom:0;width:20px;
+  background:linear-gradient(90deg,#080604,#1e1a12,#080604);
+  border-radius:3px 0 0 3px;
   display:flex;align-items:center;justify-content:center;
 }
-.pg-btn:hover{background:rgba(120,75,18,.12);border-color:var(--g3)}
-.pg-btn.act{background:var(--g3);border-color:var(--g3);color:#fff;font-weight:700}
-.pg-btn-nav{
-  background:rgba(120,75,18,.1);border:1px solid rgba(120,75,18,.3);
-  color:var(--g3);font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.12em;
-  padding:.4rem .9rem;cursor:pointer;transition:all .15s;border-radius:2px;
+.book-spine span{
+  font-family:'Playfair Display',serif;font-weight:700;
+  color:rgba(197,178,140,.42);font-size:.32rem;letter-spacing:.35em;
+  writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;
 }
-.pg-btn-nav:hover{background:rgba(120,75,18,.2)}
-.pg-btn-nav:disabled{opacity:.3;cursor:default}
-.ch-more{font-family:'Cormorant Garamond',serif;color:var(--ink3);font-size:1rem;opacity:.55}
 
-/* Verses */
-.verses{font-family:'IM Fell English',Georgia,serif;font-size:clamp(1.3rem,2.1vw,1.58rem);line-height:2.2;color:var(--ink);margin-top:.5rem}
-.vrow{display:flex;gap:.85rem;padding:.3rem .4rem;border-radius:3px;transition:background .12s}
-.vrow:hover{background:rgba(120,75,18,.06)}
-.vrow.love-v{background:rgba(176,80,96,.06);border-left:2px solid rgba(176,80,96,.28);padding-left:.8rem}
-.vrow.love-v:hover{background:rgba(176,80,96,.1)}
-.vrow.egg-v{background:rgba(176,80,96,.1);border-left:3px solid var(--rose);padding-left:.8rem}
-.vn{font-family:'Cinzel',serif;font-size:.7rem;color:var(--g3);min-width:24px;padding-top:.68rem;text-align:right;flex-shrink:0;opacity:.8}
-.vc{flex:1;display:flex;gap:.38rem;align-items:flex-start}
-.vt{flex:1}
-.vh{color:var(--rose);font-size:.78rem;margin-top:.7rem;flex-shrink:0;animation:hbeat 2.8s ease-in-out infinite}
-.orn{text-align:center;color:var(--g3);margin:1.8rem 0;letter-spacing:.55rem;opacity:.35;font-size:1rem}
-
-/* Result cards */
-.res-card{
-  border:1px solid rgba(120,75,18,.18);background:rgba(240,225,190,.7);
-  padding:1.1rem 1.4rem;margin-bottom:.75rem;cursor:pointer;border-radius:3px;transition:all .15s;
+/* Cover content */
+.cover-D{
+  font-family:'Playfair Display',serif;font-weight:900;font-style:italic;
+  font-size:clamp(3.5rem,8vw,5.5rem);
+  color:rgba(197,178,140,.9);line-height:1;
+  text-shadow:0 2px 20px rgba(197,178,140,.2);
 }
-.res-card:hover{border-color:var(--g3);background:rgba(184,146,42,.1)}
-.res-ref{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.2em;color:var(--g3);margin-bottom:.4rem}
-.res-txt{font-family:'IM Fell English',serif;font-size:1.15rem;color:var(--ink);line-height:1.75}
-.res-txt em{background:rgba(184,146,42,.28);font-style:normal;border-radius:2px;padding:0 2px}
-
-/* Spinner */
-.spin-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6rem 2rem;gap:1rem}
-.spinner{width:36px;height:36px;border:2px solid rgba(184,146,42,.2);border-top-color:var(--g);border-radius:50%;animation:spin .8s linear infinite}
-.spin-lbl{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink3);font-size:1.2rem;opacity:.6}
-
-/* Empty state */
-.empty{text-align:center;padding:5rem 2rem}
-.empty-ic{font-size:2.5rem;color:var(--g3);display:block;margin-bottom:1rem;animation:glow 2.5s infinite}
-.empty-t{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-style:italic;color:rgba(80,45,15,.5)}
-.empty-s{font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(80,45,15,.38);margin-top:.5rem}
-
-/* Hearts */
-#hearts{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;display:none}
-.hp{position:absolute;animation:pop 1.9s ease-out forwards;opacity:0}
-
-/* Mobile drawer */
-.mob-veil{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.52)}
-.mob-veil.on{display:block}
-.mob-drawer{
-  position:fixed;left:0;top:0;bottom:0;width:265px;z-index:301;
-  background:linear-gradient(170deg,#d8c498 0%,#cbb884 40%,#c4ae7a 100%);
-  overflow-y:auto;transform:translateX(-100%);transition:transform .28s ease;
-  display:flex;flex-direction:column;
+.cover-rule{width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(197,178,140,.5),transparent);}
+.cover-title{
+  font-family:'Playfair Display',serif;font-weight:700;
+  color:rgba(197,178,140,.75);font-size:.78rem;letter-spacing:.32em;
+  text-align:center;line-height:1.7;
 }
-.mob-drawer.on{transform:none}
-.mob-dc{background:none;border:none;color:var(--ink2);font-size:1.3rem;cursor:pointer;align-self:flex-end;padding:.8rem 1rem .3rem}
-
-@media(max-width:660px){
-  .sidebar{display:none}.btn-menu{display:block}
-  .page-content{padding:1.5rem 1.2rem 3rem}
-  .verses{font-size:1.22rem;line-height:2.05}
-  .ch-num{font-size:1.7rem}
-  .pg-btn{width:32px;height:32px;font-size:.9rem}
-  .rh-search{flex-wrap:wrap}
+.cover-sub{
+  font-family:'Lora',serif;font-style:italic;
+  color:rgba(197,178,140,.32);font-size:.62rem;letter-spacing:.2em;text-align:center;
 }
-@media(min-width:661px) and (max-width:980px){
-  .sidebar{width:195px;min-width:175px}
-  .page-content{padding:2rem 2.5rem 4rem}
+.cover-ed{
+  font-family:'EB Garamond',serif;font-style:italic;
+  color:rgba(197,178,140,.22);font-size:.58rem;letter-spacing:.15em;
+}
+
+.cover-tap{
+  font-family:'Lora',serif;font-style:italic;
+  color:rgba(197,178,140,.38);font-size:1rem;letter-spacing:.08em;
+  animation:fadeUp .9s 1.4s both, breathe 3.5s 2s infinite;
+  margin-top:2.2rem;
+}
+@keyframes breathe{0%,100%{opacity:.35;}50%{opacity:.75;}}
+
+/* ══════════════════════════════════════════
+   DICTIONARY SCREEN
+══════════════════════════════════════════ */
+#dictScreen{
+  flex-direction:column;overflow:hidden;
+  background:var(--paper);
+}
+
+/* Top bar */
+.dict-header{
+  background:var(--cover);
+  border-bottom:2px solid rgba(197,178,140,.18);
+  padding:.75rem 1.8rem;flex-shrink:0;z-index:20;
+  display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;
+}
+.dh-brand{
+  font-family:'Playfair Display',serif;font-weight:900;font-style:italic;
+  color:rgba(232,218,192,.85);font-size:1.4rem;letter-spacing:.06em;
+  white-space:nowrap;
+}
+.dh-brand small{
+  display:block;font-style:normal;font-weight:400;
+  font-size:.56rem;letter-spacing:.3em;
+  color:rgba(197,178,140,.3);margin-top:.08rem;
+  font-family:'EB Garamond',serif;
+}
+.dh-search-wrap{flex:1;min-width:200px;position:relative;}
+.dh-search{
+  width:100%;
+  background:rgba(197,178,140,.07);
+  border:1px solid rgba(197,178,140,.2);
+  border-radius:2px;
+  color:rgba(232,218,192,.85);
+  font-family:'EB Garamond',serif;font-size:1.05rem;font-style:italic;
+  padding:.52rem 1rem .52rem 2.5rem;
+  outline:none;transition:border-color .2s,background .2s;
+}
+.dh-search::placeholder{color:rgba(197,178,140,.3);}
+.dh-search:focus{border-color:rgba(197,178,140,.45);background:rgba(197,178,140,.1);}
+.dh-search-icon{
+  position:absolute;left:.8rem;top:50%;transform:translateY(-50%);
+  color:rgba(197,178,140,.35);font-size:.95rem;pointer-events:none;
+}
+.dh-back{
+  background:none;border:1px solid rgba(197,178,140,.2);
+  color:rgba(197,178,140,.55);font-family:'EB Garamond',serif;
+  font-size:.78rem;letter-spacing:.18em;padding:.4rem .85rem;
+  cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.dh-back:hover{border-color:rgba(197,178,140,.5);color:rgba(197,178,140,.85);}
+
+/* Main layout */
+.dict-body{display:flex;flex:1;overflow:hidden;}
+
+/* Alphabet sidebar */
+.alpha-bar{
+  width:52px;flex-shrink:0;
+  background:var(--cream3);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;align-items:center;
+  padding:.5rem 0;overflow-y:auto;
+  gap:1px;
+}
+.alpha-bar::-webkit-scrollbar{width:0;}
+.alpha-btn{
+  width:36px;height:28px;
+  background:none;border:none;
+  font-family:'Playfair Display',serif;font-weight:700;
+  color:var(--ink3);font-size:.88rem;cursor:pointer;
+  border-radius:2px;transition:all .14s;
+  display:flex;align-items:center;justify-content:center;
+}
+.alpha-btn:hover{background:var(--cream2);color:var(--ink);}
+.alpha-btn.act{background:var(--ink);color:var(--paper);border-radius:2px;}
+.alpha-btn.has-egg{color:var(--red);}
+
+/* Content area */
+.dict-content{flex:1;overflow-y:auto;position:relative;}
+.dict-content::-webkit-scrollbar{width:5px;}
+.dict-content::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+.dict-content::-webkit-scrollbar-track{background:var(--paper);}
+
+/* Paper texture on content */
+.dict-content-inner{
+  background:var(--paper);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.038'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(180deg, transparent, transparent 28px, rgba(180,165,140,.06) 28px, rgba(180,165,140,.06) 29px);
+  min-height:100%;
+  padding:0 0 4rem 0;
+}
+
+/* Letter section */
+.letter-section{padding:0;}
+.letter-heading{
+  position:sticky;top:0;z-index:5;
+  background:linear-gradient(180deg, var(--cream2) 0%, var(--cream3) 100%);
+  border-bottom:2px solid var(--border);
+  border-top:1px solid var(--border);
+  padding:.6rem 2.5rem;
+  display:flex;align-items:baseline;gap:1.2rem;
+}
+.letter-big{
+  font-family:'Playfair Display',serif;font-weight:900;
+  color:var(--ink2);font-size:2.8rem;line-height:1;
+  opacity:.18;
+}
+.letter-label{
+  font-family:'Lora',serif;font-style:italic;
+  color:var(--ink3);font-size:.82rem;letter-spacing:.22em;
+}
+
+/* Word entry */
+.word-entry{
+  padding:1.4rem 2.5rem 1.4rem;
+  border-bottom:1px solid rgba(180,165,140,.22);
+  transition:background .15s;
+  cursor:pointer;
+}
+.word-entry:hover{background:rgba(180,165,140,.06);}
+.word-entry:last-child{border-bottom:none;}
+
+/* Special egg entry */
+.word-entry.egg-entry{
+  background:rgba(155,32,32,.04);
+  border-left:3px solid var(--red);
+  padding-left:calc(2.5rem - 3px);
+}
+.word-entry.egg-entry:hover{background:rgba(155,32,32,.08);}
+
+.word-row{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;margin-bottom:.3rem;}
+.word{
+  font-family:'Playfair Display',serif;font-weight:700;
+  color:var(--ink);font-size:1.55rem;line-height:1.2;
+}
+.word.egg-word{color:var(--red);}
+.word-pron{
+  font-family:'EB Garamond',serif;font-style:italic;
+  color:var(--ink4);font-size:1rem;
+}
+.word-pos{
+  font-family:'Lora',serif;font-style:italic;
+  color:var(--ink4);font-size:.88rem;letter-spacing:.06em;
+}
+.word-sep{color:var(--border);font-size:.9rem;}
+
+.definition{
+  font-family:'EB Garamond',serif;
+  color:var(--ink2);font-size:1.2rem;line-height:1.75;
+  margin-bottom:.3rem;
+}
+.def-num{
+  font-family:'Lora',serif;font-weight:600;
+  color:var(--ink3);font-size:.78rem;margin-right:.4rem;
+}
+
+.etymology{
+  font-family:'Lora',serif;font-style:italic;
+  color:var(--ink4);font-size:.9rem;margin-top:.4rem;
+  padding-top:.4rem;border-top:1px dashed rgba(180,165,140,.3);
+}
+.etymology b{font-style:normal;color:var(--ink3);}
+
+.example{
+  font-family:'EB Garamond',serif;font-style:italic;
+  color:var(--ink4);font-size:1.05rem;
+  margin-top:.3rem;padding-left:1rem;
+  border-left:2px solid rgba(180,165,140,.3);
+}
+
+/* Egg special box */
+.egg-box{
+  margin-top:.9rem;
+  background:rgba(155,32,32,.06);
+  border:1px solid rgba(155,32,32,.2);
+  border-radius:3px;
+  padding:.9rem 1.1rem;
+  position:relative;overflow:hidden;
+}
+.egg-box::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(155,32,32,.04) 0%,transparent 60%);
+  pointer-events:none;
+}
+.egg-marker{
+  font-family:'Lora',serif;font-style:italic;
+  color:var(--red);font-size:.78rem;letter-spacing:.22em;
+  text-transform:uppercase;margin-bottom:.5rem;opacity:.7;
+}
+.egg-text{
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
+  color:var(--red2);font-size:1.35rem;line-height:1.4;
+}
+.egg-sub{
+  font-family:'EB Garamond',serif;font-style:italic;
+  color:rgba(155,32,32,.65);font-size:1rem;margin-top:.35rem;
+}
+.hearts-btn{
+  display:inline-flex;align-items:center;gap:.4rem;
+  margin-top:.7rem;background:none;
+  border:1px solid rgba(155,32,32,.3);border-radius:2px;
+  color:var(--red);font-family:'Lora',serif;font-style:italic;
+  font-size:.88rem;padding:.35rem .8rem;cursor:pointer;
+  transition:all .18s;
+}
+.hearts-btn:hover{background:rgba(155,32,32,.08);border-color:var(--red);}
+
+/* Search results */
+.search-results{padding:1.5rem 2.5rem;}
+.sr-header{
+  font-family:'Lora',serif;font-style:italic;
+  color:var(--ink3);font-size:1rem;
+  margin-bottom:1.2rem;padding-bottom:.8rem;
+  border-bottom:1px solid var(--border);
+}
+.sr-header b{font-style:normal;color:var(--ink);}
+.no-results{
+  text-align:center;padding:4rem 2rem;
+  font-family:'Playfair Display',serif;font-style:italic;
+  color:rgba(60,50,35,.35);font-size:1.3rem;
+}
+
+/* Hearts explosion */
+#heartsEl{position:fixed;inset:0;pointer-events:none;z-index:9999;display:none;overflow:hidden;}
+.hp{position:absolute;animation:hpop 2s ease-out forwards;opacity:0;}
+@keyframes hpop{
+  0%{transform:translate(-50%,-50%) scale(0) rotate(var(--r));opacity:0;}
+  15%{opacity:1;transform:translate(-50%,-50%) scale(1.4) rotate(var(--r));}
+  100%{transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(.2) rotate(var(--r));opacity:0;}
+}
+
+/* Shared animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+@keyframes shake{0%,100%{transform:none;}25%{transform:translateX(-9px);}75%{transform:translateX(9px);}}
+@keyframes popIn{from{opacity:0;transform:scale(.96);}to{opacity:1;transform:none;}}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media(max-width:600px){
+  .alpha-bar{width:38px;}
+  .alpha-btn{width:28px;font-size:.75rem;}
+  .word-entry,.letter-heading,.search-results{padding-left:1.4rem;padding-right:1.4rem;}
+  .word-entry.egg-entry{padding-left:calc(1.4rem - 3px);}
+  .word{font-size:1.32rem;}
+  .definition{font-size:1.1rem;}
+  .dict-header{padding:.65rem 1rem;}
+  .dh-brand{font-size:1.15rem;}
 }
 </style>
 </head>
 <body>
-<div id="ptcls"></div>
 
-<!-- ═══ INTRO ═══ -->
-<div class="screen vis" id="sIntro">
-  <div class="stars" id="starsEl"></div>
-  <p class="i-super">✦ &nbsp; Un Acertijo Para Ti &nbsp; ✦</p>
-  <div class="i-cross">✝</div>
-  <p class="i-title">Si llegaste hasta aquí,<br/>estás <b>muy cerca</b> de resolverlo.<br/><br/>Hay una fecha grabada en mi corazón —<br/><b>el día en que todo comenzó.</b><br/>Escríbela y abre lo que guardé para ti.</p>
-  <div class="i-rule"></div>
-  <p class="i-label">Tu código secreto</p>
-  <div class="dots" id="dotsEl">
-    <div class="dot" id="d0"></div><div class="dot" id="d1"></div>
-    <div class="dot" id="d2"></div><div class="dot" id="d3"></div>
+<!-- ══════ PIN SCREEN ══════ -->
+<div class="screen active" id="pinScreen">
+  <div class="bg-letters" id="bgLetters"></div>
+  <p class="pin-super">— edición especial —</p>
+  <div class="pin-book-icon">D</div>
+  <p class="pin-book-label">Diccionario</p>
+  <p class="pin-msg">
+    Cada gran historia comienza con<br/>una <b>primera página.</b><br/><br/>
+    La nuestra comenzó en una fecha<br/>que ninguno de los dos olvidará.<br/>
+    Escríbela para abrir este libro.
+  </p>
+  <div class="pin-rule"></div>
+  <p class="pin-label">tu clave secreta</p>
+  <div class="pin-dots" id="pinDots">
+    <div class="pdot" id="pd0"></div><div class="pdot" id="pd1"></div>
+    <div class="pdot" id="pd2"></div><div class="pdot" id="pd3"></div>
   </div>
-  <div class="pad">
-    <button class="key" onclick="kp('1')">1</button><button class="key" onclick="kp('2')">2</button><button class="key" onclick="kp('3')">3</button>
-    <button class="key" onclick="kp('4')">4</button><button class="key" onclick="kp('5')">5</button><button class="key" onclick="kp('6')">6</button>
-    <button class="key" onclick="kp('7')">7</button><button class="key" onclick="kp('8')">8</button><button class="key" onclick="kp('9')">9</button>
-    <button class="key sm" onclick="kp('del')">⌫</button><button class="key" onclick="kp('0')">0</button>
-    <button class="key" onclick="kp('ok')" style="color:var(--g)">✓</button>
+  <div class="pin-pad">
+    <button class="pkey" onclick="kp('1')">1</button>
+    <button class="pkey" onclick="kp('2')">2</button>
+    <button class="pkey" onclick="kp('3')">3</button>
+    <button class="pkey" onclick="kp('4')">4</button>
+    <button class="pkey" onclick="kp('5')">5</button>
+    <button class="pkey" onclick="kp('6')">6</button>
+    <button class="pkey" onclick="kp('7')">7</button>
+    <button class="pkey" onclick="kp('8')">8</button>
+    <button class="pkey" onclick="kp('9')">9</button>
+    <button class="pkey del-k" onclick="kp('del')">⌫</button>
+    <button class="pkey" onclick="kp('0')">0</button>
+    <button class="pkey ok-k" onclick="kp('ok')">✓</button>
   </div>
-  <p class="err" id="errEl">Esa no es la fecha, mi amor 🕊️</p>
+  <p class="pin-err" id="pinErr">Código incorrecto, inténtalo de nuevo</p>
 </div>
 
-<!-- ═══ COVER ═══ -->
-<div class="screen" id="sCover">
-  <p class="c-greet">Lo lograste — esto es para ti, con todo mi amor ✨</p>
-  <div class="book-scene" onclick="openBible()">
-    <div class="book" id="theBook">
-      <div class="bk-spine"><span>La Santa Biblia · RVR 1960</span></div>
-      <div class="bk-pages"></div>
-      <div class="bk-cover">
-        <span class="bk-cross">✝</span>
-        <div class="bk-rule"></div>
-        <div class="bk-t">LA SANTA<br/>BIBLIA</div>
-        <div class="bk-rule"></div>
-        <div class="bk-s">Reina-Valera 1960</div>
+<!-- ══════ COVER SCREEN ══════ -->
+<div class="screen" id="coverScreen">
+  <p class="cover-greeting">Lo sabías todo el tiempo — esto es para ti ✦</p>
+  <div class="dict-scene" onclick="openDict()" id="dictScene">
+    <div class="dict-book" id="dictBook">
+      <div class="book-spine"><span>DICCIONARIO DE LA LENGUA ESPAÑOLA</span></div>
+      <div class="book-pages"></div>
+      <div class="book-face">
+        <div class="book-hinge"></div>
+        <div class="cover-D">D</div>
+        <div class="cover-rule"></div>
+        <div class="cover-title">DICCIONARIO<br/>DE LA LENGUA<br/>ESPAÑOLA</div>
+        <div class="cover-rule"></div>
+        <div class="cover-sub">Edición Especial</div>
+        <div class="cover-ed">Para ti · Con amor</div>
       </div>
     </div>
   </div>
-  <p class="c-hint">Toca la Biblia para abrirla ✦</p>
+  <p class="cover-tap">Toca el diccionario para abrirlo ✦</p>
 </div>
 
-<!-- ═══ READER ═══ -->
-<div class="screen" id="sReader">
-  <header class="rdr-head">
-    <div class="rh-row1">
-      <div class="rh-brand">La Santa Biblia<small>Reina-Valera 1960 · Para ti, con amor</small></div>
-      <div class="rh-actions">
-        <button class="btn-menu" onclick="openDrawer()">☰ Libros</button>
-        <button class="btn-back" onclick="goBack()">← Inicio</button>
-      </div>
+<!-- ══════ DICTIONARY SCREEN ══════ -->
+<div class="screen" id="dictScreen">
+  <header class="dict-header">
+    <div class="dh-brand">Diccionario<small>de la lengua española</small></div>
+    <div class="dh-search-wrap">
+      <span class="dh-search-icon">⌕</span>
+      <input class="dh-search" id="searchInput" type="text" placeholder="Buscar una palabra…" autocomplete="off" spellcheck="false"/>
     </div>
-    <div class="rh-search">
-      <input type="text" id="sTxt" placeholder="Buscar versículo…"/>
-      <select id="sBk"><option value="">— Libro —</option></select>
-      <input type="number" id="sCh" placeholder="Cap." min="1"/>
-      <input type="number" id="sVr" placeholder="Ver." min="1"/>
-      <button class="btn-srch" onclick="doSearch()">Buscar</button>
-    </div>
-    <p class="rh-hint">💡 Busca <a onclick="eggSearch()">"felices 10 meses"</a> para encontrar un mensaje especial ✨</p>
+    <button class="dh-back" onclick="goBack()">← Cerrar</button>
   </header>
-  <div class="book-layout">
-    <nav class="sidebar" id="sidebar">
-      <div class="sb-section">
-        <div class="sb-label">Testamento</div>
-        <div class="test-btns">
-          <button class="test-btn act" id="tOld" onclick="swT('old')">Antiguo Testamento</button>
-          <button class="test-btn" id="tNew" onclick="swT('new')">Nuevo Testamento</button>
-        </div>
-      </div>
-      <div class="sb-section"><div class="sb-label">Libros</div><ul class="bk-list" id="bkList"></ul></div>
-    </nav>
-    <div class="reading-area">
-      <div class="page-container">
-        <div class="page-inner" id="pageEl">
-          <div class="page-content">
-            <div class="empty"><span class="empty-ic">✝</span><p class="empty-t">Selecciona un libro para comenzar a leer</p></div>
-          </div>
-        </div>
-      </div>
+  <div class="dict-body">
+    <nav class="alpha-bar" id="alphaBar"></nav>
+    <div class="dict-content" id="dictContent">
+      <div class="dict-content-inner" id="dictInner"></div>
     </div>
   </div>
 </div>
 
-<!-- Mobile drawer -->
-<div class="mob-veil" id="veil" onclick="closeDrawer()"></div>
-<div class="mob-drawer" id="mobDr">
-  <button class="mob-dc" onclick="closeDrawer()">✕</button>
-  <div class="sb-section">
-    <div class="sb-label">Testamento</div>
-    <div class="test-btns">
-      <button class="test-btn act" id="tOldM" onclick="swT('old');closeDrawer()">Antiguo Testamento</button>
-      <button class="test-btn" id="tNewM" onclick="swT('new');closeDrawer()">Nuevo Testamento</button>
-    </div>
-  </div>
-  <div class="sb-section"><div class="sb-label">Libros</div><ul class="bk-list" id="bkListM"></ul></div>
-</div>
-<div id="hearts"></div>
+<div id="heartsEl"></div>
 
 <script>
-// ── PARTICLES ──
+/* ══════════════════════════════════════════
+   FLOATING BACKGROUND LETTERS
+══════════════════════════════════════════ */
 (()=>{
-  const c=document.getElementById('ptcls'),f=document.createDocumentFragment();
-  for(let i=0;i<20;i++){const p=document.createElement('div');p.className='p';const s=Math.random()*2+1;p.style.cssText=`left:${Math.random()*100}%;width:${s}px;height:${s}px;animation-duration:${13+Math.random()*16}s;animation-delay:${Math.random()*18}s;--dx:${(Math.random()-.5)*170}px`;f.appendChild(p);}
-  c.appendChild(f);
-  const se=document.getElementById('starsEl'),sf=document.createDocumentFragment();
-  for(let i=0;i<60;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+.5;s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*5}s`;sf.appendChild(s);}
-  se.appendChild(sf);
+  const el=document.getElementById('bgLetters');
+  const letters='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+  for(let i=0;i<28;i++){
+    const d=document.createElement('div');d.className='bg-letter';
+    d.textContent=letters[Math.floor(Math.random()*letters.length)];
+    const sz=Math.random()*60+20;
+    d.style.cssText=`left:${Math.random()*100}%;font-size:${sz}px;--r:${(Math.random()-.5)*30}deg;animation-duration:${14+Math.random()*18}s;animation-delay:${Math.random()*20}s;`;
+    el.appendChild(d);
+  }
 })();
 
-// ── PIN ──
-const PIN='1605'; let pin='';
+/* ══════════════════════════════════════════
+   PIN LOGIC
+══════════════════════════════════════════ */
+const SECRET='1605';let pin='';
 function kp(k){
-  if(k==='del')pin=pin.slice(0,-1);
-  else if(k==='ok')checkPin();
-  else if(pin.length<4)pin+=k;
-  for(let i=0;i<4;i++)document.getElementById('d'+i).classList.toggle('on',i<pin.length);
-  if(pin.length===4)setTimeout(checkPin,200);
+  if(k==='del'){pin=pin.slice(0,-1);}
+  else if(k==='ok'){checkPin();}
+  else if(pin.length<4){pin+=k;}
+  for(let i=0;i<4;i++)document.getElementById('pd'+i).classList.toggle('lit',i<pin.length);
+  if(pin.length===4)setTimeout(checkPin,220);
 }
 function checkPin(){
-  if(pin===PIN){
-    document.getElementById('sIntro').classList.add('out');
-    setTimeout(()=>{document.getElementById('sIntro').style.display='none';show('sCover');},1300);
-  }else{
-    const e=document.getElementById('errEl'),d=document.getElementById('dotsEl');
-    e.classList.add('on'); d.style.animation='shake .45s ease';
-    pin=''; for(let i=0;i<4;i++)document.getElementById('d'+i).classList.remove('on');
-    setTimeout(()=>{e.classList.remove('on');d.style.animation='';},2600);
+  if(pin===SECRET){
+    const s=document.getElementById('pinScreen');
+    s.style.transition='opacity 1.3s, transform 1.3s';
+    s.style.opacity='0';s.style.transform='scale(1.05)';
+    setTimeout(()=>{
+      s.style.display='none';
+      const cs=document.getElementById('coverScreen');
+      cs.style.display='flex';
+      requestAnimationFrame(()=>cs.classList.add('active'));
+    },1300);
+  } else {
+    const e=document.getElementById('pinErr'),d=document.getElementById('pinDots');
+    e.classList.add('show');d.style.animation='shake .45s ease';
+    pin='';for(let i=0;i<4;i++)document.getElementById('pd'+i).classList.remove('lit');
+    setTimeout(()=>{e.classList.remove('show');d.style.animation='';},2600);
   }
 }
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('vis'));const el=document.getElementById(id);el.style.display='flex';el.classList.add('vis');}
 
-function openBible(){
-  document.getElementById('theBook').classList.add('open');
-  setTimeout(()=>{show('sReader');initReader();},950);
+/* ══════════════════════════════════════════
+   BOOK OPEN ANIMATION
+══════════════════════════════════════════ */
+function openDict(){
+  const book=document.getElementById('dictBook');
+  const scene=document.getElementById('dictScene');
+  // Stop floating animation
+  scene.style.animation='none';
+  // Grow + open
+  book.style.transition='transform 1s cubic-bezier(.4,0,.2,1), opacity .7s, filter .7s';
+  book.style.transform='rotateY(-200deg) scale(0)';
+  book.style.opacity='0';
+  book.style.filter='drop-shadow(0 0 0 transparent)';
+  setTimeout(()=>{
+    document.getElementById('coverScreen').style.display='none';
+    document.getElementById('coverScreen').classList.remove('active');
+    const ds=document.getElementById('dictScreen');
+    ds.style.display='flex';
+    requestAnimationFrame(()=>{
+      ds.classList.add('active');
+      initDict();
+    });
+  },900);
 }
 function goBack(){
-  show('sCover');
-  const bk=document.getElementById('theBook');bk.classList.remove('open');bk.style.opacity='1';
+  document.getElementById('dictScreen').style.display='none';
+  document.getElementById('dictScreen').classList.remove('active');
+  const cs=document.getElementById('coverScreen');
+  cs.style.display='flex';cs.classList.add('active');
+  // Reset book
+  const book=document.getElementById('dictBook');
+  const scene=document.getElementById('dictScene');
+  book.style.transform='';book.style.opacity='';book.style.filter='';
+  scene.style.animation='fadeUp 0s both, bookFloat 4s ease-in-out infinite';
 }
-function openDrawer(){document.getElementById('veil').classList.add('on');document.getElementById('mobDr').classList.add('on');}
-function closeDrawer(){document.getElementById('veil').classList.remove('on');document.getElementById('mobDr').classList.remove('on');}
 
-// ── BOOKS DATA ──
-const OLD=[
-  {id:1,n:'Génesis',ch:50},{id:2,n:'Éxodo',ch:40},{id:3,n:'Levítico',ch:27},
-  {id:4,n:'Números',ch:36},{id:5,n:'Deuteronomio',ch:34},{id:6,n:'Josué',ch:24},
-  {id:7,n:'Jueces',ch:21},{id:8,n:'Rut',ch:4},{id:9,n:'1 Samuel',ch:31},
-  {id:10,n:'2 Samuel',ch:24},{id:11,n:'1 Reyes',ch:22},{id:12,n:'2 Reyes',ch:25},
-  {id:13,n:'1 Crónicas',ch:29},{id:14,n:'2 Crónicas',ch:36},{id:15,n:'Esdras',ch:10},
-  {id:16,n:'Nehemías',ch:13},{id:17,n:'Ester',ch:10},{id:18,n:'Job',ch:42},
-  {id:19,n:'Salmos',ch:150},{id:20,n:'Proverbios',ch:31},{id:21,n:'Eclesiastés',ch:12},
-  {id:22,n:'Cantares',ch:8},{id:23,n:'Isaías',ch:66},{id:24,n:'Jeremías',ch:52},
-  {id:25,n:'Lamentaciones',ch:5},{id:26,n:'Ezequiel',ch:48},{id:27,n:'Daniel',ch:12},
-  {id:28,n:'Oseas',ch:14},{id:29,n:'Joel',ch:3},{id:30,n:'Amós',ch:9},
-  {id:31,n:'Abdías',ch:1},{id:32,n:'Jonás',ch:4},{id:33,n:'Miqueas',ch:7},
-  {id:34,n:'Nahúm',ch:3},{id:35,n:'Habacuc',ch:3},{id:36,n:'Sofonías',ch:3},
-  {id:37,n:'Hageo',ch:2},{id:38,n:'Zacarías',ch:14},{id:39,n:'Malaquías',ch:4}
+/* ══════════════════════════════════════════
+   DICTIONARY DATA — palabras completas
+══════════════════════════════════════════ */
+const WORDS = [
+  // ── A ──
+  {w:'amar',p:'a·már',pos:'v. tr.',defs:['Sentir amor hacia alguien o algo. Tener afecto profundo y sincero.','Estimar, apreciar con devoción y entrega.'],etym:'Del latín <i>amare</i>, de origen incierto, probablemente de raíz indoeuropea.',ex:'«Amar es encontrar en la felicidad de otro tu propia felicidad.»'},
+  {w:'abrazo',p:'a·brá·zo',pos:'s. m.',defs:['Acto de estrechar a alguien entre los brazos en señal de afecto o cariño.','Saludo o despedida que consiste en rodear con los brazos a otra persona.'],etym:'Del latín <i>brachium</i>, brazo.',ex:'«Hay abrazos que dicen todo lo que las palabras no pueden.»'},
+  {w:'alma',p:'ál·ma',pos:'s. f.',defs:['Principio inmaterial e inmortal que, junto al cuerpo, constituye la persona.','Lo más íntimo y profundo de una persona; su esencia.','Vigor, energía o fuerza interior.'],etym:'Del latín <i>anima</i>, aire, soplo vital.',ex:'«El alma es ese rincón donde viven nuestros recuerdos más queridos.»'},
+  {w:'alegría',p:'a·le·grí·a',pos:'s. f.',defs:['Sentimiento de placer y bienestar que se manifiesta generalmente con signos exteriores.','Estado de ánimo positivo y luminoso que irradia a quienes nos rodean.'],etym:'Del latín <i>alacritas</i>, viveza, presteza.',ex:'«Su alegría era contagiosa; bastaba con mirarla para sonreír.»'},
+  {w:'amanecer',p:'a·ma·ne·cér',pos:'s. m.',defs:['Tiempo en que empieza a aparecer la luz del día; el alba.','Inicio o comienzo de algo nuevo y esperanzador.'],etym:'De <i>a-</i> y <i>mañana</i>, del latín <i>maneana</i>.',ex:'«Cada amanecer es una página en blanco esperando ser escrita.»'},
+  {w:'anhelo',p:'an·hé·lo',pos:'s. m.',defs:['Deseo vehemente y sostenido de conseguir algo que se aprecia mucho.','Ansia, aspiración profunda del corazón.'],etym:'De <i>anhelar</i>, del latín <i>anhelare</i>, jadear.',ex:'«Su mayor anhelo era compartir cada momento contigo.»'},
+  {w:'aurora',p:'au·ró·ra',pos:'s. f.',defs:['Luz del alba, antes de la salida del sol.','Principio o comienzo de algo; metáfora de un inicio luminoso.'],etym:'Del latín <i>aurora</i>, diosa del amanecer.',ex:'«La aurora pintó el cielo con los mismos colores de su sonrisa.»'},
+  // ── B ──
+  {w:'bello',p:'bé·llo',pos:'adj.',defs:['Que tiene belleza; que produce deleite estético o emocional.','Excelente, magnífico en su clase.'],etym:'Del latín <i>bellus</i>, bonito, gracioso.',ex:'«Hay algo bello en cada momento compartido.»'},
+  {w:'bondad',p:'bon·dád',pos:'s. f.',defs:['Cualidad de quien es bueno de manera natural y sincera.','Inclinación a hacer el bien; generosidad de espíritu.'],etym:'Del latín <i>bonitas</i>, de <i>bonus</i>, bueno.',ex:'«La bondad que hay en ella transforma todo lo que toca.»'},
+  // ── C ──
+  {w:'calma',p:'cál·ma',pos:'s. f.',defs:['Tranquilidad, sosiego; ausencia de agitación o perturbación.','Estado de paz interior que permite ver con claridad.'],etym:'Del italiano <i>calma</i>, del griego <i>kaûma</i>, calor del mediodía.',ex:'«A su lado, encontraba la calma que no sabía que buscaba.»'},
+  {w:'camino',p:'ca·mí·no',pos:'s. m.',defs:['Tierra hollada por donde se transita habitualmente.','Dirección que se toma para llegar a un destino; proceso vital.','Modo o medio para conseguir algo.'],etym:'De origen prerromano, probablemente celta.',ex:'«El mejor camino es el que se recorre en buena compañía.»'},
+  {w:'caricia',p:'ca·rí·cia',pos:'s. f.',defs:['Demostración de afecto con la mano, rozando suavemente a alguien.','Cualquier demostración de ternura y amor.'],etym:'Del italiano <i>carezza</i>, de <i>caro</i>, querido.',ex:'«Una caricia a tiempo vale más que mil palabras.»'},
+  {w:'corazón',p:'co·ra·zón',pos:'s. m.',defs:['Órgano muscular que impulsa la sangre por el cuerpo.','Centro de los sentimientos, afectos y emociones humanas.','Lo más esencial o íntimo de algo.'],etym:'Del latín <i>cor, cordis</i>.',ex:'«El corazón tiene razones que la razón no comprende.»'},
+  {w:'confianza',p:'con·fián·za',pos:'s. f.',defs:['Esperanza firme que se tiene en alguien o algo.','Seguridad que alguien tiene en sí mismo o en otra persona.','Familiaridad en el trato.'],etym:'De <i>confiar</i>, del latín <i>confidere</i>.',ex:'«La confianza es el cimiento sobre el que se construye todo lo demás.»'},
+  // ── D ──
+  {w:'destino',p:'des·tí·no',pos:'s. m.',defs:['Encadenamiento de los sucesos considerado como inevitable.','Lugar al que va dirigida una persona o cosa.','Fin o propósito al que alguien o algo está orientado.'],etym:'Del latín <i>destinare</i>, fijar, asegunar.',ex:'«Creo que el destino nos puso en el mismo lugar para encontrarnos.»'},
+  {w:'dulce',p:'dúl·ce',pos:'adj.',defs:['Que tiene sabor agradable como el azúcar o la miel.','Afable, cariñoso, tierno en el trato.','Grato, agradable para los sentidos o el ánimo.'],etym:'Del latín <i>dulcis</i>.',ex:'«Tiene una forma dulce de decir las cosas más difíciles.»'},
+  {w:'devoción',p:'de·vo·ción',pos:'s. f.',defs:['Amor y entrega profunda hacia alguien o algo.','Veneración, respeto y afecto intensos.'],etym:'Del latín <i>devotio</i>, de <i>devovere</i>, consagrar.',ex:'«Su devoción por los detalles hacía que todo pareciera especial.»'},
+  // ── E ──
+  {w:'emoción',p:'e·mo·ción',pos:'s. f.',defs:['Alteración del ánimo intensa y pasajera, agradable o penosa.','Sentimiento intenso que nos conecta con lo más humano de nosotros.'],etym:'Del latín <i>emotio</i>, de <i>emovere</i>, conmover.',ex:'«Hay emociones que solo se sienten una vez en la vida.»'},
+  {w:'encuentro',p:'en·cuén·tro',pos:'s. m.',defs:['Acción y efecto de encontrarse dos personas.','Coincidencia o reunión casual o intencionada.'],etym:'De <i>encontrar</i>, del latín <i>incontrare</i>.',ex:'«Ese encuentro cambió para siempre el curso de su historia.»'},
+  {w:'esperar',p:'es·pe·rár',pos:'v. intr.',defs:['Permanecer en un lugar hasta que llegue alguien o suceda algo.','Tener esperanza de conseguir algo.','Creer que algo bueno ha de suceder.'],etym:'Del latín <i>sperare</i>, confiar, esperar.',ex:'«Supo desde el principio que valdría la pena esperarte.»'},
+  {w:'eterno',p:'e·tér·no',pos:'adj.',defs:['Que no tiene principio ni fin en el tiempo; perpetuo.','Que dura o parece durar indefinidamente.','Que se mantiene siempre igual, inmutable.'],etym:'Del latín <i>aeternus</i>.',ex:'«Hay momentos que se vuelven eternos en la memoria del corazón.»'},
+  // ── F ──
+  {w:'fe',p:'fé',pos:'s. f.',defs:['Creencia en algo sin exigir pruebas.','Confianza plena en alguien.','Seguridad interior que impulsa a actuar.'],etym:'Del latín <i>fides</i>, fidelidad, confianza.',ex:'«Tenía fe en que todo llegaría en el momento preciso.»'},
+  // 🌹 EASTER EGG ENTRY 🌹
+  {w:'felices',p:'fe·lí·ces',pos:'adj. pl.',
+   defs:['Plural de feliz. Que disfrutan de la felicidad.','Que producen o expresan gozo y alegría.','Afortunados; en un estado de plenitud y satisfacción.'],
+   etym:'Del latín <i>felix, felicis</i>, fértil, fecundo, próspero.',
+   ex:'«Las personas felices no tienen todo lo que desean; desean todo lo que tienen.»',
+   isEgg:true,
+   eggMsg:'f. de Felices 10 meses mi amor',
+   eggSub:'— y los que siguen, contigo ✦'},
+  {w:'fidelidad',p:'fi·de·li·dád',pos:'s. f.',defs:['Lealtad y constancia en los afectos, en las obligaciones y en el trato.','Exactitud en la reproducción de algo.'],etym:'Del latín <i>fidelitas</i>, de <i>fidelis</i>, fiel.',ex:'«La fidelidad es el sello de los amores que duran.»'},
+  {w:'florecer',p:'flo·re·cér',pos:'v. intr.',defs:['Echar flor una planta.','Prosperar, desarrollarse favorablemente.','Alcanzar esplendor o plenitud.'],etym:'Del latín <i>florescere</i>, comenzar a florecer.',ex:'«A su lado, todo parecía florecer con más intensidad.»'},
+  {w:'fortuna',p:'for·tú·na',pos:'s. f.',defs:['Encadenamiento de los sucesos; suerte.','Caudal, riqueza considerable.','Buena suerte, circunstancia favorable.'],etym:'Del latín <i>fortuna</i>, diosa de la suerte.',ex:'«Tuvo la fortuna de que el destino los pusiera en el mismo camino.»'},
+  // ── G ──
+  {w:'gracia',p:'grá·cia',pos:'s. f.',defs:['Cualidad que hace agradable a la persona a los ojos de los demás.','Don o favor que se concede sin merecimiento.','Elegancia y donaire en los movimientos o en el trato.'],etym:'Del latín <i>gratia</i>, favor, agradecimiento.',ex:'«Tenía esa gracia natural que solo tienen las personas especiales.»'},
+  {w:'gratitud',p:'gra·ti·túd',pos:'s. f.',defs:['Sentimiento que nos obliga a estimar el beneficio que hemos recibido.','Reconocimiento y afecto hacia quien nos ha dado algo valioso.'],etym:'Del latín <i>gratitudo</i>, de <i>gratus</i>, agradecido.',ex:'«La gratitud convierte lo que tenemos en suficiente.»'},
+  // ── H ──
+  {w:'historia',p:'his·tó·ria',pos:'s. f.',defs:['Narración y exposición de los acontecimientos pasados.','Conjunto de los sucesos de la vida de una persona.','Relato de hechos memorables.'],etym:'Del griego <i>historía</i>, información, investigación.',ex:'«Juntos estaban escribiendo la historia más bonita.»'},
+  {w:'horizonte',p:'ho·ri·zón·te',pos:'s. m.',defs:['Línea que separa aparentemente el cielo de la tierra.','Límite del campo de una actividad o de la vista.','Perspectiva, posibilidades de futuro.'],etym:'Del griego <i>horizon</i>, el que delimita.',ex:'«Con ella, el horizonte siempre parecía más amplio y luminoso.»'},
+  {w:'hogar',p:'ho·gár',pos:'s. m.',defs:['Sitio donde se enciende lumbre en las cocinas, chimeneas, etc.','Casa o domicilio; lugar donde vive una persona o familia.','Lugar donde una persona encuentra paz y pertenencia.'],etym:'Del latín <i>focaris</i>, del fuego del hogar.',ex:'«El hogar no es un lugar; es la persona con quien te sientes en casa.»'},
+  // ── I ──
+  {w:'ilusión',p:'i·lu·sión',pos:'s. f.',defs:['Esperanza cuyo cumplimiento parece especialmente atractivo.','Imagen en la mente de algo que se desea o espera.','Viva complacencia con que se desea o se hace algo.'],etym:'Del latín <i>illusio</i>, engaño, pero en español tomó sentido positivo.',ex:'«Tenía ilusión por cada nuevo día que amanecía junto a ti.»'},
+  {w:'infinito',p:'in·fi·ní·to',pos:'adj.',defs:['Que no tiene fin, límite ni término.','Muy grande, numeroso o intenso.'],etym:'Del latín <i>infinitus</i>, de <i>in-</i> y <i>finis</i>, sin fin.',ex:'«Su capacidad de amar parecía verdaderamente infinita.»'},
+  {w:'instante',p:'ins·tán·te',pos:'s. m.',defs:['Porción brevísima de tiempo; momento.','El tiempo presente considerado como punto sin duración.'],etym:'Del latín <i>instans</i>, urgente, presente.',ex:'«Ese instante quedó grabado para siempre en su memoria.»'},
+  // ── J ──
+  {w:'júbilo',p:'jú·bi·lo',pos:'s. m.',defs:['Viva alegría y regocijo, que frecuentemente se manifiesta con signos exteriores.','Estado de ánimo de intensa y expresiva felicidad.'],etym:'Del latín <i>iubilum</i>, grito de alegría.',ex:'«Sentía júbilo cada vez que veía su nombre en la pantalla.»'},
+  {w:'jornada',p:'jor·ná·da',pos:'s. f.',defs:['Camino que se anda regularmente en un día.','Tiempo de duración del trabajo diario.','Cada uno de los días de una actividad.'],etym:'Del catalán <i>jornada</i>, del latín <i>diurnata</i>, de día.',ex:'«Cada jornada junto a ella era un pequeño regalo.»'},
+  // ── L ──
+  {w:'latir',p:'la·tír',pos:'v. intr.',defs:['Dar latidos el corazón u otras partes del cuerpo.','Moverse con golpes alternados y acompasados.'],etym:'Del latín <i>glattire</i>, ladrar, por onomatopeya.',ex:'«Su corazón latía de otra manera cuando ella estaba cerca.»'},
+  {w:'libertad',p:'li·ber·tád',pos:'s. f.',defs:['Facultad del ser humano de obrar de una u otra manera, o de abstenerse de obrar.','Estado de quien no está sujeto a obligaciones onerosas o vínculos.','Facilidad y soltura para hacer algo.'],etym:'Del latín <i>libertas</i>, de <i>liber</i>, libre.',ex:'«Junto a ti encontró la libertad de ser exactamente quien era.»'},
+  {w:'luz',p:'lúz',pos:'s. f.',defs:['Agente físico que hace visibles los objetos.','Claridad que irradia algo o alguien.','Persona que sirve de guía o ejemplo.'],etym:'Del latín <i>lux, lucis</i>.',ex:'«Tenía una luz propia que iluminaba todo a su alrededor.»'},
+  // ── M ──
+  {w:'magia',p:'má·gia',pos:'s. f.',defs:['Arte o ciencia oculta con que se pretenden producir efectos extraordinarios.','Encanto o atractivo especial e inexplicable.','Algo que produce admiración o sorpresa grata.'],etym:'Del latín <i>magia</i>, del griego <i>mageia</i>.',ex:'«Había una magia extraña en la forma en que sus conversaciones siempre fluían.»'},
+  {w:'memoria',p:'me·mó·ria',pos:'s. f.',defs:['Facultad psíquica por medio de la cual se retiene y recuerda el pasado.','Recuerdo que se hace de algo pasado.','Exposición de hechos o razones sobre un asunto.'],etym:'Del latín <i>memoria</i>.',ex:'«Guardaba con cuidado cada memoria de los momentos juntos.»'},
+  {w:'mirada',p:'mi·rá·da',pos:'s. f.',defs:['Acción de mirar.','Expresión de los ojos.','Modo particular de contemplar o considerar algo.'],etym:'De <i>mirar</i>, del latín <i>mirare</i>, asombrarse.',ex:'«Una sola mirada suya bastaba para decirlo todo.»'},
+  // ── N ──
+  {w:'nostalgia',p:'nos·tál·gia',pos:'s. f.',defs:['Tristeza melancólica originada por el recuerdo de algo lejano.','Añoranza de algo que se ha perdido o está ausente.'],etym:'Del griego <i>nostos</i>, regreso, y <i>algos</i>, dolor.',ex:'«La nostalgia es el amor que vive en los recuerdos.»'},
+  {w:'noche',p:'nó·che',pos:'s. f.',defs:['Tiempo desde que se pone el sol hasta que sale.','Período de oscuridad y descanso.','Metáfora de lo misterioso o lo íntimo.'],etym:'Del latín <i>nox, noctis</i>.',ex:'«Las mejores conversaciones siempre empezaban cuando caía la noche.»'},
+  // ── O ──
+  {w:'origen',p:'o·rí·gen',pos:'s. m.',defs:['Principio, nacimiento, manantial, raíz y causa de algo.','Inicio de algo o de alguien.','Patria, país o lugar de donde procede alguien.'],etym:'Del latín <i>origo, originis</i>.',ex:'«El origen de todo lo bueno fue esa primera conversación.»'},
+  // ── P ──
+  {w:'paciencia',p:'pa·cién·cia',pos:'s. f.',defs:['Virtud que consiste en sufrir sin perturbación del ánimo los infortunios.','Capacidad de esperar con tranquilidad.','Lentitud o tardanza en hacer algo.'],etym:'Del latín <i>patientia</i>, sufrimiento, tolerancia.',ex:'«Tuvo la paciencia de esperar el momento exacto.»'},
+  {w:'pasión',p:'pa·sión',pos:'s. f.',defs:['Perturbación o afecto desordenado del ánimo.','Inclinación muy viva hacia alguien o algo.','Entusiasmo o amor muy intensos.'],etym:'Del latín <i>passio</i>, sufrimiento, pero también sentimiento intenso.',ex:'«Hacer lo que amas con pasión es el secreto de una vida bien vivida.»'},
+  {w:'plenitud',p:'ple·ni·túd',pos:'s. f.',defs:['Totalidad, integridad, o cualidad de pleno.','Momento de mayor auge o esplendor.','Estado de máxima satisfacción y realización.'],etym:'Del latín <i>plenitudo</i>, de <i>plenus</i>, lleno.',ex:'«Sentía una plenitud que jamás había conocido antes.»'},
+  {w:'promesa',p:'pro·mé·sa',pos:'s. f.',defs:['Expresión de la voluntad de dar o hacer algo a alguien.','Esperanza o indicio de que algo bueno habrá de venir.','Persona o cosa que da señales de brillante porvenir.'],etym:'Del latín <i>promissus</i>, participio de <i>promittere</i>.',ex:'«No era solo una promesa; era un pacto entre dos corazones.»'},
+  // ── Q ──
+  {w:'querer',p:'que·rér',pos:'v. tr.',defs:['Desear o apetecer algo.','Amar a alguien.','Tener voluntad o determinación de hacer algo.'],etym:'Del latín <i>quaerere</i>, buscar, procurar.',ex:'«Querer es querer bien, con paciencia y con constancia.»'},
+  // ── R ──
+  {w:'risa',p:'rí·sa',pos:'s. f.',defs:['Movimiento de la boca y otras partes del rostro que denota alegría.','Expresión sonora de la alegría.'],etym:'Del latín <i>risus</i>, de <i>ridere</i>, reír.',ex:'«Su risa era el mejor sonido del mundo.»'},
+  {w:'rumbo',p:'rúm·bo',pos:'s. m.',defs:['Dirección trazada en el plano del horizonte.','Camino y senda que alguien sigue en sus acciones.','Orientación general de la vida.'],etym:'Del neerlandés <i>ruim</i>, espacio.',ex:'«Desde ese día, su vida tomó un rumbo completamente diferente.»'},
+  // ── S ──
+  {w:'serenidad',p:'se·re·ni·dád',pos:'s. f.',defs:['Cualidad de sereno; calma y tranquilidad.','Estado de paz interior y equilibrio.'],etym:'Del latín <i>serenitas</i>, de <i>serenus</i>, despejado, claro.',ex:'«Tenía esa serenidad que transmite certeza y confianza.»'},
+  {w:'sincero',p:'sin·cé·ro',pos:'adj.',defs:['Sencillo, sin doblez ni engaño; que expresa lo que realmente siente o piensa.','Auténtico, verdadero, sin artificio.'],etym:'Del latín <i>sincerus</i>, puro, sin mezcla.',ex:'«Era de esas personas cuyas palabras son siempre sinceras.»'},
+  {w:'sonrisa',p:'son·rí·sa',pos:'s. f.',defs:['Acción de sonreír; gesto suave de alegría o afecto.','Expresión del rostro que denota alegría sin risa.'],etym:'De <i>sonreír</i>, de <i>sub-</i> y <i>reír</i>.',ex:'«Su sonrisa era la cosa más bonita que había visto en mucho tiempo.»'},
+  {w:'sueño',p:'sué·ño',pos:'s. m.',defs:['Acto de dormir.','Representación mental mientras se duerme.','Deseo muy grande o aspiración vehemente.'],etym:'Del latín <i>somnus</i>.',ex:'«Había sido su sueño durante mucho tiempo; ahora era su realidad.»'},
+  // ── T ──
+  {w:'ternura',p:'ter·nú·ra',pos:'s. f.',defs:['Calidad de tierno; sentimiento afectuoso y delicado.','Expresión de afecto suave y cariñoso.'],etym:'De <i>tierno</i>, del latín <i>tener</i>, blando.',ex:'«Había una ternura especial en la forma en que pronunciaba su nombre.»'},
+  {w:'tiempo',p:'tiém·po',pos:'s. m.',defs:['Duración de las cosas sujetas a mutación.','Época durante la cual vive alguien.','Cada uno de los momentos que constituyen la vida.'],etym:'Del latín <i>tempus, temporis</i>.',ex:'«El tiempo que pasa contigo siempre parece demasiado corto.»'},
+  {w:'tesoro',p:'te·só·ro',pos:'s. m.',defs:['Cantidad de dinero, joyas u objetos preciosos, reunida y guardada.','Persona o cosa de mucho valor e importancia.','Lo que resulta precioso e inapreciable.'],etym:'Del latín <i>thesaurus</i>, del griego <i>thesaurós</i>.',ex:'«La encontró cuando menos lo esperaba: su mayor tesoro.»'},
+  // ── U ──
+  {w:'único',p:'ú·ni·co',pos:'adj.',defs:['Solo y sin otro de su especie.','Singular, extraordinario, excelente.'],etym:'Del latín <i>unicus</i>, de <i>unus</i>, uno.',ex:'«Era única, y él lo supo desde el primer momento.»'},
+  {w:'universo',p:'u·ni·vér·so',pos:'s. m.',defs:['Conjunto de todo lo que existe.','El mundo, la totalidad de las cosas creadas.','Ámbito de algo; todo lo que rodea a alguien.'],etym:'Del latín <i>universus</i>, vuelto hacia uno.',ex:'«Para él, su universo entero cabía en una sola mirada de ella.»'},
+  // ── V ──
+  {w:'valiente',p:'va·lién·te',pos:'adj.',defs:['Que tiene valor; esforzado, animoso.','Que denota valentía o la expresa.','Enérgico, eficaz, resuelto.'],etym:'Del latín <i>valens</i>, fuerte, poderoso.',ex:'«Fue valiente al atreverse a decir lo que sentía.»'},
+  {w:'verdad',p:'ver·dád',pos:'s. f.',defs:['Conformidad de las cosas con el concepto que de ellas forma la mente.','Lo que es real o existe; la realidad.','Juicio que no puede negarse sin incurrir en contradicción.'],etym:'Del latín <i>veritas</i>, de <i>verus</i>, verdadero.',ex:'«La única verdad que importaba era lo que sentía.»'},
+  {w:'vida',p:'ví·da',pos:'s. f.',defs:['Fuerza o actividad interna que tienen los seres orgánicos.','Duración de la existencia de los seres vivos.','Modo de vivir.','Persona o cosa muy querida.'],etym:'Del latín <i>vita</i>.',ex:'«Hay personas que llegan a tu vida y se convierten en parte de ella para siempre.»'},
+  {w:'vínculo',p:'vín·cu·lo',pos:'s. m.',defs:['Unión o atadura de una persona o cosa con otra.','Lazo afectivo que une a las personas.'],etym:'Del latín <i>vinculum</i>, cadena, ligadura.',ex:'«El vínculo que los unía era difícil de explicar pero imposible de ignorar.»'},
+  // ── Z ──
+  {w:'zozobra',p:'zo·zó·bra',pos:'s. f.',defs:['Inquietud y aflicción del ánimo.','Intranquilidad o angustia causada por la incertidumbre.'],etym:'Probablemente del latín <i>sub</i> y <i>supra</i>, por el movimiento del barco.',ex:'«La zozobra desapareció el día que por fin se lo dijo.»'},
 ];
-const NEW=[
-  {id:40,n:'Mateo',ch:28},{id:41,n:'Marcos',ch:16},{id:42,n:'Lucas',ch:24},
-  {id:43,n:'Juan',ch:21},{id:44,n:'Hechos',ch:28},{id:45,n:'Romanos',ch:16},
-  {id:46,n:'1 Corintios',ch:16},{id:47,n:'2 Corintios',ch:13},{id:48,n:'Gálatas',ch:6},
-  {id:49,n:'Efesios',ch:6},{id:50,n:'Filipenses',ch:4},{id:51,n:'Colosenses',ch:4},
-  {id:52,n:'1 Tesalonicenses',ch:5},{id:53,n:'2 Tesalonicenses',ch:3},{id:54,n:'1 Timoteo',ch:6},
-  {id:55,n:'2 Timoteo',ch:4},{id:56,n:'Tito',ch:3},{id:57,n:'Filemón',ch:1},
-  {id:58,n:'Hebreos',ch:13},{id:59,n:'Santiago',ch:5},{id:60,n:'1 Pedro',ch:5},
-  {id:61,n:'2 Pedro',ch:3},{id:62,n:'1 Juan',ch:5},{id:63,n:'2 Juan',ch:1},
-  {id:64,n:'3 Juan',ch:1},{id:65,n:'Judas',ch:1},{id:66,n:'Apocalipsis',ch:22}
-];
-const ALL=[...OLD,...NEW];
-const EGG={id:22,ch:2,vr:16,msg:'💕 Felices 10 meses mi amor 💕'};
 
-// Love keywords
-const LW=['amor','amad','amará','amarás','amamos','amaron',' ama ','amado','amada','corazón','corazon','misericordia','fiel','fidelidad','ternura','gozo','alegría','alegria','esposa','esposo','dilecto','dilecta','eterno','eterna','compasión','te amó'];
-function isLove(t){const l=t.toLowerCase();return LW.some(w=>l.includes(w));}
-
-// API name map (for bible-api.com)
-const AMAP={1:'genesis',2:'exodus',3:'leviticus',4:'numbers',5:'deuteronomy',6:'joshua',7:'judges',8:'ruth',9:'1samuel',10:'2samuel',11:'1kings',12:'2kings',13:'1chronicles',14:'2chronicles',15:'ezra',16:'nehemiah',17:'esther',18:'job',19:'psalms',20:'proverbs',21:'ecclesiastes',22:'songofsolomon',23:'isaiah',24:'jeremiah',25:'lamentations',26:'ezekiel',27:'daniel',28:'hosea',29:'joel',30:'amos',31:'obadiah',32:'jonah',33:'micah',34:'nahum',35:'habakkuk',36:'zephaniah',37:'haggai',38:'zechariah',39:'malachi',40:'matthew',41:'mark',42:'luke',43:'john',44:'acts',45:'romans',46:'1corinthians',47:'2corinthians',48:'galatians',49:'ephesians',50:'philippians',51:'colossians',52:'1thessalonians',53:'2thessalonians',54:'1timothy',55:'2timothy',56:'titus',57:'philemon',58:'hebrews',59:'james',60:'1peter',61:'2peter',62:'1john',63:'2john',64:'3john',65:'jude',66:'revelation'};
-
-const cache={};
-let curT='old',curBook=null,curCh=1,rInited=false,isAnimating=false;
-
-function initReader(){
-  if(rInited)return; rInited=true;
-  renderSidebar(); populateSel();
-}
-function populateSel(){
-  const s=document.getElementById('sBk');
-  if(s.options.length>1)return;
-  ALL.forEach(b=>{const o=document.createElement('option');o.value=b.id;o.textContent=b.n;s.appendChild(o);});
-}
-function swT(t){
-  curT=t;
-  ['tOld','tOldM'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('act',t==='old');});
-  ['tNew','tNewM'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('act',t==='new');});
-  renderSidebar();
-}
-function renderSidebar(){
-  const books=curT==='old'?OLD:NEW;
-  ['bkList','bkListM'].forEach(lid=>{
-    const ul=document.getElementById(lid);if(!ul)return;
-    ul.innerHTML='';
-    books.forEach(b=>{
-      const li=document.createElement('li');li.className='bk-item'+(curBook?.id===b.id?' act':'');
-      li.innerHTML=`<span>${b.n}</span><span class="ch-count">${b.ch}</span>`;
-      li.onclick=()=>{selectBook(b);closeDrawer();};
-      ul.appendChild(li);
-    });
+/* ══════════════════════════════════════════
+   BUILD ALPHABET INDEX
+══════════════════════════════════════════ */
+function getLetterGroups(){
+  const groups={};
+  WORDS.forEach(w=>{
+    const L=w.w[0].toUpperCase();
+    if(!groups[L])groups[L]=[];
+    groups[L].push(w);
   });
+  return groups;
 }
 
-function selectBook(b){
-  curBook=b; curCh=1;
-  renderSidebar();
-  loadAndShow(b.id,1,false);
+/* ══════════════════════════════════════════
+   INIT DICTIONARY
+══════════════════════════════════════════ */
+let dictInited=false;
+function initDict(){
+  if(dictInited)return;dictInited=true;
+  buildAlphaBar();
+  renderAll();
+  document.getElementById('searchInput').addEventListener('input',onSearch);
+  document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==='Escape'){e.target.value='';renderAll();}});
 }
 
-// ── PAGE TURN ANIMATION ──
-async function turnPage(fn){
-  if(isAnimating)return;
-  isAnimating=true;
-  const el=document.getElementById('pageEl');
-  el.classList.add('turn-out');
-  await new Promise(r=>setTimeout(r,420));
-  el.classList.remove('turn-out');
-  fn();
-  el.classList.add('turn-in');
-  await new Promise(r=>setTimeout(r,420));
-  el.classList.remove('turn-in');
-  isAnimating=false;
+function buildAlphaBar(){
+  const bar=document.getElementById('alphaBar');
+  const groups=getLetterGroups();
+  const usedLetters=new Set(Object.keys(groups));
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(L=>{
+    if(!usedLetters.has(L))return;
+    const btn=document.createElement('button');
+    btn.className='alpha-btn'+(groups[L]?.some(w=>w.isEgg)?' has-egg':'');
+    btn.textContent=L;
+    btn.onclick=()=>scrollToLetter(L);
+    bar.appendChild(btn);
+  });
+  // Mirror for mobile drawer
+  const barM=document.getElementById('alphaBar');
+  if(barM)barM.style.display='flex';
 }
 
-async function loadAndShow(bookId,ch,animate=true){
-  const doLoad=async()=>{
-    setLoading();
-    const verses=await fetchChapter(bookId,ch);
-    renderChapter(bookId,ch,verses);
-  };
-  if(animate){await turnPage(doLoad);}
-  else{await doLoad();}
+function renderAll(){
+  const groups=getLetterGroups();
+  const inner=document.getElementById('dictInner');
+  inner.innerHTML='';
+  Object.keys(groups).sort().forEach(L=>{
+    const sec=document.createElement('div');
+    sec.className='letter-section';sec.id='letter-'+L;
+    sec.innerHTML=`<div class="letter-heading"><span class="letter-big">${L}</span><span class="letter-label">${groups[L].length} entrada${groups[L].length>1?'s':''}</span></div>`;
+    groups[L].forEach(w=>sec.appendChild(makeEntry(w)));
+    inner.appendChild(sec);
+  });
+  // Highlight active letter on scroll
+  document.getElementById('dictContent').onscroll=updateActiveAlpha;
 }
 
-function setLoading(){
-  document.getElementById('pageEl').innerHTML=`<div class="page-content"><div class="spin-wrap"><div class="spinner"></div><p class="spin-lbl">Cargando…</p></div></div>`;
-}
+function makeEntry(w){
+  const div=document.createElement('div');
+  div.className='word-entry'+(w.isEgg?' egg-entry':'');
+  let html=`<div class="word-row">
+    <span class="word${w.isEgg?' egg-word':''}">${w.w}</span>
+    <span class="word-pron">${w.p}</span>
+    <span class="word-sep">·</span>
+    <span class="word-pos">${w.pos}</span>
+  </div>`;
+  w.defs.forEach((d,i)=>{
+    html+=`<div class="definition"><span class="def-num">${w.defs.length>1?i+1+'.':''}</span>${d}</div>`;
+  });
+  if(w.etym)html+=`<div class="etymology"><b>Etimología:</b> ${w.etym}</div>`;
+  if(w.ex)html+=`<div class="example">${w.ex}</div>`;
 
-// ── FETCH — múltiples APIs en español ──
-async function fetchChapter(bookId,ch){
-  const key=`${bookId}-${ch}`;
-  if(cache[key])return cache[key];
-
-  // Primero datos embebidos
-  if(BDATA[bookId]&&BDATA[bookId][ch]){
-    cache[key]=BDATA[bookId][ch];
-    return cache[key];
-  }
-
-  // API 1: api.scripture.api.bible — versión RVR1960 en español completa
-  // Usamos el API de bolls.life que es gratis y tiene RVR en español
-  try{
-    const r=await fetch(`https://bolls.life/get-chapter/RVR1960/${bookId}/${ch}/`,{signal:AbortSignal.timeout(8000)});
-    if(r.ok){
-      const d=await r.json();
-      if(Array.isArray(d)&&d.length){
-        const vs=d.map(v=>({v:v.verse,t:stripHTML(v.text)}));
-        cache[key]=vs; return vs;
-      }
-    }
-  }catch{}
-
-  // API 2: getbible.net
-  try{
-    const r=await fetch(`https://getbible.net/v2/rvr1960/${bookId}/${ch}.json`,{signal:AbortSignal.timeout(8000)});
-    if(r.ok){
-      const d=await r.json();
-      const vs=Object.values(d.verses||{}).map(v=>({v:v.verse_nr,t:v.verse}));
-      if(vs.length){cache[key]=vs;return vs;}
-    }
-  }catch{}
-
-  // API 3: bible-api.com con rvr1960
-  try{
-    const name=AMAP[bookId]||'genesis';
-    const r=await fetch(`https://bible-api.com/${name}+${ch}?translation=rvr1960`,{signal:AbortSignal.timeout(8000)});
-    const d=await r.json();
-    if(d.verses?.length){
-      const vs=d.verses.map(v=>({v:v.verse,t:v.text.trim()}));
-      cache[key]=vs; return vs;
-    }
-  }catch{}
-
-  return null;
-}
-
-function stripHTML(s){return s?s.replace(/<[^>]*>/g,'').trim():'';}
-
-// ── RENDER CHAPTER ──
-function renderChapter(bookId,ch,verses){
-  const book=ALL.find(b=>b.id===bookId);
-  const isEggCh=bookId===EGG.id&&ch===EGG.ch;
-  let html=`<div class="page-content">`;
-  html+=`<div class="ch-header">
-    <div class="ch-book">${book?.n||''}</div>
-    <div class="ch-num">Capítulo ${ch}</div>
-    <div class="ch-nav-row">
-      <button class="pg-btn-nav" onclick="navCh(-1)" ${ch<=1?'disabled':''}>‹ Anterior</button>`;
-
-  // Show up to 15 chapter buttons around current
-  const total=book?.ch||1;
-  const start=Math.max(1,Math.min(ch-7,total-14));
-  const end=Math.min(total,start+14);
-  if(start>1)html+=`<span class="ch-more">…</span>`;
-  for(let i=start;i<=end;i++)html+=`<button class="pg-btn${i===ch?' act':''}" onclick="navToC(${i})">${i}</button>`;
-  if(end<total)html+=`<span class="ch-more">…</span>`;
-  html+=`<button class="pg-btn-nav" onclick="navCh(1)" ${ch>=total?'disabled':''}>Siguiente ›</button>
-    </div></div>`;
-
-  if(!verses||!verses.length){
-    html+=`<div class="empty"><span class="empty-ic">✝</span><p class="empty-t">No se pudo cargar este capítulo.</p><p class="empty-s">Verifica tu conexión a internet.</p></div>`;
-  }else{
-    html+=`<div class="orn">— ✦ —</div><div class="verses">`;
-    verses.forEach(v=>{
-      const txt=v.t||v.text||'';
-      const vn=v.v||v.verse||0;
-      const isEgg=isEggCh&&vn===EGG.vr;
-      let display=txt;
-      if(isEgg)display+=` <span style="color:var(--rose);font-weight:600;font-style:italic;">&nbsp;— ${EGG.msg}</span>`;
-      const love=isLove(txt)||isEgg;
-      html+=`<div class="vrow${isEgg?' egg-v':love?' love-v':''}">
-        <span class="vn">${vn}</span>
-        <div class="vc"><span class="vt">${display}</span>${love?'<span class="vh">♥</span>':''}</div>
-      </div>`;
-    });
-    html+=`</div><div class="orn" style="margin-top:2rem">— ✦ —</div>`;
-    // Bottom nav
-    html+=`<div class="ch-nav-row" style="margin-top:1.5rem">
-      <button class="pg-btn-nav" onclick="navCh(-1)" ${ch<=1?'disabled':''}>‹ Capítulo anterior</button>
-      <button class="pg-btn-nav" onclick="navCh(1)" ${ch>=total?'disabled':''}>Capítulo siguiente ›</button>
+  // 🌹 EGG BOX
+  if(w.isEgg){
+    html+=`<div class="egg-box">
+      <div class="egg-marker">✦ &nbsp; definición especial &nbsp; ✦</div>
+      <div class="egg-text">${w.eggMsg}</div>
+      <div class="egg-sub">${w.eggSub}</div>
+      <button class="hearts-btn" onclick="triggerHearts()">💕 celebrar</button>
     </div>`;
   }
-  html+=`</div>`;
-  document.getElementById('pageEl').innerHTML=html;
-  document.getElementById('pageEl').scrollTop=0;
+  div.innerHTML=html;
+  return div;
 }
 
-function navCh(dir){
-  if(!curBook||isAnimating)return;
-  const next=curCh+dir;
-  if(next<1||next>curBook.ch)return;
-  curCh=next;
-  // Update chapter buttons
-  document.querySelectorAll('.pg-btn').forEach((b,i)=>{
-    const n=parseInt(b.textContent);if(!isNaN(n))b.classList.toggle('act',n===curCh);
-  });
-  turnPage(async()=>{
-    setLoading();
-    const v=await fetchChapter(curBook.id,curCh);
-    renderChapter(curBook.id,curCh,v);
-  });
-}
-function navToC(n){
-  if(!curBook||isAnimating||n===curCh)return;
-  curCh=n;
-  turnPage(async()=>{
-    setLoading();
-    const v=await fetchChapter(curBook.id,curCh);
-    renderChapter(curBook.id,curCh,v);
-  });
+function scrollToLetter(L){
+  const sec=document.getElementById('letter-'+L);
+  if(!sec)return;
+  const content=document.getElementById('dictContent');
+  content.scrollTo({top:sec.offsetTop,behavior:'smooth'});
+  updateAlphaBtns(L);
 }
 
-// ── SEARCH ──
-function eggSearch(){document.getElementById('sTxt').value='felices 10 meses';doSearch();}
-async function doSearch(){
-  const txt=document.getElementById('sTxt').value.trim();
-  const bkId=parseInt(document.getElementById('sBk').value)||0;
-  const ch=parseInt(document.getElementById('sCh').value)||0;
-  const vr=parseInt(document.getElementById('sVr').value)||0;
-  const pe=document.getElementById('pageEl');
+function updateActiveAlpha(){
+  const content=document.getElementById('dictContent');
+  const sections=content.querySelectorAll('.letter-section');
+  let current='';
+  sections.forEach(s=>{
+    if(s.offsetTop-content.scrollTop<80)current=s.id.replace('letter-','');
+  });
+  if(current)updateAlphaBtns(current);
+}
+function updateAlphaBtns(L){
+  document.querySelectorAll('.alpha-btn').forEach(b=>{b.classList.toggle('act',b.textContent===L);});
+}
 
-  if(bkId&&ch){
-    const b=ALL.find(x=>x.id===bkId);if(!b)return;
-    curBook=b;curCh=ch;
-    curT=OLD.some(x=>x.id===bkId)?'old':'new';
-    swT(curT);
-    await loadAndShow(bkId,ch,true);
-    if(vr)setTimeout(()=>hlVerse(vr,bkId===EGG.id&&ch===EGG.ch&&vr===EGG.vr),600);
-    return;
+/* ══════════════════════════════════════════
+   SEARCH
+══════════════════════════════════════════ */
+function onSearch(e){
+  const q=e.target.value.trim().toLowerCase();
+  if(!q){renderAll();return;}
+  const results=WORDS.filter(w=>
+    w.w.toLowerCase().includes(q)||
+    w.defs.some(d=>d.toLowerCase().includes(q))
+  );
+  showSearchResults(results,q);
+}
+
+function showSearchResults(results,q){
+  const inner=document.getElementById('dictInner');
+  inner.innerHTML='';
+  const wrap=document.createElement('div');
+  wrap.className='search-results';
+  if(!results.length){
+    wrap.innerHTML=`<div class="no-results">No se encontraron resultados para <i>"${q}"</i></div>`;
+  } else {
+    wrap.innerHTML=`<div class="sr-header">Se encontraron <b>${results.length}</b> resultado${results.length>1?'s':''} para <b>"${q}"</b></div>`;
+    results.forEach(w=>wrap.appendChild(makeEntry(w)));
   }
-  if(txt.length<2)return;
-
-  if(/felices|10 meses/i.test(txt)){
-    pe.innerHTML=`<div class="page-content">
-      <div class="ch-header"><div class="ch-book">Búsqueda Especial</div><div class="ch-num">1 resultado ✦</div></div>
-      <div class="res-card" onclick="jumpTo(22,2,16)" style="border-color:var(--rose);background:rgba(176,80,96,.08)">
-        <div class="res-ref" style="color:var(--rose)">Cantares 2:16 ♥</div>
-        <div class="res-txt">Mi amado es mío, y yo soy suya; él apacienta entre lirios. — <em style="background:rgba(176,80,96,.2)">${EGG.msg}</em></div>
-      </div>
-    </div>`;
-    setTimeout(triggerHearts,400); return;
-  }
-
-  pe.innerHTML=`<div class="page-content"><div class="ch-header"><div class="ch-num">Buscando…</div></div><div class="spin-wrap"><div class="spinner"></div></div></div>`;
-  try{
-    const r=await fetch(`https://bolls.life/search/RVR1960/${encodeURIComponent(txt)}/`,{signal:AbortSignal.timeout(10000)});
-    if(r.ok){
-      const d=await r.json();
-      if(d&&d.length){showResults(d,txt);return;}
-    }
-  }catch{}
-  // Fallback: bible-api search
-  try{
-    const r=await fetch(`https://bible-api.com/?q=${encodeURIComponent(txt)}&translation=rvr1960`,{signal:AbortSignal.timeout(10000)});
-    const d=await r.json();
-    if(d.verses?.length){showApiResults(d.verses,txt);return;}
-  }catch{}
-  pe.innerHTML=`<div class="page-content"><div class="empty"><span class="empty-ic">✦</span><p class="empty-t">Sin resultados para "${txt}"</p><p class="empty-s">Selecciona un libro del panel lateral para leer.</p></div></div>`;
+  inner.appendChild(wrap);
 }
 
-function showResults(results,q){
-  const esc=q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-  let h=`<div class="page-content"><div class="ch-header"><div class="ch-book">Resultados de búsqueda</div><div class="ch-num">${results.length} versículo(s)</div></div>`;
-  results.slice(0,30).forEach(v=>{
-    const bk=ALL.find(b=>b.id===v.book);
-    const hi=(v.text||'').replace(new RegExp(esc,'gi'),m=>`<em>${m}</em>`);
-    h+=`<div class="res-card" onclick="jumpTo(${v.book},${v.chapter},${v.verse})">
-      <div class="res-ref">${bk?.n||v.book} ${v.chapter}:${v.verse}${isLove(v.text||'')?' ♥':''}</div>
-      <div class="res-txt">${hi}</div>
-    </div>`;
-  });
-  document.getElementById('pageEl').innerHTML=h+'</div>';
-}
-function showApiResults(verses,q){
-  const esc=q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-  // bible-api doesn't return book_id number, try to find by name
-  let h=`<div class="page-content"><div class="ch-header"><div class="ch-book">Resultados</div><div class="ch-num">${verses.length} versículo(s)</div></div>`;
-  verses.slice(0,25).forEach(v=>{
-    const hi=(v.text||'').replace(new RegExp(esc,'gi'),m=>`<em>${m}</em>`);
-    const bk=ALL.find(b=>b.n.toLowerCase()===v.book_name?.toLowerCase())||{id:0,n:v.book_name||''};
-    h+=`<div class="res-card" onclick="jumpTo(${bk.id},${v.chapter},${v.verse})">
-      <div class="res-ref">${v.book_name} ${v.chapter}:${v.verse}</div>
-      <div class="res-txt">${hi}</div>
-    </div>`;
-  });
-  document.getElementById('pageEl').innerHTML=h+'</div>';
-}
-
-async function jumpTo(bookId,ch,vr){
-  const b=ALL.find(x=>x.id===bookId);
-  if(b){curBook=b;curCh=ch;curT=OLD.some(x=>x.id===bookId)?'old':'new';swT(curT);}
-  await loadAndShow(bookId,ch,true);
-  const isEgg=bookId===EGG.id&&ch===EGG.ch&&vr===EGG.vr;
-  setTimeout(()=>hlVerse(vr,isEgg),700);
-}
-function hlVerse(vr,egg=false){
-  document.querySelectorAll('.vrow').forEach(row=>{
-    if(parseInt(row.querySelector('.vn')?.textContent||'0')===vr){
-      row.style.background='rgba(184,146,42,.18)';
-      row.style.borderLeft='3px solid var(--g)';
-      row.scrollIntoView({behavior:'smooth',block:'center'});
-      if(egg)setTimeout(triggerHearts,500);
-    }
-  });
-}
+/* ══════════════════════════════════════════
+   HEARTS EXPLOSION
+══════════════════════════════════════════ */
 function triggerHearts(){
-  const bl=document.getElementById('hearts');bl.style.display='block';bl.innerHTML='';
+  const bl=document.getElementById('heartsEl');
+  bl.style.display='block';bl.innerHTML='';
   const cx=window.innerWidth/2,cy=window.innerHeight/2;
-  const em=['♥','❤','💕','💖','💗','💓','💞','🌹','✨'];
+  const em=['♥','❤','💕','💖','💗','💓','💞','🌹','✨','💫'];
   const f=document.createDocumentFragment();
-  for(let i=0;i<50;i++){
+  for(let i=0;i<55;i++){
     const h=document.createElement('div');h.className='hp';
-    const ang=Math.random()*360,dist=110+Math.random()*260;
-    h.style.cssText=`left:${cx}px;top:${cy}px;animation-delay:${Math.random()*.7}s;--r:${(Math.random()-.5)*70}deg;--tx:${Math.cos(ang*Math.PI/180)*dist}px;--ty:${Math.sin(ang*Math.PI/180)*dist-90}px;font-size:${1.1+Math.random()*1.6}rem;`;
-    h.textContent=em[Math.floor(Math.random()*em.length)];f.appendChild(h);
+    const ang=Math.random()*360,dist=120+Math.random()*280;
+    h.style.cssText=`left:${cx}px;top:${cy}px;animation-delay:${Math.random()*.7}s;--r:${(Math.random()-.5)*70}deg;--tx:${Math.cos(ang*Math.PI/180)*dist}px;--ty:${Math.sin(ang*Math.PI/180)*dist-80}px;font-size:${1.2+Math.random()*1.8}rem;`;
+    h.textContent=em[Math.floor(Math.random()*em.length)];
+    f.appendChild(h);
   }
   bl.appendChild(f);
   setTimeout(()=>{bl.style.display='none';bl.innerHTML='';},4000);
 }
-
-document.getElementById('sTxt').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
-
-// ══════════════════════════════════════════════
-// BIBLIA EMBEBIDA — RVR1960 EN ESPAÑOL
-// Libros completos: Cantares (22), Salmos clave,
-// Juan, 1 Corintios 13, Romanos 8, 1 Juan 4,
-// Génesis 1-3, Mateo 5-6, Efesios, Filipenses
-// ══════════════════════════════════════════════
-const BDATA={};
-
-// ── CANTARES COMPLETO ──
-BDATA[22]={
-1:[[1,"¡Oh, si él me besara con besos de su boca! Porque mejores son tus amores que el vino."],[2,"A causa del olor de tus suaves ungüentos, tu nombre es como ungüento derramado; por eso las doncellas te aman."],[3,"Llévame en pos de ti; correremos. El rey me ha metido en sus cámaras; nos gozaremos y alegraremos en ti; nos acordaremos de tus amores más que del vino; con razón te aman."],[4,"Morena soy, oh hijas de Jerusalén, pero codiciable como las tiendas de Cedar, como las cortinas de Salomón."],[5,"No reparéis en que soy morena, porque el sol me miró. Los hijos de mi madre se airaron contra mí; me pusieron a guardar las viñas; y mi viña, que era mía, no guardé."],[6,"Hazme saber, oh tú a quien ama mi alma, dónde apacientas, dónde sesteas al mediodía; pues ¿por qué había de andar yo como errante junto a los rebaños de tus compañeros?"],[7,"Si tú no lo sabes, oh hermosa entre las mujeres, sal, y ve tras las huellas del rebaño, y apacienta tus cabrillas junto a las cabañas de los pastores."],[8,"A yegua de los carros de Faraón te he comparado, amiga mía."],[9,"Hermosas son tus mejillas entre los pendientes, tu cuello entre los collares."],[10,"Zarcillos de oro te haremos, tachonados de plata."],[11,"Mientras el rey estaba en su reclinatorio, mi nardo dio su olor."],[12,"Mi amado es para mí un manojito de mirra, que reposa entre mis pechos."],[13,"Mi amado es para mí como racimo de flores de alheña en las viñas de En-gadi."],[14,"He aquí que tú eres hermosa, amiga mía; he aquí eres bella; tus ojos son como palomas."],[15,"He aquí que tú eres hermoso, amado mío, y dulce; nuestro lecho es de flores."],[16,"Las vigas de nuestra casa son de cedro, y de ciprés los artesonados."]],
-2:[[1,"Yo soy la rosa de Sarón, y el lirio de los valles."],[2,"Como el lirio entre los espinos, así es mi amiga entre las doncellas."],[3,"Como el manzano entre los árboles silvestres, así es mi amado entre los jóvenes; bajo la sombra del deseado me senté, y su fruto fue dulce a mi paladar."],[4,"Me llevó a la casa del banquete, y su bandera sobre mí fue amor."],[5,"Sustentadme con pasas, confortadme con manzanas; porque estoy enferma de amor."],[6,"Su izquierda esté debajo de mi cabeza, y su derecha me abrace."],[7,"Yo os conjuro, oh doncellas de Jerusalén, por las cabras monteses y por las ciervas del campo, que no despertéis ni hagáis velar al amor, hasta que quiera."],[8,"¡La voz de mi amado! He aquí él viene saltando sobre los montes, brincando sobre los collados."],[9,"Mi amado es semejante al corzo, o al cervatillo. Helo aquí, está tras nuestra pared, mirando por las ventanas, atisbando por las celosías."],[10,"Mi amado habló, y me dijo: Levántate, oh amiga mía, hermosa mía, y ven."],[11,"Porque he aquí ha pasado el invierno, se ha mudado, la lluvia se fue;"],[12,"Se han mostrado las flores en la tierra, el tiempo de la canción ha venido, y en nuestro país se ha oído la voz de la tórtola."],[13,"La higuera ha echado sus higos, y las vides en cierne dieron olor; levántate, oh amiga mía, hermosa mía, y ven."],[14,"Paloma mía, que estás en los agujeros de la peña, en lo escondido de escarpados parajes, muéstrame tu rostro, hazme oír tu voz; porque dulce es la voz tuya, y hermoso tu aspecto."],[15,"Cazadnos las zorras, las zorras pequeñas, que echan a perder las viñas; porque nuestras viñas están en cierne."],[16,"Mi amado es mío, y yo soy suya; él apacienta entre lirios."],[17,"Hasta que apunte el día, y huyan las sombras, vuélvete, amado mío; sé semejante al corzo, o al cervatillo sobre los montes de Beter."]],
-3:[[1,"Por las noches busqué en mi lecho al que ama mi alma; lo busqué, y no lo hallé."],[2,"Y dije: Me levantaré ahora, y rodearé por la ciudad; por las calles y por las plazas buscaré al que ama mi alma; lo busqué, y no lo hallé."],[3,"Me hallaron los guardas que rondan la ciudad, y les dije: ¿Habéis visto al que ama mi alma?"],[4,"Apenas hube pasado de ellos un poco, hallé al que ama mi alma; lo así, y no lo dejé, hasta que lo metí en casa de mi madre, y en la cámara de la que me dio a luz."],[5,"Yo os conjuro, oh doncellas de Jerusalén, por las cabras monteses y por las ciervas del campo, que no despertéis ni hagáis velar al amor, hasta que quiera."],[6,"¿Quién es ésta que sube del desierto como columna de humo, perfumada de mirra y de incienso y de todo polvo aromático del mercader?"],[7,"He aquí es la litera de Salomón; sesenta valientes la rodean, de los fuertes de Israel."],[8,"Todos ellos tienen espadas, diestros en la guerra; cada uno su espada sobre su muslo, por los temores de la noche."],[9,"El rey Salomón se hizo una carroza de madera del Líbano."],[10,"Hizo sus columnas de plata, su respaldo de oro, su asiento de grana, su interior recamado de amor por las doncellas de Jerusalén."],[11,"Salid, oh doncellas de Sión, y ved al rey Salomón con la corona con que le coronó su madre en el día de su desposorio, y el día del gozo de su corazón."]],
-4:[[1,"He aquí que tú eres hermosa, amiga mía; he aquí que tú eres hermosa. Tus ojos entre tus guedejas como de paloma; tus cabellos como manada de cabras que se recuestan en las laderas de Galaad."],[2,"Tus dientes como manadas de ovejas trasquiladas, que suben del lavadero, todas con crías gemelas, y ninguna entre ellas estéril."],[3,"Tus labios como hilo de grana, y tu habla hermosa; tus mejillas, como cachos de granada detrás de tu velo."],[4,"Tu cuello, como la torre de David, edificada para armería; mil escudos están colgados en ella, todos escudos de valientes."],[5,"Tus dos pechos, como gemelos de gacela, que se apacientan entre lirios."],[6,"Hasta que apunte el día y huyan las sombras, me iré al monte de la mirra, y al collado del incienso."],[7,"Toda tú eres hermosa, amiga mía, y en ti no hay mancha."],[8,"Ven conmigo desde el Líbano, oh esposa mía; ven conmigo desde el Líbano. Mira desde la cumbre de Amana, desde la cumbre de Senir y de Hermón, desde las guaridas de los leones, desde los montes de los leopardos."],[9,"Prendiste mi corazón, hermana mía, esposa; prendiste mi corazón con uno de tus ojos, con una gargantilla de tu cuello."],[10,"¡Cuán hermosos son tus amores, hermana mía, esposa! ¡Cuánto mejores que el vino tus amores, y el olor de tus ungüentos que todas las especias aromáticas!"],[11,"Como panal de miel destilan tus labios, oh esposa; miel y leche hay debajo de tu lengua; y el olor de tus vestidos como el olor del Líbano."],[12,"Huerto cerrado eres, hermana mía, esposa; fuente cerrada, fuente sellada."],[13,"Tus renuevos son paraíso de granados, con frutos suaves, de flores de alheña y de nardos;"],[14,"Nardo y azafrán, caña aromática y canela, con todos los árboles de incienso; mirra y áloes, con todas las principales especias aromáticas."],[15,"Fuente de huertos, pozo de aguas vivas, que corren del Líbano."],[16,"Levántate, Aquilón, y ven, Austro; soplad en mi huerto, despréndanse sus aromas. Venga mi amado a su huerto, y coma de su dulce fruta."]],
-5:[[1,"Yo vine a mi huerto, oh hermana mía, esposa mía; he recogido mi mirra y mis especias aromáticas; he comido mi panal y mi miel, he bebido mi vino y mi leche; comed, amigos; bebed en abundancia, oh amados."],[2,"Yo dormía, pero mi corazón velaba. Es la voz de mi amado que llama: Ábreme, hermana mía, amiga mía, paloma mía, perfecta mía, porque mi cabeza está llena de rocío, mis cabellos de las gotas de la noche."],[3,"Me he desnudado de mi ropa; ¿cómo me he de vestir? He lavado mis pies; ¿cómo los he de ensuciar?"],[4,"Mi amado metió su mano por la ventanilla, y mis entrañas se conmovieron dentro de mí."],[5,"Me levanté para abrir a mi amado, y mis manos gotearon mirra, y mis dedos mirra que corría sobre la manecilla del cerrojo."],[6,"Abrí yo a mi amado; pero mi amado se había ido, había ya pasado; y tras su hablar salió mi alma. Lo busqué, y no lo hallé; lo llamé, y no me respondió."],[7,"Me hallaron los guardas que rondan la ciudad; me hirieron, me llagaron; me quitaron mi manto de encima los guardas de los muros."],[8,"Yo os conjuro, oh doncellas de Jerusalén, si halláis a mi amado, que le hagáis saber que estoy enferma de amor."],[9,"¿Qué es tu amado más que otro amado, oh la más hermosa de todas las mujeres? ¿Qué es tu amado más que otro amado, que así nos conjuras?"],[10,"Mi amado es blanco y rubio, señalado entre diez mil."],[11,"Su cabeza como oro finísimo; sus cabellos crespos, negros como el cuervo."],[12,"Sus ojos, como palomas junto a los arroyos de las aguas, que se lavan con leche, y a la perfección colocados."],[13,"Sus mejillas, como una era de especias aromáticas, como fragantes flores; sus labios, como lirios que destilan mirra fragante."],[14,"Sus manos, como anillos de oro engastados de jacintos; su cuerpo, como claro marfil cubierto de zafiros."],[15,"Sus piernas, como columnas de mármol fundadas sobre basas de oro fino; su aspecto como el Líbano, escogido como los cedros."],[16,"Su paladar, dulcísimo, y todo él codiciable. Tal es mi amado, tal es mi amigo, oh doncellas de Jerusalén."]],
-6:[[1,"¿A dónde se ha ido tu amado, oh la más hermosa de todas las mujeres? ¿A dónde se apartó tu amado, y le buscaremos contigo?"],[2,"Mi amado descendió a su huerto, a las eras de las especias aromáticas, para apacentar en los huertos, y para recoger los lirios."],[3,"Yo soy de mi amado, y mi amado es mío; él apacienta entre los lirios."],[4,"Hermosa eres tú, oh amiga mía, como Tirsa; de desear, como Jerusalén; imponente como ejércitos en orden."],[5,"Aparta tus ojos de mí, porque ellos me vencieron. Tu cabello es como manada de cabras que se recuestan en las laderas de Galaad."],[6,"Tus dientes, como manadas de ovejas que suben del lavadero; todas con crías gemelas, y ninguna estéril entre ellas."],[7,"Como cachos de granada son tus mejillas detrás de tu velo."],[8,"Sesenta son las reinas, y ochenta las concubinas, y las doncellas sin número;"],[9,"Mas una es la paloma mía, la perfecta mía; la única hija de su madre; la escogida de la que la dio a luz. La vieron las doncellas, y la llamaron bienaventurada; las reinas y las concubinas, y la alabaron."],[10,"¿Quién es ésta que se muestra como el alba, hermosa como la luna, esclarecida como el sol, imponente como ejércitos en orden?"],[11,"Al huerto de los nogales descendí a ver los frutos del valle, y a ver si brotaban las vides, si florecían los granados."],[12,"Antes que lo supiera, mi alma me puso entre los carros de Ammi-nadib."]],
-7:[[1,"¡Cuán hermosos son tus pies en las sandalias, oh hija de príncipe! Los contornos de tus muslos son como joyas, obra de mano de excelente maestro."],[2,"Tu ombligo, como taza redonda que no le falta bebida. Tu vientre, como montón de trigo cercado de lirios."],[3,"Tus dos pechos, como gemelos de gacela."],[4,"Tu cuello, como torre de marfil; tus ojos, como los estanques de Hesbón junto a la puerta de Bat-rabim; tu nariz, como la torre del Líbano, que mira hacia Damasco."],[5,"Tu cabeza encima de ti, como el Carmelo; y el cabello de tu cabeza, como la púrpura del rey suspendida en los corredores."],[6,"¡Qué hermosa eres, y cuán suave, oh amor deleitoso!"],[7,"Tu estatura es semejante a la palmera, y tus pechos a sus racimos."],[8,"Yo dije: Subiré a la palmera, asiré sus ramas. Deja que tus pechos sean como racimos de vid, y el olor de tu boca como de manzanas,"],[9,"Y tu paladar como el buen vino, que se entra a mi amado suavemente, y hace hablar los labios de los viejos."],[10,"Yo soy de mi amado, y conmigo tiene su contentamiento."],[11,"Ven, oh amado mío, salgamos al campo, moremos en las aldeas."],[12,"Levantémonos de mañana a las viñas; veamos si brotan las vides, si están en cierne, si han florecido los granados; allí te daré mis amores."],[13,"Las mandrágoras han dado olor, y a nuestras puertas hay toda suerte de dulces frutas, nuevas y añejas, que para ti, oh amado mío, he guardado."]],
-8:[[1,"¡Oh, si tú fueras como un hermano mío, que mamó los pechos de mi madre! Entonces, hallándote fuera, te besaría, y no me menospreciarían."],[2,"Te llevaría, te metería en casa de mi madre; tú me enseñarías, y yo te haría beber vino adobado del mosto de mis granadas."],[3,"Su izquierda esté debajo de mi cabeza, y su derecha me abrace."],[4,"Yo os conjuro, oh doncellas de Jerusalén, que no despertéis ni hagáis velar al amor, hasta que quiera."],[5,"¿Quién es ésta que sube del desierto, recostada sobre su amado? Debajo de un manzano te desperté; allí tuvo tu madre dolores de parto; allí tuvo dolores la que te dio a luz."],[6,"Ponme como un sello sobre tu corazón, como una marca sobre tu brazo; porque fuerte es como la muerte el amor; duros como el Seol los celos; sus brasas, brasas de fuego, fuerte llama."],[7,"Las muchas aguas no podrán apagar el amor, ni los ríos lo ahogarán. Si diese el hombre todos los bienes de su casa por este amor, de cierto lo menospreciarían."],[8,"Tenemos una pequeña hermana, que no tiene pechos; ¿qué haremos a nuestra hermana cuando de ella se hablare?"],[9,"Si ella es muro, edificaremos sobre ella un palacio de plata; si fuere puerta, la guarneceremos con tablas de cedro."],[10,"Yo soy muro, y mis pechos como torres; desde que fui en sus ojos como la que halla paz."],[11,"Salomón tuvo una viña en Baal-hamón, la cual arrendó a guardas; cada uno de los cuales debía traerle mil monedas de plata por su fruto."],[12,"Mi viña, que es mía, está delante de mí; las mil sean para ti, oh Salomón, y doscientas para los que guardan su fruto."],[13,"Oh, tú que habitas en los huertos, los compañeros escuchan tu voz; házmela oír."],[14,"Apresúrate, amado mío, y sé semejante al corzo, o al cervatillo, sobre los montes de los aromas."]]
-};
-
-// ── 1 CORINTIOS 13 ──
-BDATA[46]={13:[[1,"Si yo hablase lenguas humanas y angélicas, y no tengo amor, vengo a ser como metal que resuena, o címbalo que retiñe."],[2,"Y si tuviese profecía, y entendiese todos los misterios y toda ciencia, y si tuviese toda la fe, de tal manera que trasladase los montes, y no tengo amor, nada soy."],[3,"Y si repartiese todos mis bienes para dar de comer a los pobres, y si entregase mi cuerpo para ser quemado, y no tengo amor, de nada me sirve."],[4,"El amor es sufrido, es benigno; el amor no tiene envidia, el amor no es jactancioso, no se envanece;"],[5,"no hace nada indebido, no busca lo suyo, no se irrita, no guarda rencor;"],[6,"no se goza de la injusticia, mas se goza de la verdad."],[7,"Todo lo sufre, todo lo cree, todo lo espera, todo lo soporta."],[8,"El amor nunca deja de ser; pero las profecías se acabarán, y cesarán las lenguas, y la ciencia acabará."],[9,"Porque en parte conocemos, y en parte profetizamos;"],[10,"mas cuando venga lo perfecto, entonces lo que es en parte se acabará."],[11,"Cuando yo era niño, hablaba como niño, pensaba como niño, juzgaba como niño; mas cuando ya fui hombre, dejé lo que era de niño."],[12,"Ahora vemos por espejo, oscuramente; mas entonces veremos cara a cara. Ahora conozco en parte; pero entonces conoceré como fui conocido."],[13,"Y ahora permanecen la fe, la esperanza y el amor, estos tres; pero el mayor de ellos es el amor."]]};
-
-// ── SALMOS CLAVE ──
-BDATA[19]={
-23:[[1,"Jehová es mi pastor; nada me faltará."],[2,"En lugares de delicados pastos me hará descansar; junto a aguas de reposo me pastoreará."],[3,"Confortará mi alma; me guiará por sendas de justicia por amor de su nombre."],[4,"Aunque ande en valle de sombra de muerte, no temeré mal alguno, porque tú estarás conmigo; tu vara y tu cayado me infundirán aliento."],[5,"Aderezas mesa delante de mí en presencia de mis angustiadores; unges mi cabeza con aceite; mi copa está rebosando."],[6,"Ciertamente el bien y la misericordia me seguirán todos los días de mi vida, y en la casa de Jehová moraré por largos días."]],
-103:[[1,"Bendice, alma mía, a Jehová, y bendiga todo mi ser su santo nombre."],[2,"Bendice, alma mía, a Jehová, y no olvides ninguno de sus beneficios."],[3,"El es quien perdona todas tus iniquidades, el que sana todas tus dolencias;"],[4,"El que rescata del hoyo tu vida, el que te corona de favores y misericordias;"],[5,"El que sacia de bien tu boca de modo que te rejuvenezcas como el águila."],[6,"Jehová es el que hace justicia y derecho a todos los que padecen violencia."],[7,"Sus caminos notificó a Moisés, y a los hijos de Israel sus obras."],[8,"Misericordioso y clemente es Jehová; lento para la ira, y grande en misericordia."],[9,"No contenderá para siempre, ni para siempre guardará el enojo."],[10,"No ha hecho con nosotros conforme a nuestras iniquidades, ni nos ha pagado conforme a nuestros pecados."],[11,"Porque como la altura de los cielos sobre la tierra, engrandeció su misericordia sobre los que le temen."],[12,"Cuanto está lejos el oriente del occidente, hizo alejar de nosotros nuestras rebeliones."],[13,"Como el padre se compadece de los hijos, se compadece Jehová de los que le temen."],[14,"Porque él conoce nuestra condición; se acuerda de que somos polvo."],[17,"Mas la misericordia de Jehová es desde la eternidad y hasta la eternidad sobre los que le temen, y su justicia sobre los hijos de los hijos;"]]
-};
-
-// ── JUAN CAPÍTULOS CLAVE ──
-BDATA[43]={
-3:[[1,"Había un hombre de los fariseos que se llamaba Nicodemo, un principal entre los judíos."],[2,"Este vino a Jesús de noche, y le dijo: Rabí, sabemos que has venido de Dios como maestro; porque nadie puede hacer estas señales que tú haces, si no está Dios con él."],[3,"Respondió Jesús y le dijo: De cierto, de cierto te digo, que el que no naciere de nuevo, no puede ver el reino de Dios."],[4,"Nicodemo le dijo: ¿Cómo puede un hombre nacer siendo viejo? ¿Puede acaso entrar por segunda vez en el vientre de su madre, y nacer?"],[5,"Respondió Jesús: De cierto, de cierto te digo, que el que no naciere de agua y del Espíritu, no puede entrar en el reino de Dios."],[6,"Lo que es nacido de la carne, carne es; y lo que es nacido del Espíritu, espíritu es."],[7,"No te maravilles de que te dije: Os es necesario nacer de nuevo."],[14,"Y como Moisés levantó la serpiente en el desierto, así es necesario que el Hijo del Hombre sea levantado,"],[15,"para que todo aquel que en él cree, no se pierda, mas tenga vida eterna."],[16,"Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna."],[17,"Porque no envió Dios a su Hijo al mundo para condenar al mundo, sino para que el mundo sea salvo por él."]],
-14:[[1,"No se turbe vuestro corazón; creéis en Dios, creed también en mí."],[2,"En la casa de mi Padre muchas moradas hay; si así no fuera, yo os lo hubiera dicho; voy, pues, a preparar lugar para vosotros."],[3,"Y si me fuere y os preparare lugar, vendré otra vez, y os tomaré a mí mismo, para que donde yo estoy, vosotros también estéis."],[6,"Jesús le dijo: Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí."],[15,"Si me amáis, guardad mis mandamientos."],[16,"Y yo rogaré al Padre, y os dará otro Consolador, para que esté con vosotros para siempre:"],[27,"La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da. No se turbe vuestro corazón, ni tenga miedo."]]
-};
-
-// ── 1 JUAN 4 ──
-BDATA[62]={4:[[7,"Amados, amémonos unos a otros; porque el amor es de Dios. Todo aquel que ama, es nacido de Dios, y conoce a Dios."],[8,"El que no ama, no ha conocido a Dios; porque Dios es amor."],[9,"En esto se mostró el amor de Dios para con nosotros, en que Dios envió a su Hijo unigénito al mundo, para que vivamos por él."],[10,"En esto consiste el amor: no en que nosotros hayamos amado a Dios, sino en que él nos amó a nosotros, y envió a su Hijo en propiciación por nuestros pecados."],[11,"Amados, si Dios nos ha amado así, debemos también nosotros amarnos unos a otros."],[12,"Nadie ha visto jamás a Dios. Si nos amamos unos a otros, Dios permanece en nosotros, y su amor se ha perfeccionado en nosotros."],[16,"Y nosotros hemos conocido y creído el amor que Dios tiene para con nosotros. Dios es amor; y el que permanece en amor, permanece en Dios, y Dios en él."],[18,"En el amor no hay temor, sino que el perfecto amor echa fuera el temor; porque el temor lleva en sí castigo. De donde el que teme, no ha sido perfeccionado en el amor."],[19,"Nosotros le amamos a él, porque él nos amó primero."]]};
-
-// ── ROMANOS 8 ──
-BDATA[45]={8:[[1,"Ahora, pues, ninguna condenación hay para los que están en Cristo Jesús, los que no andan conforme a la carne, sino conforme al Espíritu."],[28,"Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien, esto es, a los que conforme a su propósito son llamados."],[31,"¿Qué, pues, diremos a esto? Si Dios es por nosotros, ¿quién contra nosotros?"],[35,"¿Quién nos separará del amor de Cristo? ¿Tribulación, o angustia, o persecución, o hambre, o desnudez, o peligro, o espada?"],[37,"Antes, en todas estas cosas somos más que vencedores por medio de aquel que nos amó."],[38,"Por lo cual estoy seguro de que ni la muerte, ni la vida, ni ángeles, ni principados, ni potestades, ni lo presente, ni lo por venir,"],[39,"ni lo alto, ni lo bajo, ni ninguna otra cosa creada nos podrá separar del amor de Dios, que es en Cristo Jesús Señor nuestro."]]};
-
-// ── GÉNESIS 1-2 ──
-BDATA[1]={
-1:[[1,"En el principio creó Dios los cielos y la tierra."],[2,"Y la tierra estaba desordenada y vacía, y las tinieblas estaban sobre la faz del abismo, y el Espíritu de Dios se movía sobre la faz de las aguas."],[3,"Y dijo Dios: Sea la luz; y fue la luz."],[4,"Y vio Dios que la luz era buena; y separó Dios la luz de las tinieblas."],[5,"Y llamó Dios a la luz Día, y a las tinieblas llamó Noche. Y fue la tarde y la mañana un día."],[6,"Luego dijo Dios: Haya expansión en medio de las aguas, y separe las aguas de las aguas."],[7,"E hizo Dios la expansión, y separó las aguas que estaban debajo de la expansión, de las aguas que estaban sobre la expansión. Y fue así."],[8,"Y llamó Dios a la expansión Cielos. Y fue la tarde y la mañana el día segundo."],[9,"Dijo también Dios: Júntense las aguas que están debajo de los cielos en un lugar, y descúbrase lo seco. Y fue así."],[10,"Y llamó Dios a lo seco Tierra, y a la reunión de las aguas llamó Mares. Y vio Dios que era bueno."],[11,"Después dijo Dios: Produzca la tierra hierba verde, hierba que dé semilla; árbol de fruto que dé fruto según su género, que su semilla esté en él, sobre la tierra. Y fue así."],[12,"Produjo, pues, la tierra hierba verde, hierba que da semilla según su naturaleza, y árbol que da fruto, cuya semilla está en él, según su género. Y vio Dios que era bueno."],[13,"Y fue la tarde y la mañana el día tercero."],[14,"Dijo luego Dios: Haya lumbreras en la expansión de los cielos para separar el día de la noche; y sirvan de señales para las estaciones, para días y años,"],[15,"y sean por lumbreras en la expansión de los cielos para alumbrar sobre la tierra. Y fue así."],[16,"E hizo Dios las dos grandes lumbreras; la lumbrera mayor para que señorease en el día, y la lumbrera menor para que señorease en la noche; hizo también las estrellas."],[17,"Y las puso Dios en la expansión de los cielos para alumbrar sobre la tierra,"],[18,"y para señorear en el día y en la noche, y para separar la luz de las tinieblas. Y vio Dios que era bueno."],[19,"Y fue la tarde y la mañana el día cuarto."],[20,"Dijo Dios: Produzcan las aguas seres vivientes, y aves que vuelen sobre la tierra, en la abierta expansión de los cielos."],[21,"Y creó Dios los grandes monstruos marinos, y todo ser viviente que se mueve, que las aguas produjeron según su género, y toda ave alada según su especie. Y vio Dios que era bueno."],[22,"Y Dios los bendijo, diciendo: Fructificad y multiplicaos, y llenad las aguas en los mares, y multiplíquense las aves en la tierra."],[23,"Y fue la tarde y la mañana el día quinto."],[24,"Luego dijo Dios: Produzca la tierra seres vivientes según su género, bestias y serpientes y animales de la tierra según su especie. Y fue así."],[25,"E hizo Dios animales de la tierra según su género, y ganado según su género, y todo animal que se arrastra sobre la tierra según su especie. Y vio Dios que era bueno."],[26,"Entonces dijo Dios: Hagamos al hombre a nuestra imagen, conforme a nuestra semejanza; y señoree en los peces del mar, en las aves de los cielos, en las bestias, en toda la tierra, y en todo animal que se arrastra sobre la tierra."],[27,"Y creó Dios al hombre a su imagen, a imagen de Dios lo creó; varón y hembra los creó."],[28,"Y los bendijo Dios, y les dijo: Fructificad y multiplicaos; llenad la tierra, y sojuzgadla, y señoread en los peces del mar, en las aves de los cielos, y en todas las bestias que se mueven sobre la tierra."],[29,"Y dijo Dios: He aquí que os he dado toda planta que da semilla, que está sobre toda la tierra, y todo árbol en que hay fruto y que da semilla; os serán para comer."],[30,"Y a toda bestia de la tierra, y a todas las aves de los cielos, y a todo lo que se arrastra sobre la tierra, en que hay vida, toda planta verde les será para comer. Y fue así."],[31,"Y vio Dios todo lo que había hecho, y he aquí que era bueno en gran manera. Y fue la tarde y la mañana el día sexto."]],
-2:[[1,"Fueron, pues, acabados los cielos y la tierra, y todo el ejército de ellos."],[2,"Y acabó Dios en el día séptimo la obra que hizo; y reposó el día séptimo de toda la obra que hizo."],[3,"Y bendijo Dios al día séptimo, y lo santificó, porque en él reposó de toda la obra que había hecho en la creación."],[4,"Estos son los orígenes de los cielos y de la tierra cuando fueron creados, el día que Jehová Dios hizo la tierra y los cielos,"],[7,"entonces Jehová Dios formó al hombre del polvo de la tierra, y sopló en su nariz aliento de vida, y fue el hombre un ser viviente."],[18,"Y dijo Jehová Dios: No es bueno que el hombre esté solo; le haré ayuda idónea para él."],[21,"Entonces Jehová Dios hizo caer sueño profundo sobre Adán, y mientras éste dormía, tomó una de sus costillas, y cerró la carne en su lugar."],[22,"Y de la costilla que Jehová Dios tomó del hombre, hizo una mujer, y la trajo al hombre."],[23,"Dijo entonces Adán: Esto es ahora hueso de mis huesos y carne de mi carne; ésta será llamada Varona, porque del varón fue tomada."],[24,"Por tanto, dejará el hombre a su padre y a su madre, y se unirá a su mujer, y serán una sola carne."]]
-};
-
-// ── MATEO 5 (Bienaventuranzas) ──
-BDATA[40]={5:[[1,"Viendo la multitud, subió al monte; y sentándose, vinieron a él sus discípulos."],[2,"Y abriendo su boca les enseñaba, diciendo:"],[3,"Bienaventurados los pobres en espíritu, porque de ellos es el reino de los cielos."],[4,"Bienaventurados los que lloran, porque ellos recibirán consolación."],[5,"Bienaventurados los mansos, porque ellos recibirán la tierra por heredad."],[6,"Bienaventurados los que tienen hambre y sed de justicia, porque ellos serán saciados."],[7,"Bienaventurados los misericordiosos, porque ellos alcanzarán misericordia."],[8,"Bienaventurados los de limpio corazón, porque ellos verán a Dios."],[9,"Bienaventurados los pacificadores, porque ellos serán llamados hijos de Dios."],[10,"Bienaventurados los que padecen persecución por causa de la justicia, porque de ellos es el reino de los cielos."],[43,"Oísteis que fue dicho: Amarás a tu prójimo, y aborrecerás a tu enemigo."],[44,"Pero yo os digo: Amad a vuestros enemigos, bendecid a los que os maldicen, haced bien a los que os aborrecen, y orad por los que os ultrajan y os persiguen;"],[45,"para que seáis hijos de vuestro Padre que está en los cielos, que hace salir su sol sobre malos y buenos, y que hace llover sobre justos e injustos."]]};
-
-// ── FILIPENSES 4 ──
-BDATA[50]={4:[[4,"Regocijaos en el Señor siempre. Otra vez digo: ¡Regocijaos!"],[5,"Vuestra gentileza sea conocida de todos los hombres. El Señor está cerca."],[6,"Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias."],[7,"Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús."],[8,"Por lo demás, hermanos, todo lo que es verdadero, todo lo honesto, todo lo justo, todo lo puro, todo lo amable, todo lo que es de buen nombre; si hay virtud alguna, si algo digno de alabanza, en esto pensad."],[11,"No lo digo porque desee dádiva, sino porque busco fruto que abunde en vuestra cuenta."],[13,"Todo lo puedo en Cristo que me fortalece."]],1:[[3,"Doy gracias a mi Dios siempre que me acuerdo de vosotros,"],[4,"siempre en todas mis oraciones rogando con gozo por todos vosotros,"],[6,"estando persuadido de esto, que el que comenzó en vosotros la buena obra, la perfeccionará hasta el día de Jesucristo;"]]};
-
-// ── PROVERBIOS 31 ──
-BDATA[20]={31:[[10,"Mujer virtuosa, ¿quién la hallará? Porque su estima sobrepasa largamente a la de las piedras preciosas."],[11,"El corazón de su marido está en ella confiado, y no carecerá de ganancias."],[12,"Le da ella bien y no mal todos los días de su vida."],[25,"Fuerza y honor son su vestidura; y se ríe de lo por venir."],[26,"Abre su boca con sabiduría, y la ley de clemencia está en su lengua."],[28,"Se levantan sus hijos y la llaman bienaventurada; y su marido también la alaba:"],[29,"Muchas mujeres hicieron el bien; mas tú sobrepasas a todas."],[30,"Engañosa es la gracia, y vana la hermosura; la mujer que teme a Jehová, ésa será alabada."]]};
-
-// Normalizar datos embebidos
-(()=>{
-  for(const bid in BDATA){
-    for(const ch in BDATA[bid]){
-      BDATA[bid][ch]=BDATA[bid][ch].map(v=>Array.isArray(v)?{v:v[0],t:v[1]}:v);
-    }
-  }
-})();
 </script>
 </body>
 </html>
