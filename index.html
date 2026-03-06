@@ -6,522 +6,457 @@
 <title>Diccionario · Edición Especial</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
 <style>
-/* ═══════════════════════════════════════════════
-   BASE
-═══════════════════════════════════════════════ */
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  /* Medium-dark: deep slate, not pitch black */
-  --bg:       #1a1b2e;
-  --bg2:      #22243a;
-  --bg3:      #2a2d48;
-  --panel:    #1e2038;
-  --panel2:   #272a44;
-  --card:     #252840;
-
-  --border:   rgba(160,150,220,.22);
-  --border2:  rgba(160,150,220,.35);
-
-  /* Text — warm white, never pure #fff */
-  --t1: #f0eeff;
-  --t2: #c8c4e8;
-  --t3: #8e89b0;
-  --t4: #5e5a7a;
-
-  /* Accent — violet/lavender */
-  --ac:  #a88ff0;
-  --ac2: #8468d8;
-  --acg: rgba(168,143,240,.15);
-
-  /* Rose red for egg */
-  --rr:  #e0607a;
-  --rr2: #f07090;
-  --rrg: rgba(224,96,122,.14);
+  --bg:#06071a;
+  --glass:rgba(10,12,36,.88);
+  --glass2:rgba(14,16,44,.94);
+  --border:rgba(160,145,255,.2);
+  --border2:rgba(160,145,255,.38);
+  --t1:#f4f2ff;
+  --t2:#ccc8f2;
+  --t3:#8880c0;
+  --t4:#524e80;
+  --ac:#b89cff;
+  --ac2:#9070f0;
+  --rr:#e86082;
+  --rr2:#ff7898;
 }
 html,body{width:100%;height:100%;overflow:hidden;
   background:var(--bg);font-family:'EB Garamond',Georgia,serif;color:var(--t1);}
 
 canvas#sky{position:fixed;inset:0;z-index:0;pointer-events:none;}
-
 .screen{position:fixed;inset:0;z-index:10;display:none;
   align-items:center;justify-content:center;}
 .screen.active{display:flex;}
 
-/* ═══════════════════════════════════════════════
-   PIN SCREEN
-═══════════════════════════════════════════════ */
+/* ══════════════ PIN ══════════════ */
 #pinScreen{
   flex-direction:column;align-items:center;
-  padding:2rem 1.5rem;overflow-y:auto;gap:.55rem;
+  padding:2.5rem 2rem;overflow-y:auto;gap:.8rem;
   transition:opacity 1.2s,transform 1.2s;
 }
-#pinScreen.out{opacity:0;transform:scale(1.03);pointer-events:none;}
+#pinScreen.out{opacity:0;transform:scale(1.04);pointer-events:none;}
 
 .pin-badge{
-  font-family:'EB Garamond',serif;font-style:italic;
-  color:var(--t3);font-size:.85rem;letter-spacing:.32em;
-  border:1px solid var(--border);padding:.3rem 1.2rem;border-radius:30px;
-  background:var(--acg);
-  opacity:0;animation:up .8s .2s both;margin-bottom:.3rem;
+  font-family:'Lora',serif;font-style:italic;
+  color:var(--t3);font-size:1rem;letter-spacing:.32em;
+  border:1px solid var(--border);padding:.38rem 1.5rem;border-radius:30px;
+  background:rgba(184,156,255,.07);
+  opacity:0;animation:up .8s .2s both;
 }
 .pin-head{
   font-family:'Playfair Display',serif;font-weight:400;font-style:italic;
-  color:var(--t1);font-size:clamp(1.15rem,2.8vw,1.58rem);
-  line-height:1.92;text-align:center;max-width:450px;
+  color:var(--t1);font-size:clamp(1.4rem,3.2vw,2rem);
+  line-height:1.9;text-align:center;max-width:540px;
   opacity:0;animation:up .9s .5s both;
 }
 .pin-head b{font-style:normal;font-weight:700;color:var(--ac);}
-.pin-head .shout{font-style:normal;font-weight:700;color:var(--rr2);}
+.pin-shout{font-style:normal!important;font-weight:700!important;color:var(--rr2)!important;font-size:1.08em;}
 
 .pin-card{
-  width:min(430px,100%);
-  background:var(--card);border:1px solid var(--border);border-radius:10px;
-  padding:1.45rem 1.6rem;position:relative;
-  opacity:0;animation:up .9s .9s both;margin-top:.2rem;
+  width:min(480px,100%);
+  background:var(--glass);
+  border:1px solid var(--border);border-radius:14px;
+  padding:1.8rem 2rem;position:relative;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  opacity:0;animation:up .9s .9s both;
 }
 .pin-card::before{
   content:'acertijo';
-  position:absolute;top:-.65rem;left:50%;transform:translateX(-50%);
-  background:var(--bg);padding:0 .75rem;
+  position:absolute;top:-.72rem;left:50%;transform:translateX(-50%);
+  background:var(--bg);padding:0 .9rem;
   font-family:'Lora',serif;font-style:italic;
-  font-size:.72rem;letter-spacing:.22em;color:var(--ac);
+  font-size:.82rem;letter-spacing:.22em;color:var(--ac);
 }
 .pin-verse{
   font-family:'Lora',serif;font-style:italic;
-  color:var(--t2);font-size:1.1rem;line-height:2.05;text-align:center;
+  color:var(--t2);font-size:clamp(1.15rem,2vw,1.38rem);
+  line-height:2.15;text-align:center;
 }
 .pin-verse .hl{color:var(--ac);font-weight:600;}
 
-.pin-div{width:90px;height:1px;
+.pin-div{width:110px;height:1px;
   background:linear-gradient(90deg,transparent,var(--border2),transparent);
   opacity:0;animation:up .7s 1.2s both;}
 .pin-lbl{font-family:'Lora',serif;font-style:italic;
-  color:var(--t3);font-size:.88rem;letter-spacing:.2em;
+  color:var(--t3);font-size:1rem;letter-spacing:.22em;
   opacity:0;animation:up .7s 1.3s both;}
 
-.dots{display:flex;gap:12px;opacity:0;animation:up .6s 1.5s both;}
-.dot{width:14px;height:14px;border-radius:50%;
-  border:1.5px solid rgba(168,143,240,.25);transition:all .22s;}
+.dots{display:flex;gap:15px;opacity:0;animation:up .6s 1.5s both;}
+.dot{width:17px;height:17px;border-radius:50%;
+  border:2px solid rgba(184,156,255,.25);transition:all .22s;}
 .dot.lit{background:var(--ac);border-color:var(--ac);
-  box-shadow:0 0 12px rgba(168,143,240,.55);transform:scale(1.2);}
+  box-shadow:0 0 15px rgba(184,156,255,.65);transform:scale(1.25);}
 
 .pad{display:grid;grid-template-columns:repeat(3,1fr);
-  gap:9px;width:228px;opacity:0;animation:up .6s 1.7s both;}
+  gap:11px;width:270px;opacity:0;animation:up .6s 1.7s both;}
 .pk{
-  aspect-ratio:1;background:rgba(168,143,240,.06);
+  aspect-ratio:1;background:rgba(184,156,255,.06);
   border:1px solid var(--border);color:var(--t2);
-  font-family:'Playfair Display',serif;font-size:1.35rem;
-  cursor:pointer;border-radius:6px;
+  font-family:'Playfair Display',serif;font-size:1.65rem;
+  cursor:pointer;border-radius:9px;
   display:flex;align-items:center;justify-content:center;
-  transition:all .12s;user-select:none;-webkit-tap-highlight-color:transparent;
+  transition:all .13s;user-select:none;-webkit-tap-highlight-color:transparent;
 }
-.pk:hover,.pk:active{background:rgba(168,143,240,.18);
-  border-color:var(--ac);color:var(--t1);transform:scale(1.08);}
-.pk.sm{font-size:.95rem;color:var(--t3);}
+.pk:hover,.pk:active{background:rgba(184,156,255,.2);
+  border-color:var(--ac);color:var(--t1);transform:scale(1.1);}
+.pk.sm{font-size:1.1rem;color:var(--t3);}
 .pk.ok{color:var(--ac);}
 .perr{font-family:'Lora',serif;font-style:italic;
-  color:rgba(224,96,122,.82);font-size:.95rem;
-  opacity:0;transition:opacity .3s;height:1.35rem;text-align:center;}
+  color:rgba(232,96,130,.88);font-size:1.05rem;
+  opacity:0;transition:opacity .3s;height:1.5rem;text-align:center;}
 .perr.on{opacity:1;}
 
-/* ═══════════════════════════════════════════════
-   COVER SCREEN
-═══════════════════════════════════════════════ */
-#coverScreen{flex-direction:column;align-items:center;gap:0;}
+/* ══════════════ COVER ══════════════ */
+#coverScreen{flex-direction:column;align-items:center;}
 .cov-g{
   font-family:'Playfair Display',serif;font-style:italic;
-  color:rgba(168,143,240,.55);font-size:clamp(1rem,2vw,1.28rem);
-  text-align:center;padding:0 2rem;margin-bottom:2.8rem;
+  color:rgba(184,156,255,.55);font-size:clamp(1.15rem,2.4vw,1.5rem);
+  text-align:center;padding:0 2rem;margin-bottom:3.2rem;
   animation:up .8s .2s both;
 }
 .bscene{cursor:pointer;
   animation:up .9s .4s both,bfl 4s 1.4s ease-in-out infinite;}
-@keyframes bfl{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+@keyframes bfl{0%,100%{transform:translateY(0);}50%{transform:translateY(-11px);}}
 .dbook{
-  width:clamp(200px,26vw,268px);height:clamp(270px,35vw,360px);
+  width:clamp(225px,29vw,310px);height:clamp(305px,39vw,415px);
   position:relative;transform-style:preserve-3d;
   transform:rotateY(-30deg) rotateX(5deg);
   transition:transform .55s cubic-bezier(.34,1.3,.64,1);
-  filter:drop-shadow(-18px 32px 52px rgba(0,0,0,.85));
+  filter:drop-shadow(-20px 36px 60px rgba(0,0,0,.92));
 }
-.bscene:hover .dbook{transform:rotateY(-18deg) rotateX(3deg) scale(1.04);}
+.bscene:hover .dbook{transform:rotateY(-18deg) rotateX(3deg) scale(1.045);}
 .dbook.shut{
   transform:rotateY(-210deg) scale(0)!important;
   opacity:0!important;
   transition:transform .95s cubic-bezier(.4,0,.2,1),opacity .7s!important;
 }
-.bk-hinge{position:absolute;left:0;top:0;bottom:0;width:18px;
-  background:linear-gradient(90deg,#0a0818,#1a1630,#0a0818);
+.bk-hinge{position:absolute;left:0;top:0;bottom:0;width:20px;
+  background:linear-gradient(90deg,#03020d,#120e28,#03020d);
   border-radius:3px 0 0 3px;z-index:2;}
-.bk-pages{position:absolute;top:4px;right:-7px;bottom:4px;width:11px;
-  background:repeating-linear-gradient(180deg,#2a2848,#18162e 1px,#2a2848 2px);
-  border-radius:0 3px 3px 0;box-shadow:3px 0 8px rgba(0,0,0,.55);}
-.bk-spine{position:absolute;top:0;left:-16px;bottom:0;width:17px;
-  background:linear-gradient(90deg,#060410,#14122a,#060410);
+.bk-pages{position:absolute;top:4px;right:-8px;bottom:4px;width:13px;
+  background:repeating-linear-gradient(180deg,#201c40,#100d28 1px,#201c40 2px);
+  border-radius:0 3px 3px 0;box-shadow:4px 0 9px rgba(0,0,0,.65);}
+.bk-spine{position:absolute;top:0;left:-18px;bottom:0;width:19px;
+  background:linear-gradient(90deg,#03020d,#100d28,#03020d);
   border-radius:3px 0 0 3px;
   display:flex;align-items:center;justify-content:center;}
 .bk-spine span{font-family:'Playfair Display',serif;font-weight:700;
-  color:rgba(168,143,240,.3);font-size:.3rem;letter-spacing:.3em;
+  color:rgba(184,156,255,.3);font-size:.3rem;letter-spacing:.3em;
   writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;}
 .bk-face{
   position:absolute;inset:0;
-  background:linear-gradient(148deg,#1e1c38 0%,#141230 38%,#201e3c 68%,#16143a 100%);
-  border-radius:3px 9px 9px 3px;
-  border:1px solid rgba(168,143,240,.24);
+  background:linear-gradient(148deg,#1c1a3a 0%,#0e0c2c 38%,#1e1c3e 68%,#14123c 100%);
+  border-radius:3px 10px 10px 3px;
+  border:1px solid rgba(184,156,255,.26);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:12px;padding:2rem 1.6rem;overflow:hidden;
+  gap:15px;padding:2.4rem 1.9rem;overflow:hidden;
 }
-.bk-face::before{content:'';position:absolute;inset:9px;
-  border:1px solid rgba(168,143,240,.1);border-radius:2px 7px 7px 2px;pointer-events:none;}
-.bk-dust{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
-.bst{position:absolute;background:#d0caff;border-radius:50%;
+.bk-face::before{content:'';position:absolute;inset:10px;
+  border:1px solid rgba(184,156,255,.1);border-radius:2px 8px 8px 2px;pointer-events:none;}
+.bkdust{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.bst{position:absolute;background:#d8d0ff;border-radius:50%;
   animation:twk ease-in-out infinite;}
 @keyframes twk{0%,100%{opacity:.05;}50%{opacity:.6;}}
 .bk-D{font-family:'Playfair Display',serif;font-weight:900;font-style:italic;
-  font-size:clamp(3.2rem,7vw,5rem);color:rgba(168,143,240,.85);line-height:1;
-  text-shadow:0 0 40px rgba(168,143,240,.3);}
-.bk-rule{width:55px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(168,143,240,.45),transparent);}
+  font-size:clamp(3.8rem,8.5vw,5.8rem);color:rgba(184,156,255,.88);line-height:1;
+  text-shadow:0 0 45px rgba(184,156,255,.38);}
+.bk-rule{width:62px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(184,156,255,.5),transparent);}
 .bk-title{font-family:'Playfair Display',serif;font-weight:700;
-  color:rgba(168,143,240,.6);font-size:.76rem;letter-spacing:.28em;
-  text-align:center;line-height:1.8;}
+  color:rgba(184,156,255,.62);font-size:.84rem;letter-spacing:.3em;
+  text-align:center;line-height:1.88;}
 .bk-sub{font-family:'Lora',serif;font-style:italic;
-  color:rgba(168,143,240,.28);font-size:.6rem;letter-spacing:.18em;}
+  color:rgba(184,156,255,.3);font-size:.65rem;letter-spacing:.2em;}
 .cov-tap{font-family:'Lora',serif;font-style:italic;
-  color:rgba(168,143,240,.4);font-size:1rem;
-  animation:up .8s 1.2s both,breath 3.5s 2s infinite;
-  margin-top:2rem;}
-@keyframes breath{0%,100%{opacity:.32;}50%{opacity:.75;}}
+  color:rgba(184,156,255,.44);font-size:1.15rem;
+  animation:up .8s 1.2s both,brth 3.5s 2s infinite;margin-top:2.4rem;}
+@keyframes brth{0%,100%{opacity:.32;}50%{opacity:.78;}}
 
-/* ═══════════════════════════════════════════════
-   DICT SCREEN — MEDIUM DARK, FULL PAGE
-═══════════════════════════════════════════════ */
-#dictScreen{flex-direction:column;overflow:hidden;background:var(--bg);}
+/* ══════════════ DICTIONARY ══════════════ */
+#dictScreen{flex-direction:column;overflow:hidden;}
 
-/* Header */
 .dh{
-  background:var(--panel);
+  background:var(--glass);
   border-bottom:1px solid var(--border);
-  padding:.8rem 1.6rem;flex-shrink:0;z-index:20;
-  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  padding:1rem 2rem;flex-shrink:0;z-index:20;
+  display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
 }
 .dh-brand{
   font-family:'Playfair Display',serif;font-weight:900;font-style:italic;
-  color:var(--t1);font-size:1.5rem;letter-spacing:.04em;white-space:nowrap;
+  color:var(--t1);font-size:1.8rem;letter-spacing:.04em;white-space:nowrap;
 }
 .dh-brand small{display:block;font-style:normal;font-weight:400;
   font-family:'EB Garamond',serif;
-  font-size:.58rem;letter-spacing:.28em;color:var(--t3);margin-top:.04rem;}
-.dh-sw{flex:1;min-width:180px;position:relative;}
+  font-size:.62rem;letter-spacing:.28em;color:var(--t3);margin-top:.04rem;}
+.dh-sw{flex:1;min-width:200px;position:relative;}
 .dh-in{
-  width:100%;background:rgba(168,143,240,.07);
-  border:1px solid var(--border);border-radius:5px;
+  width:100%;background:rgba(184,156,255,.07);
+  border:1px solid var(--border);border-radius:7px;
   color:var(--t1);font-family:'EB Garamond',serif;
-  font-size:1.15rem;font-style:italic;
-  padding:.52rem 1rem .52rem 2.5rem;
+  font-size:1.3rem;font-style:italic;
+  padding:.6rem 1.1rem .6rem 2.8rem;
   outline:none;transition:all .2s;
 }
 .dh-in::placeholder{color:var(--t4);}
-.dh-in:focus{border-color:var(--ac2);background:rgba(168,143,240,.11);}
-.dh-ico{position:absolute;left:.78rem;top:50%;transform:translateY(-50%);
-  color:var(--t4);font-size:.95rem;pointer-events:none;}
+.dh-in:focus{border-color:var(--ac2);background:rgba(184,156,255,.13);}
+.dh-ico{position:absolute;left:.84rem;top:50%;transform:translateY(-50%);
+  color:var(--t4);font-size:1.05rem;pointer-events:none;}
 .dh-back{background:none;border:1px solid var(--border);
   color:var(--t3);font-family:'EB Garamond',serif;
-  font-size:.82rem;letter-spacing:.16em;padding:.4rem .85rem;
-  cursor:pointer;transition:all .2s;border-radius:4px;white-space:nowrap;}
+  font-size:.95rem;letter-spacing:.16em;padding:.48rem 1rem;
+  cursor:pointer;transition:all .2s;border-radius:5px;white-space:nowrap;}
 .dh-back:hover{border-color:var(--ac);color:var(--t1);}
 
-/* Body */
 .dbody{display:flex;flex:1;overflow:hidden;}
 
-/* ── Sidebar ── */
+/* sidebar */
 .dside{
-  width:230px;min-width:215px;flex-shrink:0;
-  background:var(--panel2);
+  width:258px;min-width:240px;flex-shrink:0;
+  background:var(--glass2);
   border-right:1px solid var(--border);
   display:flex;flex-direction:column;overflow-y:auto;
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
 }
 .dside::-webkit-scrollbar{width:3px;}
 .dside::-webkit-scrollbar-thumb{background:var(--border2);}
 
-.ds-blk{padding:1.15rem 1.1rem;border-bottom:1px solid var(--border);}
+.ds-blk{padding:1.4rem 1.25rem;border-bottom:1px solid var(--border);}
 .ds-tag{font-family:'Lora',serif;font-style:italic;
-  font-size:.68rem;letter-spacing:.24em;color:var(--ac);
-  opacity:.75;text-transform:uppercase;margin-bottom:.6rem;}
+  font-size:.75rem;letter-spacing:.25em;color:var(--ac);
+  opacity:.78;text-transform:uppercase;margin-bottom:.7rem;}
 .ds-poem{
-  background:rgba(168,143,240,.07);border:1px solid rgba(168,143,240,.16);
-  border-radius:6px;padding:1rem 1.05rem;position:relative;
+  background:rgba(184,156,255,.07);border:1px solid rgba(184,156,255,.16);
+  border-radius:8px;padding:1.1rem 1.15rem;position:relative;
   font-family:'Lora',serif;font-style:italic;
-  color:var(--t2);font-size:1.02rem;line-height:2.05;
+  color:var(--t2);font-size:1.1rem;line-height:2.1;
 }
-.ds-poem::before{content:'❝';position:absolute;top:-.55rem;left:.6rem;
-  background:var(--panel2);color:var(--ac);font-size:1.2rem;padding:0 .22rem;}
+.ds-poem::before{content:'❝';position:absolute;top:-.6rem;left:.7rem;
+  background:var(--glass2);color:var(--ac);font-size:1.3rem;padding:0 .2rem;}
 .ds-hint{
-  margin-top:.8rem;
-  background:rgba(224,96,122,.07);border:1px dashed rgba(224,96,122,.22);
-  border-radius:5px;padding:.7rem .85rem;
+  margin-top:.9rem;
+  background:rgba(232,96,130,.07);border:1px dashed rgba(232,96,130,.26);
+  border-radius:6px;padding:.8rem .95rem;
   font-family:'EB Garamond',serif;font-style:italic;
-  color:var(--t2);font-size:.97rem;line-height:1.7;text-align:center;
+  color:var(--t2);font-size:1.05rem;line-height:1.78;text-align:center;
 }
-.ds-hint b{color:var(--rr);font-style:normal;font-size:1.05em;}
+.ds-hint b{color:var(--rr);font-style:normal;font-size:1.1em;}
 
-/* alpha */
-.ds-alpha{padding:.8rem .9rem .9rem 1.1rem;
-  display:flex;flex-direction:column;gap:3px;}
+.ds-alpha{padding:.95rem 1.05rem;display:flex;flex-direction:column;gap:4px;}
 .alb{
   background:none;border:none;
   font-family:'Playfair Display',serif;
-  font-size:.85rem;color:var(--t3);
-  cursor:pointer;padding:.24rem .5rem;border-radius:4px;
+  font-size:.95rem;color:var(--t3);
+  cursor:pointer;padding:.28rem .55rem;border-radius:5px;
   text-align:left;transition:all .12s;
   overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
 }
-.alb:hover{background:rgba(168,143,240,.1);color:var(--t1);}
-.alb.on{background:rgba(168,143,240,.18);color:var(--ac);}
+.alb:hover{background:rgba(184,156,255,.1);color:var(--t1);}
+.alb.on{background:rgba(184,156,255,.18);color:var(--ac);}
 .alb.egg{color:var(--rr)!important;font-weight:700;}
 
-/* ── Content ── */
+/* content */
 .dcnt{flex:1;overflow-y:auto;}
 .dcnt::-webkit-scrollbar{width:6px;}
-.dcnt::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:3px;}
-.dcnt::-webkit-scrollbar-track{background:transparent;}
+.dcnt::-webkit-scrollbar-thumb{background:rgba(184,156,255,.2);border-radius:3px;}
 .din{min-height:100%;padding-bottom:6rem;}
 
-/* Letter header — full width sticky */
+/* letter bar */
 .lh{
   position:sticky;top:0;z-index:5;
-  background:rgba(26,27,46,.95);
+  background:rgba(6,7,26,.93);
   border-bottom:1px solid var(--border);
-  padding:.6rem 2.8rem;
-  display:flex;align-items:baseline;gap:1.1rem;
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  padding:.75rem 3.2rem;
+  display:flex;align-items:baseline;gap:1.3rem;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
 }
 .lh-big{font-family:'Playfair Display',serif;font-weight:900;
-  color:var(--ac);font-size:2.5rem;opacity:.2;line-height:1;}
+  color:var(--ac);font-size:3rem;opacity:.2;line-height:1;}
 .lh-lbl{font-family:'Lora',serif;font-style:italic;
-  color:var(--t3);font-size:.84rem;letter-spacing:.22em;}
+  color:var(--t3);font-size:.95rem;letter-spacing:.22em;}
 
-/* ── Entry — big readable text ── */
+/* entries — BIG text */
 .entry{
-  padding:1.6rem 2.8rem 1.5rem;
-  border-bottom:1px solid rgba(160,150,220,.1);
-  transition:background .14s;
+  padding:2rem 3.2rem 1.9rem;
+  border-bottom:1px solid rgba(160,145,255,.09);
+  transition:background .13s;
 }
-.entry:hover{background:rgba(168,143,240,.04);}
+.entry:hover{background:rgba(184,156,255,.04);}
 .entry.egg{
-  background:var(--rrg);
-  border-left:3px solid var(--rr);
-  padding-left:calc(2.8rem - 3px);
+  background:rgba(232,96,130,.05);
+  border-left:4px solid var(--rr);
+  padding-left:calc(3.2rem - 4px);
 }
-.entry.egg:hover{background:rgba(224,96,122,.09);}
+.entry.egg:hover{background:rgba(232,96,130,.09);}
 
-.erow{display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap;margin-bottom:.45rem;}
-
-/* Word — big and bold */
+.erow{display:flex;align-items:baseline;gap:.9rem;flex-wrap:wrap;margin-bottom:.6rem;}
 .ew{
   font-family:'Playfair Display',serif;font-weight:700;
-  color:var(--t1);font-size:clamp(1.7rem,2.4vw,2.1rem);line-height:1.15;
+  color:var(--t1);font-size:clamp(2rem,3vw,2.7rem);line-height:1.1;
 }
 .ew.red{color:var(--rr);}
+.epron{font-family:'EB Garamond',serif;font-style:italic;
+  color:var(--t3);font-size:1.3rem;}
+.epos{font-family:'Lora',serif;font-style:italic;
+  color:var(--ac);font-size:1.05rem;opacity:.85;}
+.esep{color:rgba(184,156,255,.35);font-size:1.05rem;}
 
-/* Pronunciation — visible and clear */
-.epron{
-  font-family:'EB Garamond',serif;font-style:italic;
-  color:var(--t3);font-size:1.15rem;
-}
-/* Part of speech */
-.epos{
-  font-family:'Lora',serif;font-style:italic;
-  color:var(--ac);font-size:.95rem;opacity:.8;
-}
-.esep{color:var(--border2);font-size:.95rem;}
-
-/* Definition — large and readable */
 .edef{
   font-family:'EB Garamond',serif;
   color:var(--t2);
-  font-size:clamp(1.22rem,1.7vw,1.42rem);
-  line-height:1.82;margin-bottom:.28rem;
+  font-size:clamp(1.35rem,1.9vw,1.6rem);
+  line-height:1.88;margin-bottom:.32rem;
 }
-.enum{
-  font-family:'Lora',serif;font-weight:600;
-  color:var(--t4);font-size:.82rem;margin-right:.4rem;
-}
+.enum{font-family:'Lora',serif;font-weight:600;
+  color:var(--t4);font-size:.9rem;margin-right:.45rem;}
 
-/* Etymology — clearly readable */
 .eetym{
   font-family:'Lora',serif;font-style:italic;
-  color:var(--t3);font-size:.98rem;
-  margin-top:.5rem;padding-top:.5rem;
-  border-top:1px dashed rgba(160,150,220,.15);
-  line-height:1.6;
+  color:var(--t3);font-size:1.05rem;
+  margin-top:.58rem;padding-top:.58rem;
+  border-top:1px dashed rgba(160,145,255,.14);
+  line-height:1.68;
 }
 .eetym b{font-style:normal;color:var(--t2);}
 
-/* Example quote */
 .eex{
   font-family:'EB Garamond',serif;font-style:italic;
-  color:var(--t3);font-size:1.12rem;
-  margin-top:.38rem;padding-left:1rem;
-  border-left:2px solid rgba(168,143,240,.22);
-  line-height:1.7;
+  color:var(--t3);font-size:1.2rem;
+  margin-top:.45rem;padding-left:1.15rem;
+  border-left:2px solid rgba(184,156,255,.22);
+  line-height:1.78;
 }
 
-/* ── Egg box ── */
+/* egg */
 .egg-box{
-  margin-top:1.1rem;
-  background:rgba(224,96,122,.08);
-  border:1px solid rgba(224,96,122,.25);border-radius:7px;
-  padding:1.1rem 1.3rem;position:relative;overflow:hidden;
+  margin-top:1.3rem;
+  background:rgba(232,96,130,.08);
+  border:1px solid rgba(232,96,130,.26);border-radius:9px;
+  padding:1.3rem 1.5rem;position:relative;overflow:hidden;
 }
 .egg-box::after{content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 50% -10%,rgba(224,96,122,.12) 0%,transparent 60%);
+  background:radial-gradient(ellipse at 50% -10%,rgba(232,96,130,.13) 0%,transparent 62%);
   pointer-events:none;}
 .egg-tag{font-family:'Lora',serif;font-style:italic;
-  color:var(--rr);font-size:.78rem;letter-spacing:.24em;
-  text-transform:uppercase;opacity:.75;margin-bottom:.5rem;}
+  color:var(--rr);font-size:.86rem;letter-spacing:.26em;
+  text-transform:uppercase;opacity:.78;margin-bottom:.6rem;}
 .egg-main{
   font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
-  color:var(--rr2);font-size:clamp(1.35rem,2vw,1.6rem);line-height:1.45;
+  color:var(--rr2);font-size:clamp(1.5rem,2.3vw,1.85rem);line-height:1.45;
 }
 .egg-s{font-family:'EB Garamond',serif;font-style:italic;
-  color:rgba(224,96,122,.65);font-size:1.05rem;margin-top:.35rem;}
+  color:rgba(232,96,130,.68);font-size:1.15rem;margin-top:.4rem;}
 .egg-btn{
-  display:inline-flex;align-items:center;gap:.4rem;
-  margin-top:.85rem;
-  background:rgba(224,96,122,.12);border:1px solid rgba(224,96,122,.3);
-  border-radius:4px;color:var(--rr);
-  font-family:'Lora',serif;font-style:italic;font-size:.95rem;
-  padding:.4rem .9rem;cursor:pointer;transition:all .18s;
+  display:inline-flex;align-items:center;gap:.44rem;
+  margin-top:.95rem;
+  background:rgba(232,96,130,.12);border:1px solid rgba(232,96,130,.32);
+  border-radius:6px;color:var(--rr);
+  font-family:'Lora',serif;font-style:italic;font-size:1.05rem;
+  padding:.46rem 1.05rem;cursor:pointer;transition:all .18s;
 }
-.egg-btn:hover{background:rgba(224,96,122,.24);border-color:var(--rr);}
+.egg-btn:hover{background:rgba(232,96,130,.26);border-color:var(--rr);}
 
-/* Search */
-.sres{padding:1.8rem 2.8rem;}
+.sres{padding:2.2rem 3.2rem;}
 .sres-h{font-family:'Lora',serif;font-style:italic;color:var(--t3);
-  font-size:1.02rem;margin-bottom:1.1rem;padding-bottom:.72rem;
+  font-size:1.1rem;margin-bottom:1.3rem;padding-bottom:.8rem;
   border-bottom:1px solid var(--border);}
 .sres-h b{font-style:normal;color:var(--t1);}
 .nores{text-align:center;padding:5rem 2rem;
   font-family:'Playfair Display',serif;font-style:italic;
-  color:var(--t4);font-size:1.35rem;}
+  color:var(--t4);font-size:1.5rem;}
 
-/* ═══════════════════════════════════════════════
-   CELEBRATION OVERLAY — full CSS animation
-═══════════════════════════════════════════════ */
+/* ══════════════ CELEBRATE ══════════════ */
 #cel{
   position:fixed;inset:0;z-index:9000;
   display:none;align-items:center;justify-content:center;
-  flex-direction:column;gap:1.5rem;cursor:pointer;
-  background:rgba(16,14,32,.88);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  flex-direction:column;gap:1.6rem;cursor:pointer;
+  background:rgba(4,4,18,.9);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
 }
 #cel.on{display:flex;}
 
-/* The celebration card */
 .cel-card{
-  width:min(380px,88vw);
-  background:linear-gradient(145deg,#2a1e3a,#1e1630,#2e1a2e);
-  border:1px solid rgba(224,96,122,.35);border-radius:18px;
-  padding:2.5rem 2rem;
-  display:flex;flex-direction:column;align-items:center;gap:1rem;
+  width:min(420px,90vw);
+  background:linear-gradient(150deg,#1e1432,#160e2a,#240e28);
+  border:1px solid rgba(232,96,130,.4);border-radius:22px;
+  overflow:hidden;position:relative;
+  animation:cpop .55s cubic-bezier(.34,1.4,.64,1) both;
+  box-shadow:0 0 70px rgba(232,96,130,.32),0 0 140px rgba(232,96,130,.1);
+}
+/* tenor embed wrapper */
+.cel-tenor{
+  width:100%;
+  /* maintain 0.561224 aspect ratio from Tenor */
+  aspect-ratio:1/0.5612;
   position:relative;overflow:hidden;
-  animation:celPop .55s cubic-bezier(.34,1.4,.64,1) both;
-  box-shadow:0 0 60px rgba(224,96,122,.3),0 0 120px rgba(224,96,122,.1);
+  background:#1a0820;
 }
-/* Animated shimmer stripe */
-.cel-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(115deg,
-    transparent 30%,
-    rgba(224,96,122,.07) 50%,
-    transparent 70%);
-  animation:shim 2.5s ease-in-out infinite;
+.cel-tenor .tenor-gif-embed{
+  position:absolute;inset:0;
+  width:100%!important;height:100%!important;
 }
-@keyframes shim{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
-
-/* Heart burst rings */
-.cel-rings{
-  position:relative;width:130px;height:130px;
+/* fallback shown if tenor doesn't load */
+.cel-fallback{
+  position:absolute;inset:0;
   display:flex;align-items:center;justify-content:center;
-}
-.ring{
-  position:absolute;border-radius:50%;
-  border:2px solid rgba(224,96,122,.4);
-  animation:ringPulse 2s ease-out infinite;
-}
-.ring:nth-child(1){width:60px;height:60px;animation-delay:0s;}
-.ring:nth-child(2){width:90px;height:90px;animation-delay:.4s;
-  border-color:rgba(168,143,240,.35);}
-.ring:nth-child(3){width:120px;height:120px;animation-delay:.8s;
-  border-color:rgba(224,96,122,.2);}
-@keyframes ringPulse{
-  0%{transform:scale(0);opacity:1;}
-  100%{transform:scale(1.5);opacity:0;}
-}
-.cel-heart{
-  font-size:3.5rem;
+  font-size:5.5rem;
   animation:hbeat 1.2s ease-in-out infinite;
-  z-index:1;filter:drop-shadow(0 0 18px rgba(224,96,122,.7));
+  z-index:1;
 }
 @keyframes hbeat{0%,100%{transform:scale(1);}50%{transform:scale(1.18);}}
 
+.cel-body{padding:1.6rem 2rem 1.8rem;text-align:center;}
 .cel-msg{
   font-family:'Playfair Display',serif;font-style:italic;font-weight:700;
-  color:var(--rr2);font-size:clamp(1.4rem,3.5vw,2rem);
-  text-align:center;
-  text-shadow:0 0 25px rgba(224,96,122,.5);
-  animation:up .5s .15s both;
+  color:var(--rr2);font-size:clamp(1.45rem,3.2vw,2rem);
+  text-shadow:0 0 24px rgba(232,96,130,.55);margin-bottom:.45rem;
 }
-.cel-sub{
-  font-family:'Lora',serif;font-style:italic;
-  color:rgba(224,96,122,.65);font-size:1.05rem;
-  animation:up .5s .25s both;
-}
+.cel-sub{font-family:'Lora',serif;font-style:italic;
+  color:rgba(232,96,130,.68);font-size:1.1rem;}
 .cel-close{font-family:'Lora',serif;font-style:italic;
-  color:rgba(255,255,255,.3);font-size:.85rem;
-  animation:up .5s .35s both;}
+  color:rgba(255,255,255,.32);font-size:.92rem;
+  animation:up .5s .3s both;}
 
-@keyframes celPop{from{opacity:0;transform:scale(.82) translateY(20px);}to{opacity:1;transform:none;}}
+@keyframes cpop{from{opacity:0;transform:scale(.8) translateY(28px);}to{opacity:1;transform:none;}}
 
 /* hearts rain */
 #hbl{position:fixed;inset:0;pointer-events:none;z-index:8999;overflow:hidden;display:none;}
 .hp{position:absolute;animation:hpop 2.2s ease-out forwards;opacity:0;}
 @keyframes hpop{
   0%{transform:translate(-50%,-50%) scale(0) rotate(var(--r));opacity:0;}
-  15%{opacity:1;transform:translate(-50%,-50%) scale(1.5) rotate(var(--r));}
-  100%{transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(.1) rotate(var(--r));opacity:0;}
+  15%{opacity:1;transform:translate(-50%,-50%) scale(1.6) rotate(var(--r));}
+  100%{transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(.08) rotate(var(--r));opacity:0;}
 }
 
-/* Animations */
-@keyframes up{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
-@keyframes shake{0%,100%{transform:none;}25%{transform:translateX(-9px);}75%{transform:translateX(9px);}}
+@keyframes up{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+@keyframes shake{0%,100%{transform:none;}25%{transform:translateX(-10px);}75%{transform:translateX(10px);}}
 
-/* ═══════ RESPONSIVE ═══════ */
-@media(max-width:700px){
+/* responsive */
+@media(max-width:720px){
   .dside{display:none;}
-  .entry,.lh,.sres{padding-left:1.2rem;padding-right:1.2rem;}
-  .entry.egg{padding-left:calc(1.2rem - 3px);}
-  .ew{font-size:1.5rem;}.edef{font-size:1.16rem;}
-  .dh{padding:.65rem 1rem;}
-  .dh-brand{font-size:1.25rem;}
+  .entry,.lh,.sres{padding-left:1.4rem;padding-right:1.4rem;}
+  .entry.egg{padding-left:calc(1.4rem - 4px);}
+  .ew{font-size:1.7rem;}.edef{font-size:1.22rem;}
+  .dh{padding:.75rem 1.1rem;}.dh-brand{font-size:1.45rem;}
 }
-@media(min-width:701px) and (max-width:960px){
-  .dside{width:200px;}
-  .entry,.lh,.sres{padding-left:1.8rem;padding-right:1.8rem;}
+@media(min-width:721px) and (max-width:1050px){
+  .dside{width:218px;}
+  .entry,.lh,.sres{padding-left:2.1rem;padding-right:2.1rem;}
 }
 </style>
 </head>
 <body>
 <canvas id="sky"></canvas>
 
-<!-- ════════ PIN ════════ -->
+<!-- PIN -->
 <div class="screen active" id="pinScreen">
   <p class="pin-badge">✦ &nbsp; edición especial &nbsp; ✦</p>
   <p class="pin-head">
     Si llegaste hasta aquí es porque<br/>
     <b>casi logras descifrar el acertijo,</b><br/>
-    <span class="shout">¡tú puedes, amor!</span>
+    <span class="pin-shout">¡tú puedes, amor!</span>
   </p>
   <div class="pin-card">
     <p class="pin-verse">
@@ -534,8 +469,10 @@ canvas#sky{position:fixed;inset:0;z-index:0;pointer-events:none;}
   <div class="pin-div"></div>
   <p class="pin-lbl">tu clave secreta</p>
   <div class="dots" id="dotsEl">
-    <div class="dot" id="d0"></div><div class="dot" id="d1"></div>
-    <div class="dot" id="d2"></div><div class="dot" id="d3"></div>
+    <div class="dot" id="d0"></div>
+    <div class="dot" id="d1"></div>
+    <div class="dot" id="d2"></div>
+    <div class="dot" id="d3"></div>
   </div>
   <div class="pad">
     <button class="pk" onclick="kp('1')">1</button>
@@ -554,7 +491,7 @@ canvas#sky{position:fixed;inset:0;z-index:0;pointer-events:none;}
   <p class="perr" id="perr">Código incorrecto, inténtalo de nuevo</p>
 </div>
 
-<!-- ════════ COVER ════════ -->
+<!-- COVER -->
 <div class="screen" id="coverScreen">
   <p class="cov-g">Lo lograste — abre lo que guarda estas páginas ✦</p>
   <div class="bscene" id="bscene" onclick="openDict()">
@@ -563,7 +500,7 @@ canvas#sky{position:fixed;inset:0;z-index:0;pointer-events:none;}
       <div class="bk-pages"></div>
       <div class="bk-face">
         <div class="bk-hinge"></div>
-        <div class="bk-dust" id="bkDust"></div>
+        <div class="bkdust" id="bkDust"></div>
         <div class="bk-D">D</div>
         <div class="bk-rule"></div>
         <div class="bk-title">DICCIONARIO<br/>DE LA LENGUA<br/>ESPAÑOLA</div>
@@ -575,7 +512,7 @@ canvas#sky{position:fixed;inset:0;z-index:0;pointer-events:none;}
   <p class="cov-tap">Toca para abrir ✦</p>
 </div>
 
-<!-- ════════ DICTIONARY ════════ -->
+<!-- DICTIONARY -->
 <div class="screen" id="dictScreen">
   <header class="dh">
     <div class="dh-brand">Diccionario<small>de la lengua española</small></div>
@@ -587,8 +524,6 @@ canvas#sky{position:fixed;inset:0;z-index:0;pointer-events:none;}
     <button class="dh-back" onclick="goBack()">← Cerrar</button>
   </header>
   <div class="dbody">
-
-    <!-- sidebar -->
     <nav class="dside">
       <div class="ds-blk">
         <div class="ds-tag">pista secreta</div>
@@ -609,368 +544,329 @@ canvas#sky{position:fixed;inset:0;z-index:0;pointer-events:none;}
         <div class="ds-alpha" id="alphaEl"></div>
       </div>
     </nav>
-
-    <!-- main content -->
     <div class="dcnt" id="dcnt">
       <div class="din" id="din"></div>
     </div>
   </div>
 </div>
 
-<!-- ════════ CELEBRATE ════════ -->
+<!-- CELEBRATE — Tenor GIF embed + fallback -->
 <div id="cel" onclick="closeCel()">
   <div class="cel-card" onclick="event.stopPropagation()">
-    <div class="cel-rings">
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <span class="cel-heart">💕</span>
+    <div class="cel-tenor" id="celTenor">
+      <!-- Tenor official embed — postid 3398162314833221578 -->
+      <div class="tenor-gif-embed"
+        data-postid="3398162314833221578"
+        data-share-method="host"
+        data-aspect-ratio="0.561224"
+        data-width="100%">
+        <a href="https://tenor.com/view/hai-gif-3398162314833221578">Hai GIF</a>
+      </div>
+      <!-- Emoji fallback shown until script loads -->
+      <div class="cel-fallback" id="celFallback">💕</div>
     </div>
-    <div class="cel-msg">Felices 10 meses, mi amor</div>
-    <div class="cel-sub">— y los que siguen, contigo ✦</div>
+    <div class="cel-body">
+      <div class="cel-msg">Felices 10 meses, mi amor</div>
+      <div class="cel-sub">— y los que siguen, contigo ✦</div>
+    </div>
   </div>
   <p class="cel-close">toca fuera para cerrar</p>
 </div>
 <div id="hbl"></div>
 
-<script>
-/* ═══ CONSTELLATION WORD RAIN — performance-first ═══
-   45 static stars + precomputed edges + 32 word particles
-   Particles update every 2 RAF frames
-═════════════════════════════════════════════════════ */
-(()=>{
-  const cv=document.getElementById('sky'),ctx=cv.getContext('2d');
-  let W=0,H=0;
-  const rsz=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight;};
-  rsz();window.addEventListener('resize',rsz,{passive:true});
+<!-- Tenor embed script — loaded lazily when celebrate fires -->
+<script id="tenorScript" data-src="https://tenor.com/embed.js" type="text/plain"></script>
 
-  /* stars */
-  const S=Array.from({length:48},()=>({
-    x:Math.random(),y:Math.random(),
-    r:.5+Math.random()*1.2,
-    a:.04+Math.random()*.28,
-    ph:Math.random()*Math.PI*2,
-    sp:.004+Math.random()*.007
+<script>
+/* ══════════════════════════════════════════════
+   STAR FIELD — pure stars, zero word particles
+   Perf strategy:
+   • 200 static stars drawn once into offscreen canvas → blitted cheaply
+   • Constellation lines also drawn to offscreen canvas (static)
+   • 50 twinklers: simple alpha oscillation, one arc() call each
+   • Shooting stars: 1 at a time, spawned every ~5s
+   • Everything on a single RAF. No DOM mutations during loop.
+══════════════════════════════════════════════ */
+(()=>{
+  const cv = document.getElementById('sky');
+  const ctx = cv.getContext('2d');
+  let W = 0, H = 0;
+  const oc = document.createElement('canvas'); // offscreen
+  const ox = oc.getContext('2d');
+
+  // 200 static stars (position as fraction so they scale on resize)
+  const BASE = Array.from({length:200}, () => ({
+    fx: Math.random(), fy: Math.random(),
+    r:  Math.random() * 1.4 + 0.15,
+    a:  Math.random() * 0.55 + 0.06
   }));
-  /* edges */
-  const E=[];
-  for(let i=0;i<S.length;i++)
-    for(let j=i+1;j<S.length;j++){
-      const dx=S[i].x-S[j].x,dy=S[i].y-S[j].y;
-      if(dx*dx+dy*dy<.01)E.push([i,j]);
+
+  // Constellation edges (pre-computed, distance threshold)
+  const EDGES = [];
+  for (let i = 0; i < BASE.length; i++)
+    for (let j = i + 1; j < BASE.length; j++) {
+      const dx = BASE[i].fx - BASE[j].fx, dy = BASE[i].fy - BASE[j].fy;
+      if (dx*dx + dy*dy < 0.006) EDGES.push([i, j]);
     }
-  /* word particles */
-  const V=['amor','alma','luz','fe','paz','ser','dar','soñar','sentir',
-    'latir','vivir','crecer','fluir','querer','creer','brillar','elegir','reír'];
-  class P{
-    r(){
-      this.x=Math.random()*W;this.y=H+12;
-      this.w=V[0|Math.random()*V.length];
-      this.v=.14+Math.random()*.18;
-      this.a=0;this.ma=.08+Math.random()*.13;
-      this.sz=9+Math.random()*8;
-      this.dx=(Math.random()-.5)*.1;
-      this.ph=Math.random()*Math.PI*2;
-      this.life=0;this.ml=H*1.5+Math.random()*H*.3;
-    }
-    constructor(){this.r();this.y=Math.random()*H;this.life=Math.random()*this.ml*.7;}
-    tick(){
-      this.y-=this.v;this.x+=this.dx+Math.sin(this.life*.007+this.ph)*.12;
-      this.life+=this.v;
-      const p=this.life/this.ml;
-      this.a=p<.12?p/.12*this.ma:p>.82?(1-p)/.18*this.ma:this.ma;
-      if(this.life>this.ml)this.r();
-    }
-    draw(){
-      ctx.globalAlpha=this.a;
-      ctx.font=`${this.sz}px 'EB Garamond',serif`;
-      ctx.fillStyle='#b8b0f8';
-      ctx.fillText(this.w,this.x,this.y);
-    }
+
+  function buildStatic() {
+    oc.width = W; oc.height = H;
+    // lines first
+    ox.lineWidth = 0.28;
+    EDGES.forEach(([a,b]) => {
+      const sa = BASE[a], sb = BASE[b];
+      const op = Math.min(sa.a, sb.a) * 0.28;
+      ox.strokeStyle = `rgba(175,160,255,${op})`;
+      ox.beginPath();
+      ox.moveTo(sa.fx*W, sa.fy*H);
+      ox.lineTo(sb.fx*W, sb.fy*H);
+      ox.stroke();
+    });
+    // static stars
+    BASE.forEach(s => {
+      ox.beginPath();
+      ox.arc(s.fx*W, s.fy*H, s.r, 0, Math.PI*2);
+      ox.fillStyle = `rgba(220,215,255,${s.a})`;
+      ox.fill();
+    });
   }
-  const PS=Array.from({length:32},()=>new P());
-  let tk=0;
-  const loop=()=>{
-    ctx.clearRect(0,0,W,H);
-    /* edges */
-    E.forEach(([a,b])=>{
-      ctx.strokeStyle=`rgba(148,128,220,${Math.min(S[a].a,S[b].a)*.35})`;
-      ctx.lineWidth=.32;ctx.beginPath();
-      ctx.moveTo(S[a].x*W,S[a].y*H);ctx.lineTo(S[b].x*W,S[b].y*H);ctx.stroke();
-    });
-    /* stars */
-    S.forEach(s=>{
-      s.ph+=s.sp;
-      const a=s.a*(.65+.35*Math.sin(s.ph));
-      ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(208,200,255,${a})`;ctx.fill();
-    });
-    /* words */
-    tk++;
-    if(tk%2===0)PS.forEach(p=>p.tick());
-    ctx.save();PS.forEach(p=>p.draw());ctx.restore();
-    ctx.globalAlpha=1;
+
+  // 50 twinkling stars (separate, more visible)
+  const TW = Array.from({length:50}, () => ({
+    fx: Math.random(), fy: Math.random(),
+    r: 0.5 + Math.random() * 2.2,
+    ta: 0.25 + Math.random() * 0.65,
+    ph: Math.random() * Math.PI * 2,
+    sp: 0.015 + Math.random() * 0.028
+  }));
+
+  // Shooting star state (one at a time)
+  let shoot = null;
+  let shootCd = 180 + Math.random()*120;
+
+  function spawnShoot() {
+    const fromLeft = Math.random() < 0.5;
+    shoot = {
+      x: fromLeft ? -50 : W + 50,
+      y: Math.random() * H * 0.5,
+      vx: fromLeft ? 4 + Math.random()*4 : -(4 + Math.random()*4),
+      vy: 1.5 + Math.random()*2,
+      life: 0, maxLife: 50 + Math.random()*30,
+      len: 70 + Math.random()*80
+    };
+  }
+
+  function resize() {
+    W = cv.width = innerWidth;
+    H = cv.height = innerHeight;
+    buildStatic();
+  }
+  resize();
+  window.addEventListener('resize', resize, {passive:true});
+
+  let hidden = false;
+  document.addEventListener('visibilitychange', () => { hidden = document.hidden; });
+
+  function loop() {
+    if (!hidden) {
+      ctx.clearRect(0, 0, W, H);
+      ctx.drawImage(oc, 0, 0); // blit static (nearly free)
+
+      // Twinklers
+      TW.forEach(s => {
+        s.ph += s.sp;
+        const a = s.ta * (0.35 + 0.65 * Math.abs(Math.sin(s.ph)));
+        ctx.beginPath();
+        ctx.arc(s.fx*W, s.fy*H, s.r, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(245,240,255,${a})`;
+        ctx.fill();
+      });
+
+      // Shooting star
+      shootCd--;
+      if (shootCd <= 0) { spawnShoot(); shootCd = 260 + Math.random()*180; }
+      if (shoot) {
+        shoot.x += shoot.vx; shoot.y += shoot.vy; shoot.life++;
+        const p = shoot.life / shoot.maxLife;
+        const a = p < 0.25 ? p/0.25*0.92 : (1-p)*0.92;
+        if (a > 0) {
+          const tail = shoot.len / Math.abs(shoot.vx);
+          const grd = ctx.createLinearGradient(
+            shoot.x, shoot.y,
+            shoot.x - shoot.vx*tail, shoot.y - shoot.vy*tail
+          );
+          grd.addColorStop(0, `rgba(255,252,255,${a})`);
+          grd.addColorStop(1, 'rgba(200,190,255,0)');
+          ctx.strokeStyle = grd; ctx.lineWidth = 1.6;
+          ctx.beginPath();
+          ctx.moveTo(shoot.x, shoot.y);
+          ctx.lineTo(shoot.x - shoot.vx*tail, shoot.y - shoot.vy*tail);
+          ctx.stroke();
+        }
+        if (shoot.life >= shoot.maxLife) shoot = null;
+      }
+    }
     requestAnimationFrame(loop);
-  };
+  }
   loop();
 })();
 
 /* book dust */
 (()=>{
-  const el=document.getElementById('bkDust');
-  for(let i=0;i<16;i++){
-    const s=document.createElement('div');s.className='bst';
-    const z=.5+Math.random()*1.5;
-    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;animation-duration:${1.4+Math.random()*3}s;animation-delay:${Math.random()*3}s;`;
+  const el = document.getElementById('bkDust');
+  for (let i = 0; i < 18; i++) {
+    const s = document.createElement('div'); s.className = 'bst';
+    const z = 0.5 + Math.random() * 1.5;
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;`+
+      `width:${z}px;height:${z}px;`+
+      `animation-duration:${1.4+Math.random()*3}s;`+
+      `animation-delay:${Math.random()*3}s;`;
     el.appendChild(s);
   }
 })();
 
-/* ═══ PIN ═══ */
-const PIN='1605';let pin='';
-function kp(k){
-  if(k==='del')pin=pin.slice(0,-1);
-  else if(k==='ok')chk();
-  else if(pin.length<4)pin+=k;
-  for(let i=0;i<4;i++)document.getElementById('d'+i).classList.toggle('lit',i<pin.length);
-  if(pin.length===4)setTimeout(chk,200);
+/* ══ PIN ══ */
+const PIN = '1605'; let pin = '';
+function kp(k) {
+  if (k==='del') pin = pin.slice(0,-1);
+  else if (k==='ok') chk();
+  else if (pin.length < 4) pin += k;
+  for (let i=0;i<4;i++) document.getElementById('d'+i).classList.toggle('lit', i<pin.length);
+  if (pin.length===4) setTimeout(chk, 200);
 }
-function chk(){
-  if(pin===PIN){
-    const s=document.getElementById('pinScreen');
+function chk() {
+  if (pin===PIN) {
+    const s = document.getElementById('pinScreen');
     s.classList.add('out');
-    setTimeout(()=>{s.style.display='none';go('coverScreen');},1250);
-  }else{
-    const e=document.getElementById('perr'),d=document.getElementById('dotsEl');
-    e.classList.add('on');d.style.animation='shake .45s ease';
-    pin='';for(let i=0;i<4;i++)document.getElementById('d'+i).classList.remove('lit');
-    setTimeout(()=>{e.classList.remove('on');d.style.animation='';},2600);
+    setTimeout(()=>{ s.style.display='none'; go('coverScreen'); }, 1250);
+  } else {
+    const e=document.getElementById('perr'), d=document.getElementById('dotsEl');
+    e.classList.add('on'); d.style.animation='shake .45s ease';
+    pin=''; for(let i=0;i<4;i++) document.getElementById('d'+i).classList.remove('lit');
+    setTimeout(()=>{ e.classList.remove('on'); d.style.animation=''; }, 2600);
   }
 }
-function go(id){
+function go(id) {
   document.querySelectorAll('.screen').forEach(s=>{s.classList.remove('active');s.style.display='none';});
-  const el=document.getElementById(id);el.style.display='flex';
-  requestAnimationFrame(()=>el.classList.add('active'));
+  const el=document.getElementById(id); el.style.display='flex';
+  requestAnimationFrame(()=> el.classList.add('active'));
 }
 
-/* ═══ BOOK OPEN ═══ */
-function openDict(){
-  const sc=document.getElementById('bscene'),bk=document.getElementById('dbook');
+/* ══ BOOK ══ */
+function openDict() {
+  const sc=document.getElementById('bscene'), bk=document.getElementById('dbook');
   sc.style.animation='none';
   bk.style.transition='transform 1s cubic-bezier(.4,0,.2,1),opacity .7s';
-  bk.style.transform='rotateY(-210deg) scale(0)';bk.style.opacity='0';
-  setTimeout(()=>{go('dictScreen');initDict();},920);
+  bk.style.transform='rotateY(-210deg) scale(0)';
+  bk.style.opacity='0';
+  setTimeout(()=>{ go('dictScreen'); initDict(); }, 920);
 }
-function goBack(){
+function goBack() {
   go('coverScreen');
-  const bk=document.getElementById('dbook'),sc=document.getElementById('bscene');
-  bk.style.transform='';bk.style.opacity='';
+  const bk=document.getElementById('dbook'), sc=document.getElementById('bscene');
+  bk.style.transform=''; bk.style.opacity='';
   sc.style.animation='bfl 4s ease-in-out infinite';
 }
 
-/* ═══ DATA ═══ */
-const WDS=[
-  {w:'amar',p:'a·már',pos:'v. tr.',
-   d:['Sentir amor profundo y sincero hacia alguien.','Estimar con devoción y entrega plenas.'],
-   e:'Del latín <i>amare</i>.',x:'«Amar es encontrar en la felicidad del otro la propia.»'},
-  {w:'abrazo',p:'a·brá·zo',pos:'s. m.',
-   d:['Acto de estrechar a alguien entre los brazos en señal de afecto.'],
-   e:'Del latín <i>brachium</i>, brazo.',x:'«Hay abrazos que dicen todo lo que las palabras no pueden.»'},
-  {w:'alma',p:'ál·ma',pos:'s. f.',
-   d:['Principio inmaterial que constituye la esencia de una persona.','Lo más íntimo y genuino de alguien.'],
-   e:'Del latín <i>anima</i>, soplo vital.',x:'«El alma es donde viven los recuerdos más queridos.»'},
-  {w:'alegría',p:'a·le·grí·a',pos:'s. f.',
-   d:['Sentimiento de placer que irradia a quienes nos rodean.','Estado de ánimo luminoso y positivo.'],
-   e:'Del latín <i>alacritas</i>, viveza, presteza.',x:'«Su alegría era tan genuina que bastaba mirarla para sonreír.»'},
-  {w:'amanecer',p:'a·ma·ne·cér',pos:'s. m.',
-   d:['Momento en que aparece la primera luz del día.','Inicio de algo nuevo y esperanzador.'],
-   e:'De <i>a-</i> y <i>mañana</i>, del latín <i>maneana</i>.',x:'«Cada amanecer es una página en blanco esperando ser escrita.»'},
-  {w:'aurora',p:'au·ró·ra',pos:'s. f.',
-   d:['Luz del alba, antes de la salida del sol.','Metáfora de cualquier inicio luminoso y prometedor.'],
-   e:'Del latín <i>aurora</i>, diosa del amanecer.',x:'«La aurora pintó el cielo del color de su sonrisa.»'},
-  {w:'bondad',p:'bon·dád',pos:'s. f.',
-   d:['Cualidad de quien es bueno de manera natural y sincera.','Inclinación genuina a hacer el bien.'],
-   e:'Del latín <i>bonitas</i>, de <i>bonus</i>.',x:'«La bondad que hay en ella transforma todo lo que toca.»'},
-  {w:'calma',p:'cál·ma',pos:'s. f.',
-   d:['Tranquilidad y sosiego del ánimo.','Estado de paz interior que permite ver con claridad.'],
-   e:'Del italiano <i>calma</i>, del griego <i>kaûma</i>.',x:'«A su lado encontraba la calma que no sabía que buscaba.»'},
-  {w:'caricia',p:'ca·rí·cia',pos:'s. f.',
-   d:['Demostración de afecto que roza suavemente a alguien.','Cualquier muestra de ternura sincera.'],
-   e:'Del italiano <i>carezza</i>, de <i>caro</i>, querido.',x:'«Una caricia a tiempo vale más que mil palabras.»'},
-  {w:'corazón',p:'co·ra·zón',pos:'s. m.',
-   d:['Órgano muscular que impulsa la sangre.','Centro de los sentimientos y afectos humanos.','Lo más esencial e íntimo de algo.'],
-   e:'Del latín <i>cor, cordis</i>.',x:'«El corazón tiene razones que la razón no comprende.»'},
-  {w:'confianza',p:'con·fián·za',pos:'s. f.',
-   d:['Esperanza firme que se tiene en alguien.','Seguridad afectiva y emocional en otra persona.'],
-   e:'Del latín <i>confidere</i>, fiarse.',x:'«La confianza es el cimiento sobre el que se construye todo.»'},
-  {w:'destino',p:'des·tí·no',pos:'s. m.',
-   d:['Encadenamiento de sucesos considerado inevitable.','Fin o propósito al que algo parece orientado.'],
-   e:'Del latín <i>destinare</i>, fijar, asegunar.',x:'«Creo que el destino nos puso en el mismo lugar para encontrarnos.»'},
-  {w:'dulce',p:'dúl·ce',pos:'adj.',
-   d:['Afable, cariñoso y tierno en el trato.','Grato y agradable para los sentidos o el ánimo.'],
-   e:'Del latín <i>dulcis</i>.',x:'«Tiene una forma dulce de decir incluso las cosas difíciles.»'},
-  {w:'emoción',p:'e·mo·ción',pos:'s. f.',
-   d:['Alteración intensa del ánimo, agradable o perturbadora.','Sentimiento que nos conecta con lo más humano.'],
-   e:'Del latín <i>emotio</i>, de <i>emovere</i>, conmover.',x:'«Hay emociones que solo se sienten una vez en la vida.»'},
-  {w:'encuentro',p:'en·cuén·tro',pos:'s. m.',
-   d:['Acción de encontrarse dos personas.','Coincidencia que a veces lo cambia todo.'],
-   e:'De <i>encontrar</i>, del latín <i>incontrare</i>.',x:'«Ese encuentro cambió para siempre el curso de su historia.»'},
-  {w:'eterno',p:'e·tér·no',pos:'adj.',
-   d:['Que no tiene fin en el tiempo; perpetuo.','Que parece durar indefinidamente.'],
-   e:'Del latín <i>aeternus</i>.',x:'«Hay momentos que se vuelven eternos en la memoria del corazón.»'},
-  {w:'fe',p:'fé',pos:'s. f.',
-   d:['Creencia profunda sin exigir pruebas.','Confianza plena e incondicional en alguien.'],
-   e:'Del latín <i>fides</i>, fidelidad, confianza.',x:'«Tenía fe en que todo llegaría en el momento preciso.»'},
-  /* ══ EASTER EGG ══ */
+/* ══ DATA ══ */
+const WDS = [
+  {w:'amar',p:'a·már',pos:'v. tr.',d:['Sentir amor profundo y sincero hacia alguien.','Estimar con devoción y entrega plenas.'],e:'Del latín <i>amare</i>.',x:'«Amar es encontrar en la felicidad del otro la propia.»'},
+  {w:'abrazo',p:'a·brá·zo',pos:'s. m.',d:['Acto de estrechar a alguien entre los brazos en señal de afecto.'],e:'Del latín <i>brachium</i>, brazo.',x:'«Hay abrazos que dicen todo lo que las palabras no pueden.»'},
+  {w:'alma',p:'ál·ma',pos:'s. f.',d:['Principio inmaterial que constituye la esencia de una persona.','Lo más íntimo y genuino de alguien.'],e:'Del latín <i>anima</i>, soplo vital.',x:'«El alma es donde viven los recuerdos más queridos.»'},
+  {w:'alegría',p:'a·le·grí·a',pos:'s. f.',d:['Sentimiento de placer que irradia a quienes nos rodean.','Estado de ánimo luminoso y positivo.'],e:'Del latín <i>alacritas</i>.',x:'«Su alegría era tan genuina que bastaba mirarla para sonreír.»'},
+  {w:'amanecer',p:'a·ma·ne·cér',pos:'s. m.',d:['Momento en que aparece la primera luz del día.','Inicio de algo nuevo y esperanzador.'],e:'De <i>a-</i> y <i>mañana</i>, del latín <i>maneana</i>.',x:'«Cada amanecer es una página en blanco esperando ser escrita.»'},
+  {w:'aurora',p:'au·ró·ra',pos:'s. f.',d:['Luz del alba antes de la salida del sol.','Metáfora de cualquier inicio luminoso.'],e:'Del latín <i>aurora</i>.',x:'«La aurora pintó el cielo del color de su sonrisa.»'},
+  {w:'bondad',p:'bon·dád',pos:'s. f.',d:['Cualidad de quien es bueno de manera natural.','Inclinación genuina a hacer el bien.'],e:'Del latín <i>bonitas</i>.',x:'«La bondad que hay en ella transforma todo lo que toca.»'},
+  {w:'calma',p:'cál·ma',pos:'s. f.',d:['Tranquilidad y sosiego del ánimo.','Estado de paz interior que permite ver con claridad.'],e:'Del italiano <i>calma</i>.',x:'«A su lado encontraba la calma que no sabía que buscaba.»'},
+  {w:'caricia',p:'ca·rí·cia',pos:'s. f.',d:['Demostración de afecto que roza suavemente a alguien.','Cualquier muestra de ternura sincera.'],e:'Del italiano <i>carezza</i>.',x:'«Una caricia a tiempo vale más que mil palabras.»'},
+  {w:'corazón',p:'co·ra·zón',pos:'s. m.',d:['Órgano muscular que impulsa la sangre.','Centro de los sentimientos y afectos humanos.'],e:'Del latín <i>cor, cordis</i>.',x:'«El corazón tiene razones que la razón no comprende.»'},
+  {w:'confianza',p:'con·fián·za',pos:'s. f.',d:['Esperanza firme que se tiene en alguien.','Seguridad afectiva en otra persona.'],e:'Del latín <i>confidere</i>.',x:'«La confianza es el cimiento sobre el que se construye todo.»'},
+  {w:'destino',p:'des·tí·no',pos:'s. m.',d:['Encadenamiento de sucesos considerado inevitable.','Fin al que algo parece orientado.'],e:'Del latín <i>destinare</i>.',x:'«Creo que el destino nos puso en el mismo lugar para encontrarnos.»'},
+  {w:'dulce',p:'dúl·ce',pos:'adj.',d:['Afable, cariñoso y tierno en el trato.','Grato y agradable para los sentidos.'],e:'Del latín <i>dulcis</i>.',x:'«Tiene una forma dulce de decir incluso las cosas difíciles.»'},
+  {w:'emoción',p:'e·mo·ción',pos:'s. f.',d:['Alteración intensa del ánimo.','Sentimiento que nos conecta con lo más humano.'],e:'Del latín <i>emotio</i>.',x:'«Hay emociones que solo se sienten una vez en la vida.»'},
+  {w:'encuentro',p:'en·cuén·tro',pos:'s. m.',d:['Acción de encontrarse dos personas.','Coincidencia que a veces lo cambia todo.'],e:'Del latín <i>incontrare</i>.',x:'«Ese encuentro cambió para siempre el curso de su historia.»'},
+  {w:'eterno',p:'e·tér·no',pos:'adj.',d:['Que no tiene fin en el tiempo.','Que parece durar indefinidamente.'],e:'Del latín <i>aeternus</i>.',x:'«Hay momentos que se vuelven eternos en la memoria del corazón.»'},
+  {w:'fe',p:'fé',pos:'s. f.',d:['Creencia profunda sin exigir pruebas.','Confianza plena e incondicional en alguien.'],e:'Del latín <i>fides</i>.',x:'«Tenía fe en que todo llegaría en el momento preciso.»'},
   {w:'felices',p:'fe·lí·ces',pos:'adj. pl.',
-   d:['Plural de <i>feliz</i>. Que gozan de plena felicidad.','Que producen o expresan gozo y alegría genuinos.','Afortunados; en un estado de satisfacción verdadera.'],
-   e:'Del latín <i>felix, felicis</i>, fértil, próspero, afortunado.',
-   x:'«Las personas felices no tienen todo lo que desean; desean todo lo que tienen.»',
-   egg:true,em:'f. de Felices 10 meses mi amor',es:'— y los que siguen, contigo ✦'},
-  {w:'fidelidad',p:'fi·de·li·dád',pos:'s. f.',
-   d:['Lealtad y constancia en los afectos y en el trato.'],
-   e:'Del latín <i>fidelitas</i>, de <i>fidelis</i>.',x:'«La fidelidad es el sello de los amores que duran.»'},
-  {w:'florecer',p:'flo·re·cér',pos:'v. intr.',
-   d:['Echar flor una planta.','Prosperar y alcanzar esplendor o plenitud.'],
-   e:'Del latín <i>florescere</i>, comenzar a florecer.',x:'«A su lado, todo parecía florecer con más intensidad.»'},
-  {w:'gracia',p:'grá·cia',pos:'s. f.',
-   d:['Cualidad que hace agradable a una persona.','Elegancia y donaire natural en el trato.'],
-   e:'Del latín <i>gratia</i>, favor, agradecimiento.',x:'«Tenía esa gracia que solo tienen las personas especiales.»'},
-  {w:'gratitud',p:'gra·ti·túd',pos:'s. f.',
-   d:['Reconocimiento afectuoso hacia quien nos ha dado algo valioso.'],
-   e:'Del latín <i>gratitudo</i>, de <i>gratus</i>.',x:'«La gratitud convierte lo que tenemos en suficiente.»'},
-  {w:'historia',p:'his·tó·ria',pos:'s. f.',
-   d:['Narración de los sucesos de una vida.','Relato de hechos memorables y significativos.'],
-   e:'Del griego <i>historía</i>, investigación, información.',x:'«Juntos estaban escribiendo la historia más bonita.»'},
-  {w:'hogar',p:'ho·gár',pos:'s. m.',
-   d:['Casa o lugar donde una persona vive.','Lugar donde alguien encuentra paz y verdadera pertenencia.'],
-   e:'Del latín <i>focaris</i>, del fuego del hogar.',x:'«El hogar no es un lugar; es la persona con quien te sientes en casa.»'},
-  {w:'ilusión',p:'i·lu·sión',pos:'s. f.',
-   d:['Esperanza cuyo cumplimiento parece especialmente atractivo.','Viva complacencia con que se desea o espera algo.'],
-   e:'Del latín <i>illusio</i>; en español adoptó sentido positivo.',x:'«Tenía ilusión por cada nuevo día junto a ti.»'},
-  {w:'infinito',p:'in·fi·ní·to',pos:'adj.',
-   d:['Que no tiene fin, límite ni término.','Muy intenso, grande o prolongado.'],
-   e:'Del latín <i>infinitus</i>, de <i>in-</i> y <i>finis</i>.',x:'«Su capacidad de amar parecía verdaderamente infinita.»'},
-  {w:'júbilo',p:'jú·bi·lo',pos:'s. m.',
-   d:['Viva alegría que se manifiesta con entusiasmo.'],
-   e:'Del latín <i>iubilum</i>, grito de alegría.',x:'«Sentía júbilo cada vez que veía su nombre en la pantalla.»'},
-  {w:'latir',p:'la·tír',pos:'v. intr.',
-   d:['Dar latidos el corazón.','Palpitar con fuerza ante algo significativo.'],
-   e:'Del latín <i>glattire</i>.',x:'«Su corazón latía diferente cuando ella estaba cerca.»'},
-  {w:'libertad',p:'li·ber·tád',pos:'s. f.',
-   d:['Facultad de obrar de una u otra manera.','Facilidad de ser uno mismo sin restricciones.'],
-   e:'Del latín <i>libertas</i>, de <i>liber</i>, libre.',x:'«Junto a ti encontró la libertad de ser exactamente quien era.»'},
-  {w:'luz',p:'lúz',pos:'s. f.',
-   d:['Agente físico que hace visibles los objetos.','Persona que ilumina o sirve de guía.'],
-   e:'Del latín <i>lux, lucis</i>.',x:'«Tenía una luz propia que iluminaba todo a su alrededor.»'},
-  {w:'magia',p:'má·gia',pos:'s. f.',
-   d:['Encanto especial e inexplicable.','Lo que produce admiración grata y sorpresa.'],
-   e:'Del latín <i>magia</i>, del griego <i>mageia</i>.',x:'«Había magia en la forma en que sus conversaciones siempre fluían.»'},
-  {w:'memoria',p:'me·mó·ria',pos:'s. f.',
-   d:['Facultad de retener y recordar el pasado.','Recuerdo que se guarda de algo vivido.'],
-   e:'Del latín <i>memoria</i>.',x:'«Guardaba con cuidado cada memoria de los momentos juntos.»'},
-  {w:'mirada',p:'mi·rá·da',pos:'s. f.',
-   d:['Expresión de los ojos.','Modo particular de contemplar a alguien o algo.'],
-   e:'De <i>mirar</i>, del latín <i>mirare</i>, asombrarse.',x:'«Una sola mirada suya bastaba para decirlo todo.»'},
-  {w:'nostalgia',p:'nos·tál·gia',pos:'s. f.',
-   d:['Tristeza melancólica por algo lejano o perdido.'],
-   e:'Del griego <i>nostos</i>, regreso + <i>algos</i>, dolor.',x:'«La nostalgia es el amor que vive en los recuerdos.»'},
-  {w:'origen',p:'o·rí·gen',pos:'s. m.',
-   d:['Principio, nacimiento; inicio de una historia.'],
-   e:'Del latín <i>origo, originis</i>.',x:'«El origen de todo lo bueno fue esa primera conversación.»'},
-  {w:'pasión',p:'pa·sión',pos:'s. f.',
-   d:['Inclinación muy viva hacia alguien.','Entusiasmo profundo e intenso.'],
-   e:'Del latín <i>passio</i>, sentimiento intenso.',x:'«Hacer lo que amas con pasión es el secreto de vivir bien.»'},
-  {w:'plenitud',p:'ple·ni·túd',pos:'s. f.',
-   d:['Estado de máxima satisfacción y realización personal.'],
-   e:'Del latín <i>plenitudo</i>, de <i>plenus</i>, lleno.',x:'«Sentía una plenitud que jamás había conocido antes.»'},
-  {w:'promesa',p:'pro·mé·sa',pos:'s. f.',
-   d:['Expresión de la voluntad de hacer algo.','Pacto sincero entre dos personas.'],
-   e:'Del latín <i>promissus</i>, de <i>promittere</i>.',x:'«No era solo una promesa; era un pacto entre dos corazones.»'},
-  {w:'querer',p:'que·rér',pos:'v. tr.',
-   d:['Amar a alguien.','Tener voluntad o deseo de algo.'],
-   e:'Del latín <i>quaerere</i>, buscar, procurar.',x:'«Querer bien es querer con paciencia y constancia.»'},
-  {w:'risa',p:'rí·sa',pos:'s. f.',
-   d:['Expresión sonora y visible de la alegría.'],
-   e:'Del latín <i>risus</i>, de <i>ridere</i>.',x:'«Su risa era el mejor sonido del mundo.»'},
-  {w:'serenidad',p:'se·re·ni·dád',pos:'s. f.',
-   d:['Calma y tranquilidad del ánimo.','Estado de paz interior que transmite certeza.'],
-   e:'Del latín <i>serenitas</i>.',x:'«Tenía esa serenidad que transmite certeza y confianza.»'},
-  {w:'sincero',p:'sin·cé·ro',pos:'adj.',
-   d:['Que expresa lo que realmente siente o piensa.','Auténtico, sin doblez ni artificio.'],
-   e:'Del latín <i>sincerus</i>, puro, sin mezcla.',x:'«Era de esas personas cuyas palabras son siempre sinceras.»'},
-  {w:'sonrisa',p:'son·rí·sa',pos:'s. f.',
-   d:['Gesto suave del rostro que denota alegría o afecto.'],
-   e:'De <i>sonreír</i>, de <i>sub-</i> y <i>reír</i>.',x:'«Su sonrisa era lo más bonito que había visto en mucho tiempo.»'},
-  {w:'sueño',p:'sué·ño',pos:'s. m.',
-   d:['Representación mental durante el descanso.','Aspiración vehemente que une lo posible con lo soñado.'],
-   e:'Del latín <i>somnus</i>.',x:'«Había sido su sueño mucho tiempo; ahora era su realidad.»'},
-  {w:'ternura',p:'ter·nú·ra',pos:'s. f.',
-   d:['Sentimiento afectuoso y delicado hacia alguien.'],
-   e:'De <i>tierno</i>, del latín <i>tener</i>, blando.',x:'«Había ternura en la forma en que pronunciaba su nombre.»'},
-  {w:'tiempo',p:'tiém·po',pos:'s. m.',
-   d:['Duración de las cosas sujetas a cambio.','Cada momento que compone una vida compartida.'],
-   e:'Del latín <i>tempus, temporis</i>.',x:'«El tiempo contigo siempre parece demasiado corto.»'},
-  {w:'único',p:'ú·ni·co',pos:'adj.',
-   d:['Solo y sin otro de su especie.','Singular; extraordinario en su clase.'],
-   e:'Del latín <i>unicus</i>, de <i>unus</i>.',x:'«Era única, y él lo supo desde el primer instante.»'},
-  {w:'universo',p:'u·ni·vér·so',pos:'s. m.',
-   d:['Conjunto de todo lo que existe.','El mundo entero de una persona.'],
-   e:'Del latín <i>universus</i>, vuelto hacia uno.',x:'«Para él, su universo entero cabía en una sola mirada de ella.»'},
-  {w:'valiente',p:'va·lién·te',pos:'adj.',
-   d:['Que tiene valor y ánimo para actuar.','Resuelto para decir o hacer lo que siente.'],
-   e:'Del latín <i>valens</i>, fuerte, poderoso.',x:'«Fue valiente al atreverse a decir lo que sentía.»'},
-  {w:'verdad',p:'ver·dád',pos:'s. f.',
-   d:['Lo que es real; conformidad con la realidad.'],
-   e:'Del latín <i>veritas</i>, de <i>verus</i>.',x:'«La única verdad que importaba era lo que sentía.»'},
-  {w:'vida',p:'ví·da',pos:'s. f.',
-   d:['Fuerza interna de los seres orgánicos.','Persona o cosa profundamente querida.'],
-   e:'Del latín <i>vita</i>.',x:'«Hay personas que llegan y se convierten en parte de ti para siempre.»'},
-  {w:'zozobra',p:'zo·zó·bra',pos:'s. f.',
-   d:['Inquietud del ánimo por la incertidumbre.'],
-   e:'Probablemente del latín <i>sub</i> y <i>supra</i>.',x:'«La zozobra desapareció el día que por fin se lo dijo.»'},
+    d:['Plural de <i>feliz</i>. Que gozan de plena felicidad.','Que producen o expresan gozo y alegría genuinos.','Afortunados; en un estado de satisfacción verdadera.'],
+    e:'Del latín <i>felix, felicis</i>, fértil, próspero.',
+    x:'«Las personas felices no tienen todo lo que desean; desean todo lo que tienen.»',
+    egg:true, em:'f. de Felices 10 meses mi amor', es:'— y los que siguen, contigo ✦'},
+  {w:'fidelidad',p:'fi·de·li·dád',pos:'s. f.',d:['Lealtad y constancia en los afectos.'],e:'Del latín <i>fidelitas</i>.',x:'«La fidelidad es el sello de los amores que duran.»'},
+  {w:'florecer',p:'flo·re·cér',pos:'v. intr.',d:['Echar flor.','Prosperar y alcanzar plenitud.'],e:'Del latín <i>florescere</i>.',x:'«A su lado todo parecía florecer con más intensidad.»'},
+  {w:'gracia',p:'grá·cia',pos:'s. f.',d:['Cualidad que hace agradable a una persona.','Elegancia y donaire natural.'],e:'Del latín <i>gratia</i>.',x:'«Tenía esa gracia que solo tienen las personas especiales.»'},
+  {w:'gratitud',p:'gra·ti·túd',pos:'s. f.',d:['Reconocimiento afectuoso hacia quien nos ha dado algo valioso.'],e:'Del latín <i>gratitudo</i>.',x:'«La gratitud convierte lo que tenemos en suficiente.»'},
+  {w:'historia',p:'his·tó·ria',pos:'s. f.',d:['Narración de los sucesos de una vida.','Relato de hechos memorables.'],e:'Del griego <i>historía</i>.',x:'«Juntos estaban escribiendo la historia más bonita.»'},
+  {w:'hogar',p:'ho·gár',pos:'s. m.',d:['Lugar donde una persona encuentra paz y pertenencia.'],e:'Del latín <i>focaris</i>.',x:'«El hogar no es un lugar; es la persona con quien te sientes en casa.»'},
+  {w:'ilusión',p:'i·lu·sión',pos:'s. f.',d:['Esperanza cuyo cumplimiento parece especialmente atractivo.','Viva complacencia con que se desea algo.'],e:'Del latín <i>illusio</i>; en español adoptó sentido positivo.',x:'«Tenía ilusión por cada nuevo día junto a ti.»'},
+  {w:'infinito',p:'in·fi·ní·to',pos:'adj.',d:['Que no tiene fin ni límite.','Muy intenso o grande.'],e:'Del latín <i>infinitus</i>.',x:'«Su capacidad de amar parecía verdaderamente infinita.»'},
+  {w:'júbilo',p:'jú·bi·lo',pos:'s. m.',d:['Viva alegría que se manifiesta con entusiasmo.'],e:'Del latín <i>iubilum</i>.',x:'«Sentía júbilo cada vez que veía su nombre en la pantalla.»'},
+  {w:'latir',p:'la·tír',pos:'v. intr.',d:['Dar latidos el corazón.','Palpitar con fuerza ante algo significativo.'],e:'Del latín <i>glattire</i>.',x:'«Su corazón latía diferente cuando ella estaba cerca.»'},
+  {w:'libertad',p:'li·ber·tád',pos:'s. f.',d:['Facultad de obrar de una u otra manera.','Facilidad de ser uno mismo sin restricciones.'],e:'Del latín <i>libertas</i>.',x:'«Junto a ti encontró la libertad de ser exactamente quien era.»'},
+  {w:'luz',p:'lúz',pos:'s. f.',d:['Agente físico que hace visibles los objetos.','Persona que ilumina o sirve de guía.'],e:'Del latín <i>lux, lucis</i>.',x:'«Tenía una luz propia que iluminaba todo a su alrededor.»'},
+  {w:'magia',p:'má·gia',pos:'s. f.',d:['Encanto especial e inexplicable.','Lo que produce admiración grata.'],e:'Del latín <i>magia</i>.',x:'«Había magia en la forma en que sus conversaciones siempre fluían.»'},
+  {w:'memoria',p:'me·mó·ria',pos:'s. f.',d:['Facultad de retener y recordar el pasado.','Recuerdo que se guarda de algo vivido.'],e:'Del latín <i>memoria</i>.',x:'«Guardaba con cuidado cada memoria de los momentos juntos.»'},
+  {w:'mirada',p:'mi·rá·da',pos:'s. f.',d:['Expresión de los ojos.','Modo particular de contemplar a alguien.'],e:'Del latín <i>mirare</i>.',x:'«Una sola mirada suya bastaba para decirlo todo.»'},
+  {w:'nostalgia',p:'nos·tál·gia',pos:'s. f.',d:['Tristeza melancólica por algo lejano o perdido.'],e:'Del griego <i>nostos</i> + <i>algos</i>.',x:'«La nostalgia es el amor que vive en los recuerdos.»'},
+  {w:'origen',p:'o·rí·gen',pos:'s. m.',d:['Principio, nacimiento; inicio de una historia.'],e:'Del latín <i>origo</i>.',x:'«El origen de todo lo bueno fue esa primera conversación.»'},
+  {w:'pasión',p:'pa·sión',pos:'s. f.',d:['Inclinación muy viva hacia alguien.','Entusiasmo profundo e intenso.'],e:'Del latín <i>passio</i>.',x:'«Hacer lo que amas con pasión es el secreto de vivir bien.»'},
+  {w:'plenitud',p:'ple·ni·túd',pos:'s. f.',d:['Estado de máxima satisfacción y realización.'],e:'Del latín <i>plenitudo</i>.',x:'«Sentía una plenitud que jamás había conocido antes.»'},
+  {w:'promesa',p:'pro·mé·sa',pos:'s. f.',d:['Expresión de la voluntad de hacer algo.','Pacto sincero entre dos personas.'],e:'Del latín <i>promissus</i>.',x:'«No era solo una promesa; era un pacto entre dos corazones.»'},
+  {w:'querer',p:'que·rér',pos:'v. tr.',d:['Amar a alguien.','Tener voluntad o deseo de algo.'],e:'Del latín <i>quaerere</i>.',x:'«Querer bien es querer con paciencia y constancia.»'},
+  {w:'risa',p:'rí·sa',pos:'s. f.',d:['Expresión sonora y visible de la alegría.'],e:'Del latín <i>risus</i>.',x:'«Su risa era el mejor sonido del mundo.»'},
+  {w:'serenidad',p:'se·re·ni·dád',pos:'s. f.',d:['Calma y tranquilidad del ánimo.','Estado de paz interior.'],e:'Del latín <i>serenitas</i>.',x:'«Tenía esa serenidad que transmite certeza y confianza.»'},
+  {w:'sincero',p:'sin·cé·ro',pos:'adj.',d:['Que expresa lo que realmente siente.','Auténtico, sin artificio.'],e:'Del latín <i>sincerus</i>.',x:'«Era de esas personas cuyas palabras son siempre sinceras.»'},
+  {w:'sonrisa',p:'son·rí·sa',pos:'s. f.',d:['Gesto suave del rostro que denota alegría o afecto.'],e:'De <i>sub-</i> y <i>reír</i>.',x:'«Su sonrisa era lo más bonito que había visto en mucho tiempo.»'},
+  {w:'sueño',p:'sué·ño',pos:'s. m.',d:['Representación mental durante el descanso.','Aspiración vehemente.'],e:'Del latín <i>somnus</i>.',x:'«Había sido su sueño mucho tiempo; ahora era su realidad.»'},
+  {w:'ternura',p:'ter·nú·ra',pos:'s. f.',d:['Sentimiento afectuoso y delicado.'],e:'De <i>tierno</i>, del latín <i>tener</i>.',x:'«Había ternura en la forma en que pronunciaba su nombre.»'},
+  {w:'tiempo',p:'tiém·po',pos:'s. m.',d:['Duración de las cosas.','Cada momento que compone una vida compartida.'],e:'Del latín <i>tempus</i>.',x:'«El tiempo contigo siempre parece demasiado corto.»'},
+  {w:'único',p:'ú·ni·co',pos:'adj.',d:['Solo y sin otro de su especie.','Singular; extraordinario.'],e:'Del latín <i>unicus</i>.',x:'«Era única, y él lo supo desde el primer instante.»'},
+  {w:'universo',p:'u·ni·vér·so',pos:'s. m.',d:['Conjunto de todo lo que existe.','El mundo entero de alguien.'],e:'Del latín <i>universus</i>.',x:'«Para él, su universo entero cabía en una sola mirada de ella.»'},
+  {w:'valiente',p:'va·lién·te',pos:'adj.',d:['Que tiene valor y ánimo.','Resuelto para decir o hacer lo que siente.'],e:'Del latín <i>valens</i>.',x:'«Fue valiente al atreverse a decir lo que sentía.»'},
+  {w:'verdad',p:'ver·dád',pos:'s. f.',d:['Lo que es real; conformidad con la realidad.'],e:'Del latín <i>veritas</i>.',x:'«La única verdad que importaba era lo que sentía.»'},
+  {w:'vida',p:'ví·da',pos:'s. f.',d:['Fuerza interna de los seres orgánicos.','Persona profundamente querida.'],e:'Del latín <i>vita</i>.',x:'«Hay personas que llegan y se convierten en parte de ti para siempre.»'},
+  {w:'zozobra',p:'zo·zó·bra',pos:'s. f.',d:['Inquietud del ánimo por la incertidumbre.'],e:'Probablemente del latín <i>sub</i> y <i>supra</i>.',x:'«La zozobra desapareció el día que por fin se lo dijo.»'},
 ];
 
-/* ═══ BUILD DICTIONARY ═══ */
-let inited=false;
-function initDict(){
-  if(inited)return;inited=true;
-  buildAlpha();renderAll();
-  document.getElementById('sIn').addEventListener('input',onSearch);
-  document.getElementById('sIn').addEventListener('keydown',e=>{
-    if(e.key==='Escape'){e.target.value='';renderAll();}});
-  document.getElementById('dcnt').addEventListener('scroll',spy,{passive:true});
+/* ══ DICTIONARY ══ */
+let inited = false;
+function initDict() {
+  if (inited) return; inited = true;
+  buildAlpha(); renderAll();
+  document.getElementById('sIn').addEventListener('input', onSearch);
+  document.getElementById('sIn').addEventListener('keydown', e=>{
+    if(e.key==='Escape'){e.target.value='';renderAll();}
+  });
+  document.getElementById('dcnt').addEventListener('scroll', spy, {passive:true});
 }
-
-function grps(){
+function grps() {
   const g={};
   WDS.forEach(w=>{const L=w.w[0].toUpperCase();if(!g[L])g[L]=[];g[L].push(w);});
   return g;
 }
-function buildAlpha(){
-  const g=grps(),el=document.getElementById('alphaEl');el.innerHTML='';
+function buildAlpha() {
+  const g=grps(), el=document.getElementById('alphaEl'); el.innerHTML='';
   Object.keys(g).sort().forEach(L=>{
     const hasEgg=g[L].some(w=>w.egg);
     const b=document.createElement('button');
     b.className='alb'+(hasEgg?' egg':'');
-    const preview=g[L].map(w=>w.w).join(', ');
-    b.innerHTML=`<b style="font-size:.9rem;margin-right:.3rem;">${L}</b>`+
-      `<span style="font-weight:400;font-size:.77rem;color:var(--t4)">${
-        preview.length>20?preview.slice(0,20)+'…':preview}</span>`;
+    const prev=g[L].map(w=>w.w).join(', ');
+    b.innerHTML=`<b style="font-size:1rem;margin-right:.34rem;">${L}</b>`+
+      `<span style="font-weight:400;font-size:.82rem;color:var(--t4)">${prev.length>22?prev.slice(0,22)+'…':prev}</span>`;
     b.onclick=()=>goTo(L);
     el.appendChild(b);
   });
 }
-function renderAll(){
-  const g=grps(),el=document.getElementById('din');el.innerHTML='';
+function renderAll() {
+  const g=grps(), el=document.getElementById('din'); el.innerHTML='';
   Object.keys(g).sort().forEach(L=>{
-    const s=document.createElement('div');s.id='s'+L;
+    const s=document.createElement('div'); s.id='s'+L;
     s.innerHTML=`<div class="lh"><span class="lh-big">${L}</span><span class="lh-lbl">${g[L].length} entrada${g[L].length>1?'s':''}</span></div>`;
     g[L].forEach(w=>s.appendChild(mkE(w)));
     el.appendChild(s);
   });
 }
-function mkE(w){
+function mkE(w) {
   const d=document.createElement('div');
   d.className='entry'+(w.egg?' egg':'');
   let h=`<div class="erow">
@@ -982,9 +878,9 @@ function mkE(w){
   w.d.forEach((def,i)=>{
     h+=`<div class="edef"><span class="enum">${w.d.length>1?i+1+'.':''}</span>${def}</div>`;
   });
-  if(w.e)h+=`<div class="eetym"><b>Etim.</b> ${w.e}</div>`;
-  if(w.x)h+=`<div class="eex">${w.x}</div>`;
-  if(w.egg){
+  if(w.e) h+=`<div class="eetym"><b>Etim.</b> ${w.e}</div>`;
+  if(w.x) h+=`<div class="eex">${w.x}</div>`;
+  if(w.egg) {
     h+=`<div class="egg-box">
       <div class="egg-tag">✦ &nbsp; acepción especial &nbsp; ✦</div>
       <div class="egg-main">${w.em}</div>
@@ -992,65 +888,93 @@ function mkE(w){
       <button class="egg-btn" onclick="celebrate()">💕 celebrar</button>
     </div>`;
   }
-  d.innerHTML=h;return d;
+  d.innerHTML=h; return d;
 }
-function goTo(L){
-  const s=document.getElementById('s'+L);if(!s)return;
+function goTo(L) {
+  const s=document.getElementById('s'+L); if(!s) return;
   document.getElementById('dcnt').scrollTo({top:s.offsetTop,behavior:'smooth'});
   setOn(L);
 }
-function spy(){
-  const c=document.getElementById('dcnt');let cur='';
+function spy() {
+  const c=document.getElementById('dcnt'); let cur='';
   c.querySelectorAll('[id^="s"]').forEach(s=>{
-    if(s.offsetTop-c.scrollTop<100)cur=s.id.slice(1);
+    if(s.offsetTop-c.scrollTop<110) cur=s.id.slice(1);
   });
-  if(cur)setOn(cur);
+  if(cur) setOn(cur);
 }
-function setOn(L){
+function setOn(L) {
   document.querySelectorAll('.alb').forEach(b=>{
-    b.classList.toggle('on',b.querySelector('b')?.textContent===L);
+    b.classList.toggle('on', b.querySelector('b')?.textContent===L);
   });
 }
-function onSearch(e){
+function onSearch(e) {
   const q=e.target.value.trim().toLowerCase();
   if(!q){renderAll();return;}
   const res=WDS.filter(w=>w.w.toLowerCase().includes(q)||w.d.some(d=>d.toLowerCase().includes(q)));
-  const el=document.getElementById('din');el.innerHTML='';
-  const wrap=document.createElement('div');wrap.className='sres';
-  if(!res.length){
+  const el=document.getElementById('din'); el.innerHTML='';
+  const wrap=document.createElement('div'); wrap.className='sres';
+  if(!res.length) {
     wrap.innerHTML=`<div class="nores">Sin resultados para <i>"${q}"</i></div>`;
-  }else{
+  } else {
     wrap.innerHTML=`<div class="sres-h">Se encontraron <b>${res.length}</b> resultado${res.length>1?'s':''} para <b>"${q}"</b></div>`;
     res.forEach(w=>wrap.appendChild(mkE(w)));
   }
   el.appendChild(wrap);
 }
 
-/* ═══ CELEBRATE ═══ */
-function celebrate(){
+/* ══ CELEBRATE ══ */
+let tenorLoaded = false;
+function celebrate() {
   document.getElementById('cel').classList.add('on');
+  // Load Tenor script once
+  if (!tenorLoaded) {
+    tenorLoaded = true;
+    const sc = document.createElement('script');
+    sc.src = 'https://tenor.com/embed.js';
+    sc.async = true;
+    sc.onload = () => {
+      // Hide fallback once tenor renders
+      setTimeout(()=>{
+        const fb = document.getElementById('celFallback');
+        if(fb) fb.style.display='none';
+      }, 800);
+    };
+    sc.onerror = () => {
+      // Tenor blocked — keep fallback visible
+      const fb = document.getElementById('celFallback');
+      if(fb) fb.style.display='flex';
+    };
+    document.head.appendChild(sc);
+  } else {
+    setTimeout(()=>{
+      const fb = document.getElementById('celFallback');
+      if(fb) fb.style.display='none';
+    }, 400);
+  }
   boom();
 }
-function closeCel(){document.getElementById('cel').classList.remove('on');}
-function boom(){
-  const bl=document.getElementById('hbl');bl.style.display='block';bl.innerHTML='';
-  const cx=innerWidth/2,cy=innerHeight/2;
+function closeCel() {
+  document.getElementById('cel').classList.remove('on');
+}
+function boom() {
+  const bl=document.getElementById('hbl'); bl.style.display='block'; bl.innerHTML='';
+  const cx=innerWidth/2, cy=innerHeight/2;
   const em=['♥','❤','💕','💖','💗','💓','💞','🌹','✨','💫','🌸','🫶'];
   const f=document.createDocumentFragment();
   for(let i=0;i<65;i++){
-    const h=document.createElement('div');h.className='hp';
-    const a=Math.random()*360,dist=120+Math.random()*290;
+    const h=document.createElement('div'); h.className='hp';
+    const a=Math.random()*360, dist=130+Math.random()*310;
     h.style.cssText=`left:${cx}px;top:${cy}px;`+
-      `animation-delay:${Math.random()*.9}s;`+
-      `--r:${(Math.random()-.5)*72}deg;`+
+      `animation-delay:${Math.random()*.95}s;`+
+      `--r:${(Math.random()-.5)*75}deg;`+
       `--tx:${Math.cos(a*Math.PI/180)*dist}px;`+
-      `--ty:${Math.sin(a*Math.PI/180)*dist-85}px;`+
-      `font-size:${1.2+Math.random()*2}rem;`;
+      `--ty:${Math.sin(a*Math.PI/180)*dist-88}px;`+
+      `font-size:${1.3+Math.random()*2.2}rem;`;
     h.textContent=em[0|Math.random()*em.length];
     f.appendChild(h);
   }
   bl.appendChild(f);
-  setTimeout(()=>{bl.style.display='none';bl.innerHTML='';},4500);
+  setTimeout(()=>{ bl.style.display='none'; bl.innerHTML=''; }, 4500);
 }
 </script>
 </body>
